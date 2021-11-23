@@ -14,6 +14,11 @@ Source: https://reactnavigation.org/docs/getting-started
 
 `yarn add @react-navigation/stack`
 
+## Run pod install
+
+`cd ios`
+`pod install`
+
 ## In App.tsx
 
 ```
