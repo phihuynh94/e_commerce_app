@@ -4,15 +4,14 @@
 
 ```
 // Import
-import React from 'react
+import React from 'react'
 import {StyleSheet} from 'react-native'
 
 // Interface & Type
 
 // Component
 const ComponentName = (props: propType) => {
-
-    // Misc
+    // Hooks
 
     // useSelectors
 
@@ -20,13 +19,14 @@ const ComponentName = (props: propType) => {
 
     // useEffect
 
-    // Functions
+    // useMemos
+
+    // useCallback
 
     // Render
     return (
 
     );
-
 };
 
 export default ComponentName;

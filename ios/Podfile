@@ -12,6 +12,7 @@ target 'e_commerce_app' do
     :hermes_enabled => false
   )
 
+
   target 'e_commerce_appTests' do
     inherit! :complete
     # Pods for testing
