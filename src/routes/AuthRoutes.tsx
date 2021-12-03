@@ -1,11 +1,14 @@
-import {createStackNavigator} from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  StackNavigationOptions,
+} from '@react-navigation/stack';
 import React from 'react';
 import {LoginScreen, RegisterScreen} from '../screens';
-import {RouteNames} from './routesHelper';
+import {AuthStackParamList, RouteNames} from './routesHelper';
 
-const AuthNav = createStackNavigator();
+const AuthNav = createStackNavigator<AuthStackParamList>();
 
-const navOptions = {
+const navOptions: StackNavigationOptions = {
   headerShown: false,
 };
 
