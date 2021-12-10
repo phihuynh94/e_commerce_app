@@ -1,6 +1,6 @@
 // Import
 import {useNavigation} from '@react-navigation/core';
-import React, {useState} from 'react';
+import React, {useCallback, useState} from 'react';
 import {
   Image,
   Keyboard,
@@ -9,10 +9,12 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {Button, TextInput} from 'react-native-paper';
+import {TextInput} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {appTheme} from '../../../App';
+import {theme} from '../../../App';
+import {Button} from '../../common';
 import {RouteNames} from '../../routes/routesHelper';
+import {globalStyles} from '../../styles';
 
 // Interface & Type
 const logo = require('../../assets/images/logo.png');
@@ -42,7 +44,25 @@ const LoginScreen = () => {
   // =====================================================================
 
   // useCallback
+  const pressSignin = useCallback(() => {
+    console.log('press sign in');
+  }, []);
 
+  const pressForgotPassword = useCallback(() => {
+    console.log('press forgot password');
+  }, []);
+
+  const pressLoginGoogle = useCallback(() => {
+    console.log('press login with google');
+  }, []);
+
+  const pressLoginFacebook = useCallback(() => {
+    console.log('press login with facebook');
+  }, []);
+
+  const pressRegister = useCallback(() => {
+    navigation.navigate(RouteNames.Register);
+  }, []);
   // =====================================================================
 
   // Render
@@ -53,7 +73,7 @@ const LoginScreen = () => {
         <Image source={logo} style={styles.logo} />
 
         {/* Header */}
-        <Text style={styles.header}>Welcome to Lafyuu</Text>
+        <Text style={globalStyles.header}>Welcome to Lafyuu</Text>
         <Text style={styles.smallText}>Sign in to continue</Text>
 
         {/* Email input */}
@@ -62,11 +82,11 @@ const LoginScreen = () => {
           placeholder="Your Email"
           value={email}
           style={styles.input}
-          outlineColor={appTheme.colors.accent}
+          outlineColor={theme.colors.accent}
           autoComplete="email"
           left={
             <TextInput.Icon
-              color={appTheme.colors.primary}
+              color={theme.colors.primary}
               name="email-outline"
               size={26}
               style={styles.icon}
@@ -81,11 +101,11 @@ const LoginScreen = () => {
           placeholder="Password"
           value={password}
           style={styles.input}
-          outlineColor={appTheme.colors.accent}
+          outlineColor={theme.colors.accent}
           autoComplete="password"
           left={
             <TextInput.Icon
-              color={appTheme.colors.primary}
+              color={theme.colors.primary}
               name="lock-outline"
               size={26}
               style={styles.icon}
@@ -95,12 +115,7 @@ const LoginScreen = () => {
         />
 
         {/* Sign in button */}
-        <Button
-          mode="contained"
-          labelStyle={styles.buttonLabel}
-          style={styles.button}>
-          sign in
-        </Button>
+        <Button label="sign in" mode="contained" onPress={pressSignin} />
 
         {/* Divider */}
         <View style={styles.dividerContainer}>
@@ -113,33 +128,29 @@ const LoginScreen = () => {
 
         {/* Login with Google button */}
         <Button
+          label="login with google"
           mode="outlined"
-          labelStyle={styles.socialButtonLabel}
           icon="google"
-          style={styles.button}
-          contentStyle={styles.socialButtonIcon}>
-          login with google
-        </Button>
+          onPress={pressLoginGoogle}
+        />
 
         {/* Login with Facebook button */}
         <Button
+          label="login with facebook"
           mode="outlined"
-          labelStyle={styles.socialButtonLabel}
           icon="facebook"
-          style={styles.button}
-          contentStyle={styles.socialButtonIcon}>
-          login with facebook
-        </Button>
+          onPress={pressLoginFacebook}
+        />
 
         <View style={styles.forgotPassword}>
-          <Text style={styles.linkText}>Forgot Password?</Text>
+          <Text style={globalStyles.linkText} onPress={pressForgotPassword}>
+            Forgot Password?
+          </Text>
         </View>
 
         <Text style={styles.smallText}>
           Don't have a account?{' '}
-          <Text
-            style={styles.linkText}
-            onPress={() => navigation.navigate(RouteNames.Register)}>
+          <Text style={globalStyles.linkText} onPress={pressRegister}>
             Register
           </Text>
         </Text>
@@ -151,17 +162,6 @@ const LoginScreen = () => {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  button: {
-    width: '100%',
-    padding: 5,
-    marginVertical: 5,
-  },
-  buttonLabel: {
-    color: appTheme.colors.white,
-    fontWeight: '700',
-    fontSize: 14,
-    lineHeight: 25,
-  },
   container: {
     padding: 15,
     alignItems: 'center',
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   divider: {
     flex: 1,
     height: 1,
-    backgroundColor: appTheme.colors.accent,
+    backgroundColor: theme.colors.accent,
   },
   dividerContainer: {
     marginVertical: 20,
@@ -182,31 +182,19 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '700',
     lineHeight: 21,
-    color: appTheme.colors.text,
+    color: theme.colors.text,
   },
   forgotPassword: {
     marginTop: 16,
-    marginBottom: 8,
-  },
-  header: {
-    fontWeight: '700',
-    fontSize: 16,
-    lineHeight: 24,
     marginBottom: 8,
   },
   icon: {
     alignItems: 'center',
   },
   input: {
-    backgroundColor: appTheme.colors.white,
+    backgroundColor: theme.colors.white,
     width: '100%',
     marginBottom: 5,
-  },
-  linkText: {
-    fontWeight: '700',
-    fontSize: 12,
-    lineHeight: 18,
-    color: appTheme.colors.primary,
   },
   logo: {
     marginTop: 50,
@@ -217,18 +205,6 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 21.6,
     marginBottom: 28,
-    color: appTheme.colors.text,
-  },
-  socialButtonLabel: {
-    flex: 1,
-    color: appTheme.colors.text,
-    alignItems: 'center',
-    textAlign: 'center',
-    fontSize: 14,
-    fontWeight: '700',
-    lineHeight: 25,
-  },
-  socialButtonIcon: {
-    justifyContent: 'flex-start',
+    color: theme.colors.text,
   },
 });
