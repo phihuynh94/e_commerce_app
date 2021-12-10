@@ -9,10 +9,9 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {TextInput} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {theme} from '../../../App';
-import {Button} from '../../common';
+import {Button, TextInput} from '../../common';
 import {RouteNames} from '../../routes/routesHelper';
 import {globalStyles} from '../../styles';
 
@@ -74,44 +73,24 @@ const LoginScreen = () => {
 
         {/* Header */}
         <Text style={globalStyles.header}>Welcome to Lafyuu</Text>
-        <Text style={styles.smallText}>Sign in to continue</Text>
+        <Text style={globalStyles.smallText}>Sign in to continue</Text>
 
         {/* Email input */}
         <TextInput
-          mode="outlined"
+          autoComplete="email"
+          icon="email-outline"
+          onChangeText={setEmail}
           placeholder="Your Email"
           value={email}
-          style={styles.input}
-          outlineColor={theme.colors.accent}
-          autoComplete="email"
-          left={
-            <TextInput.Icon
-              color={theme.colors.primary}
-              name="email-outline"
-              size={26}
-              style={styles.icon}
-            />
-          }
-          onChangeText={setEmail}
         />
 
         {/* Password input */}
         <TextInput
-          mode="outlined"
+          autoComplete="password"
+          icon="lock-outline"
+          onChangeText={setPassword}
           placeholder="Password"
           value={password}
-          style={styles.input}
-          outlineColor={theme.colors.accent}
-          autoComplete="password"
-          left={
-            <TextInput.Icon
-              color={theme.colors.primary}
-              name="lock-outline"
-              size={26}
-              style={styles.icon}
-            />
-          }
-          onChangeText={setPassword}
         />
 
         {/* Sign in button */}
@@ -142,13 +121,15 @@ const LoginScreen = () => {
           onPress={pressLoginFacebook}
         />
 
+        {/* Forgot password text link */}
         <View style={styles.forgotPassword}>
           <Text style={globalStyles.linkText} onPress={pressForgotPassword}>
             Forgot Password?
           </Text>
         </View>
 
-        <Text style={styles.smallText}>
+        {/* Register text link */}
+        <Text style={globalStyles.smallText}>
           Don't have a account?{' '}
           <Text style={globalStyles.linkText} onPress={pressRegister}>
             Register
@@ -188,23 +169,8 @@ const styles = StyleSheet.create({
     marginTop: 16,
     marginBottom: 8,
   },
-  icon: {
-    alignItems: 'center',
-  },
-  input: {
-    backgroundColor: theme.colors.white,
-    width: '100%',
-    marginBottom: 5,
-  },
   logo: {
     marginTop: 50,
     marginBottom: 16,
-  },
-  smallText: {
-    fontWeight: '400',
-    fontSize: 12,
-    lineHeight: 21.6,
-    marginBottom: 28,
-    color: theme.colors.text,
   },
 });
