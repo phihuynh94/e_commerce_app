@@ -14,4 +14,11 @@ export const globalStyles = StyleSheet.create({
     lineHeight: 18,
     color: theme.colors.primary,
   },
+  smallText: {
+    fontWeight: '400',
+    fontSize: 12,
+    lineHeight: 21.6,
+    marginBottom: 28,
+    color: theme.colors.text,
+  },
 });
