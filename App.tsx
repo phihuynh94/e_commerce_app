@@ -1,21 +1,25 @@
 import {
   DefaultTheme as NavDefaultTheme,
   NavigationContainer,
-  Theme,
+  Theme as NavTheme,
 } from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {
+  createStackNavigator,
+  StackNavigationOptions,
+} from '@react-navigation/stack';
 import React from 'react';
 import 'react-native-gesture-handler';
 import {
   DefaultTheme as PaperDefaultTheme,
   Provider as PaperProvider,
 } from 'react-native-paper';
+import {Theme as PaperTheme} from 'react-native-paper/lib/typescript/types';
 import AuthRoutes from './src/routes/AuthRoutes';
 import {RouteNames} from './src/routes/routesHelper';
 
 const Stack = createStackNavigator();
 
-const navTheme: Theme = {
+const navTheme: NavTheme = {
   ...NavDefaultTheme,
   colors: {
     ...NavDefaultTheme.colors,
@@ -23,25 +27,34 @@ const navTheme: Theme = {
   },
 };
 
-export const appTheme = {
+const paperTheme: PaperTheme = {
   ...PaperDefaultTheme,
   roundness: 5,
   colors: {
     ...PaperDefaultTheme.colors,
     primary: '#40BFFF',
     accent: '#EBF0FF',
-    white: '#FFFF',
     text: '#9098B1',
   },
 };
 
-const navOptions = {
+export const theme = {
+  ...navTheme,
+  ...paperTheme,
+  colors: {
+    ...navTheme.colors,
+    ...paperTheme.colors,
+    white: '#FFFFFF',
+  },
+};
+
+const navOptions: StackNavigationOptions = {
   headerShown: false,
 };
 
 const App = () => {
   return (
-    <PaperProvider theme={appTheme}>
+    <PaperProvider theme={paperTheme}>
       <NavigationContainer theme={navTheme}>
         <Stack.Navigator screenOptions={navOptions}>
           <Stack.Screen name={RouteNames.AuthRoutes} component={AuthRoutes} />

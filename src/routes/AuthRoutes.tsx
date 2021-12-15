@@ -6,7 +6,7 @@ import React from 'react';
 import {LoginScreen, RegisterScreen} from '../screens';
 import {AuthStackParamList, RouteNames} from './routesHelper';
 
-const AuthNav = createStackNavigator<AuthStackParamList>();
+const Stack = createStackNavigator<AuthStackParamList>();
 
 const navOptions: StackNavigationOptions = {
   headerShown: false,
@@ -14,10 +14,10 @@ const navOptions: StackNavigationOptions = {
 
 const AuthRoutes = () => {
   return (
-    <AuthNav.Navigator screenOptions={navOptions}>
-      <AuthNav.Screen component={LoginScreen} name={RouteNames.Login} />
-      <AuthNav.Screen component={RegisterScreen} name={RouteNames.Register} />
-    </AuthNav.Navigator>
+    <Stack.Navigator screenOptions={navOptions}>
+      <Stack.Screen component={LoginScreen} name={RouteNames.Login} />
+      <Stack.Screen component={RegisterScreen} name={RouteNames.Register} />
+    </Stack.Navigator>
   );
 };
 
