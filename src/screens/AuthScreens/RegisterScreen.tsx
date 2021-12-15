@@ -11,7 +11,7 @@ import {
 import {Button, TextInput} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/Ionicons';
-import {appTheme} from '../../../App';
+import {theme} from '../../../App';
 import {RouteNames} from '../../routes/routesHelper';
 
 // Interface & Type
@@ -52,7 +52,7 @@ const RegisterScreen = () => {
         {/* FullName Input*/}
         <TextInput
           mode="outlined"
-          outlineColor={appTheme.colors.accent}
+          outlineColor={theme.colors.accent}
           autoComplete="name"
           value={fullName}
           placeholder="Full Name"
@@ -60,7 +60,7 @@ const RegisterScreen = () => {
           onChangeText={setFullName}
           left={
             // <TextInput.Icon
-            //   color={appTheme.colors.primary}
+            //   color={theme.colors.primary}
             //   name="bag-personal-outline"
             //   size={26}
             //   style={styles.icon}
@@ -75,11 +75,11 @@ const RegisterScreen = () => {
           placeholder="Your Email"
           value={email}
           style={styles.input}
-          outlineColor={appTheme.colors.accent}
+          outlineColor={theme.colors.accent}
           autoComplete="email"
           left={
             <TextInput.Icon
-              color={appTheme.colors.primary}
+              color={theme.colors.primary}
               name="email-outline"
               size={26}
               style={styles.icon}
@@ -94,11 +94,11 @@ const RegisterScreen = () => {
           placeholder="Password"
           value={password}
           style={styles.input}
-          outlineColor={appTheme.colors.accent}
+          outlineColor={theme.colors.accent}
           autoComplete="password"
           left={
             <TextInput.Icon
-              color={appTheme.colors.primary}
+              color={theme.colors.primary}
               name="lock-outline"
               size={26}
               style={styles.icon}
@@ -113,11 +113,11 @@ const RegisterScreen = () => {
           placeholder="Confirm Password"
           value={password}
           style={styles.input}
-          outlineColor={appTheme.colors.accent}
+          outlineColor={theme.colors.accent}
           autoComplete="confirmPassword"
           left={
             <TextInput.Icon
-              color={appTheme.colors.primary}
+              color={theme.colors.primary}
               name="lock-outline"
               size={26}
               style={styles.icon}
@@ -155,7 +155,7 @@ const styles = StyleSheet.create({
     marginVertical: 5,
   },
   buttonLabel: {
-    color: appTheme.colors.white,
+    color: theme.colors.white,
     fontWeight: '700',
     fontSize: 14,
     lineHeight: 25,
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   divider: {
     flex: 1,
     height: 1,
-    backgroundColor: appTheme.colors.accent,
+    backgroundColor: theme.colors.accent,
   },
   dividerContainer: {
     marginVertical: 20,
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '700',
     lineHeight: 21,
-    color: appTheme.colors.text,
+    color: theme.colors.text,
   },
   forgotPassword: {
     marginTop: 16,
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   input: {
-    backgroundColor: appTheme.colors.white,
+    backgroundColor: theme.colors.white,
     width: '100%',
     marginBottom: 5,
   },
@@ -204,7 +204,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     fontSize: 12,
     lineHeight: 18,
-    color: appTheme.colors.primary,
+    color: theme.colors.primary,
   },
   logo: {
     marginTop: 50,
@@ -215,11 +215,11 @@ const styles = StyleSheet.create({
     fontSize: 12,
     lineHeight: 21.6,
     marginBottom: 28,
-    color: appTheme.colors.text,
+    color: theme.colors.text,
   },
   socialButtonLabel: {
     flex: 1,
-    color: appTheme.colors.text,
+    color: theme.colors.text,
     alignItems: 'center',
     textAlign: 'center',
     fontSize: 14,
