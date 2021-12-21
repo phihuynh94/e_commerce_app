@@ -8,8 +8,8 @@ import {theme} from '../../../App';
 interface ITextInputProps {
   autoComplete: string;
   icon?: string;
-  onChangeText: ((text: string) => void) & Function;
-  placeholder: string;
+  onChangeText: (text: string) => void;
+  placeholder?: string;
   value: string;
 }
 // =====================================================================

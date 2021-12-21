@@ -14,6 +14,7 @@ import {
   Provider as PaperProvider,
 } from 'react-native-paper';
 import {Theme as PaperTheme} from 'react-native-paper/lib/typescript/types';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
 import AuthRoutes from './src/routes/AuthRoutes';
 import {RouteNames} from './src/routes/routesHelper';
 
@@ -56,9 +57,11 @@ const App = () => {
   return (
     <PaperProvider theme={paperTheme}>
       <NavigationContainer theme={navTheme}>
-        <Stack.Navigator screenOptions={navOptions}>
-          <Stack.Screen name={RouteNames.AuthRoutes} component={AuthRoutes} />
-        </Stack.Navigator>
+        <SafeAreaProvider>
+          <Stack.Navigator screenOptions={navOptions}>
+            <Stack.Screen name={RouteNames.AuthRoutes} component={AuthRoutes} />
+          </Stack.Navigator>
+        </SafeAreaProvider>
       </NavigationContainer>
     </PaperProvider>
   );
