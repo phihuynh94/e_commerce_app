@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 declare global {
   namespace ReactNavigation {
     interface RootParamList extends AuthStackParamList {}

@@ -94,7 +94,7 @@ const LoginScreen = () => {
         />
 
         {/* Sign in button */}
-        <Button label="sign in" mode="contained" onPress={pressSignin} />
+        <Button label="sign in" onPress={pressSignin} />
 
         {/* Divider */}
         <View style={styles.dividerContainer}>

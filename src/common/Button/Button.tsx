@@ -9,7 +9,7 @@ interface IButtonProps {
   icon?: string;
   label: string;
   loading?: boolean;
-  mode: 'contained' | 'outlined';
+  mode?: 'contained' | 'outlined';
   onPress: () => void;
 }
 // =====================================================================
