@@ -8,6 +8,7 @@ declare global {
 export type AuthStackParamList = {
   Login: undefined;
   Register: undefined;
+  ProductDetailScreen: undefined;
 };
 
 export enum RouteNames {
@@ -16,4 +17,5 @@ export enum RouteNames {
   Home = 'Home',
   Login = 'Login',
   Register = 'Register',
+  ProductDetailScreen = 'ProductDetailScreen',
 }
