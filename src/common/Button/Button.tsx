@@ -2,32 +2,22 @@
 import React, {useMemo} from 'react';
 import {StyleProp, TextStyle, ViewStyle} from 'react-native';
 import {Button as PaperButton} from 'react-native-paper';
-import {theme} from '../../../App';
+import {theme} from '../../styles/theme';
 
 // Interface & Type
-interface IButtonProps {
-  icon?: string;
-  label: string;
-  loading?: boolean;
+type IButtonProps = React.ComponentProps<typeof PaperButton> & {
   mode?: 'contained' | 'outlined';
-  onPress: () => void;
-}
+};
 // =====================================================================
 
 // Component
-const Button = ({
-  icon,
-  label,
-  loading,
-  mode = 'contained',
-  onPress,
-}: IButtonProps) => {
+const Button = ({children, mode = 'contained', ...rest}: IButtonProps) => {
   // useMemos
   const buttonStyle: StyleProp<ViewStyle> = useMemo(() => {
     return {
-      width: '100%',
-      padding: 5,
       marginVertical: 5,
+      padding: 5,
+      width: '100%',
     };
   }, []);
 
@@ -35,13 +25,13 @@ const Button = ({
     switch (mode) {
       case 'outlined':
         return {
-          flex: 1,
-          color: theme.colors.text,
           alignItems: 'center',
-          textAlign: 'center',
+          color: theme.colors.text,
+          flex: 1,
           fontSize: 14,
           fontWeight: '700',
           lineHeight: 25,
+          textAlign: 'center',
         };
       default:
         return {
@@ -52,26 +42,16 @@ const Button = ({
         };
     }
   }, []);
-
-  const contentStyle: StyleProp<ViewStyle> = useMemo(() => {
-    if (icon)
-      return {
-        justifyContent: 'flex-start',
-      };
-  }, []);
   // =====================================================================
 
   // Render
   return (
     <PaperButton
-      contentStyle={contentStyle}
-      icon={icon}
       labelStyle={buttonLabelStyle}
-      loading={loading}
       mode={mode}
-      onPress={onPress}
-      style={buttonStyle}>
-      {label}
+      style={buttonStyle}
+      {...rest}>
+      {children}
     </PaperButton>
   );
 };

@@ -10,13 +10,17 @@ import {
   View,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-import {theme} from '../../../App';
 import {Button, TextInput} from '../../common';
-import {RouteNames} from '../../routes/routesHelper';
-import {globalStyles} from '../../styles';
+import {RouteNames, ScreenNames} from '../../routes/routesHelper';
+import {globalStyles, staticValues} from '../../styles';
+import {theme} from '../../styles/theme';
+
+// Images
+const logo = require('../../assets/images/logo.png');
+// =====================================================================
 
 // Interface & Type
-const logo = require('../../assets/images/logo.png');
+
 // =====================================================================
 
 // Component
@@ -29,47 +33,47 @@ const LoginScreen = () => {
 
   // =====================================================================
 
-  // useState
+  // useStates
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // =====================================================================
-
-  // useEffect
-
   // =====================================================================
 
   // useMemos
 
   // =====================================================================
 
-  // useCallback
-  const pressSignin = useCallback(() => {
-    console.log('press sign in');
-  }, []);
-
-  const pressForgotPassword = useCallback(() => {
+  // useCallbacks
+  const onForgotPassword = useCallback(() => {
     console.log('press forgot password');
   }, []);
 
-  const pressLoginGoogle = useCallback(() => {
+  const onLoginGoogle = useCallback(() => {
     console.log('press login with google');
   }, []);
 
-  const pressLoginFacebook = useCallback(() => {
+  const onLoginFacebook = useCallback(() => {
     console.log('press login with facebook');
   }, []);
 
-  const pressRegister = useCallback(() => {
-    navigation.navigate(RouteNames.Register);
+  const onRegister = useCallback(() => {
+    navigation.navigate(ScreenNames.Register);
+  }, [navigation]);
+
+  const onSignin = useCallback(() => {
+    navigation.navigate(RouteNames.AppRoutes);
   }, []);
+  // =====================================================================
+
+  // useEffects
+
   // =====================================================================
 
   // Render
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={globalStyles.authScreensContainer}>
         {/* Logo */}
-        <Image source={logo} style={styles.logo} />
+        <Image source={logo} />
 
         {/* Header */}
         <Text style={globalStyles.header}>Welcome to Lafyuu</Text>
@@ -90,40 +94,35 @@ const LoginScreen = () => {
           icon="lock-outline"
           onChangeText={setPassword}
           placeholder="Password"
+          secureTextEntry={true}
           value={password}
         />
 
         {/* Sign in button */}
-        <Button label="sign in" onPress={pressSignin} />
+        <Button onPress={onSignin}>sign in</Button>
 
         {/* Divider */}
         <View style={styles.dividerContainer}>
-          <View style={styles.divider} />
+          <View style={globalStyles.divider} />
           <View>
             <Text style={styles.divierText}>OR</Text>
           </View>
-          <View style={styles.divider} />
+          <View style={globalStyles.divider} />
         </View>
 
         {/* Login with Google button */}
-        <Button
-          label="login with google"
-          mode="outlined"
-          icon="google"
-          onPress={pressLoginGoogle}
-        />
+        <Button mode="outlined" icon="google" onPress={onLoginGoogle}>
+          login with google
+        </Button>
 
         {/* Login with Facebook button */}
-        <Button
-          label="login with facebook"
-          mode="outlined"
-          icon="facebook"
-          onPress={pressLoginFacebook}
-        />
+        <Button mode="outlined" icon="facebook" onPress={onLoginFacebook}>
+          login with facebook
+        </Button>
 
         {/* Forgot password text link */}
         <View style={styles.forgotPassword}>
-          <Text style={globalStyles.linkText} onPress={pressForgotPassword}>
+          <Text style={globalStyles.linkText} onPress={onForgotPassword}>
             Forgot Password?
           </Text>
         </View>
@@ -131,7 +130,7 @@ const LoginScreen = () => {
         {/* Register text link */}
         <Text style={globalStyles.smallText}>
           Don't have a account?{' '}
-          <Text style={globalStyles.linkText} onPress={pressRegister}>
+          <Text style={globalStyles.linkText} onPress={onRegister}>
             Register
           </Text>
         </Text>
@@ -143,34 +142,19 @@ const LoginScreen = () => {
 export default LoginScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    padding: 15,
-    alignItems: 'center',
-  },
-  divider: {
-    flex: 1,
-    height: 1,
-    backgroundColor: theme.colors.accent,
+  divierText: {
+    color: theme.colors.text,
+    fontSize: staticValues.normalFont,
+    fontWeight: '700',
+    lineHeight: staticValues.lineHeight,
+    textAlign: 'center',
+    width: 50,
   },
   dividerContainer: {
+    ...globalStyles.dividerContainer,
     marginVertical: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  divierText: {
-    width: 50,
-    textAlign: 'center',
-    fontSize: 14,
-    fontWeight: '700',
-    lineHeight: 21,
-    color: theme.colors.text,
   },
   forgotPassword: {
     marginTop: 16,
-    marginBottom: 8,
-  },
-  logo: {
-    marginTop: 50,
-    marginBottom: 16,
   },
 });
