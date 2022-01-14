@@ -13,8 +13,7 @@ import {
 import {Badge} from 'react-native-paper';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {TextInput} from '../../common';
-import DotsIndicator from '../../common/DotsIndicator/DotsIndicator';
+import {DotsIndicator, TextInput} from '../../common';
 import {banners, categories} from '../../mockData';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
