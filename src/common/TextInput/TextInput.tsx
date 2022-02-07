@@ -1,27 +1,18 @@
 // Import
-import React, {useMemo} from 'react';
+import React, {ReactNode, useMemo} from 'react';
 import {StyleProp, TextStyle, ViewStyle} from 'react-native';
 import {TextInput as PaperTextInput} from 'react-native-paper';
-import {theme} from '../../../App';
+import {IconSource} from 'react-native-paper/lib/typescript/components/Icon';
+import {theme} from '../../styles/theme';
 
 // Interface & Type
-interface ITextInputProps {
-  autoComplete: string;
-  icon?: string;
-  onChangeText: (text: string) => void;
-  placeholder?: string;
-  value: string;
-}
+type ITextInputProps = React.ComponentProps<typeof PaperTextInput> & {
+  icon?: IconSource;
+};
 // =====================================================================
 
 // Component
-const TextInput = ({
-  autoComplete,
-  icon,
-  onChangeText,
-  placeholder,
-  value,
-}: ITextInputProps) => {
+const TextInput = ({icon, ...rest}: ITextInputProps) => {
   // useMemos
   const iconStyle: StyleProp<ViewStyle> = useMemo(() => {
     return {
@@ -29,36 +20,40 @@ const TextInput = ({
     };
   }, []);
 
+  const leftIcon: ReactNode = useMemo(() => {
+    if (icon) {
+      return (
+        <PaperTextInput.Icon
+          color={theme.colors.primary}
+          name={icon}
+          size={24}
+          style={iconStyle}
+        />
+      );
+    }
+  }, []);
+
   const textInputStyle: StyleProp<TextStyle> = useMemo(() => {
     return {
       backgroundColor: theme.colors.white,
-      width: '100%',
       marginBottom: 5,
+      width: '100%',
     };
   }, []);
   // =====================================================================
 
   // Render
   return (
-    <PaperTextInput
-      autoComplete={autoComplete}
-      left={
-        icon && (
-          <PaperTextInput.Icon
-            color={theme.colors.primary}
-            name={icon}
-            size={26}
-            style={iconStyle}
-          />
-        )
-      }
-      mode="outlined"
-      onChangeText={onChangeText}
-      outlineColor={theme.colors.accent}
-      placeholder={placeholder}
-      style={textInputStyle}
-      value={value}
-    />
+    <>
+      <PaperTextInput
+        left={leftIcon}
+        mode="outlined"
+        outlineColor={theme.colors.accent}
+        placeholderTextColor={theme.colors.text}
+        style={textInputStyle}
+        {...rest}
+      />
+    </>
   );
 };
 

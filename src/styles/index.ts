@@ -1,24 +1,48 @@
 import {StyleSheet} from 'react-native';
-import {theme} from '../../App';
+import {theme} from './theme';
+
+export const staticValues = {
+  largeFont: 16,
+  lineHeight: 20,
+  normalFont: 14,
+  padding: 15,
+  smallFont: 12,
+};
 
 export const globalStyles = StyleSheet.create({
+  authScreensContainer: {
+    alignItems: 'center',
+    flex: 1,
+    justifyContent: 'center',
+    padding: staticValues.padding,
+  },
+  divider: {
+    backgroundColor: theme.colors.accent,
+    flex: 1,
+    height: 1,
+  },
+  dividerContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+  },
   header: {
     fontWeight: '700',
-    fontSize: 16,
+    fontSize: staticValues.largeFont,
     lineHeight: 24,
-    marginBottom: 8,
+    marginTop: 16,
   },
   linkText: {
-    fontWeight: '700',
-    fontSize: 12,
-    lineHeight: 18,
     color: theme.colors.primary,
+    fontWeight: '700',
+    fontSize: staticValues.smallFont,
+    lineHeight: staticValues.lineHeight,
   },
   smallText: {
-    fontWeight: '400',
-    fontSize: 12,
-    lineHeight: 21.6,
-    marginBottom: 28,
     color: theme.colors.text,
+    fontWeight: '400',
+    fontSize: staticValues.smallFont,
+    lineHeight: staticValues.lineHeight,
+    marginBottom: 28,
+    marginTop: 8,
   },
 });
