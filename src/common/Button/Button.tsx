@@ -1,6 +1,6 @@
 // Import
 import React, {useMemo} from 'react';
-import {StyleProp, TextStyle, ViewStyle} from 'react-native';
+import {StyleProp, StyleSheet, TextStyle} from 'react-native';
 import {Button as PaperButton} from 'react-native-paper';
 import {theme} from '../../styles/theme';
 
@@ -13,32 +13,20 @@ type IButtonProps = React.ComponentProps<typeof PaperButton> & {
 // Component
 const Button = ({children, mode = 'contained', ...rest}: IButtonProps) => {
   // useMemos
-  const buttonStyle: StyleProp<ViewStyle> = useMemo(() => {
-    return {
-      marginVertical: 5,
-      padding: 5,
-      width: '100%',
-    };
-  }, []);
-
   const buttonLabelStyle: StyleProp<TextStyle> = useMemo(() => {
     switch (mode) {
       case 'outlined':
         return {
+          ...styles.label,
           alignItems: 'center',
           color: theme.colors.text,
           flex: 1,
-          fontSize: 14,
-          fontWeight: '700',
-          lineHeight: 25,
           textAlign: 'center',
         };
       default:
         return {
+          ...styles.label,
           color: theme.colors.white,
-          fontWeight: '700',
-          fontSize: 14,
-          lineHeight: 25,
         };
     }
   }, []);
@@ -49,7 +37,7 @@ const Button = ({children, mode = 'contained', ...rest}: IButtonProps) => {
     <PaperButton
       labelStyle={buttonLabelStyle}
       mode={mode}
-      style={buttonStyle}
+      style={styles.button}
       {...rest}>
       {children}
     </PaperButton>
@@ -57,3 +45,16 @@ const Button = ({children, mode = 'contained', ...rest}: IButtonProps) => {
 };
 
 export default Button;
+
+const styles = StyleSheet.create({
+  button: {
+    marginVertical: 5,
+    padding: 5,
+    width: '100%',
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: '700',
+    lineHeight: 25,
+  },
+});

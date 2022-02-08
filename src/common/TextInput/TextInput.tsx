@@ -1,6 +1,6 @@
 // Import
 import React, {ReactNode, useMemo} from 'react';
-import {StyleProp, TextStyle, ViewStyle} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {TextInput as PaperTextInput} from 'react-native-paper';
 import {IconSource} from 'react-native-paper/lib/typescript/components/Icon';
 import {theme} from '../../styles/theme';
@@ -14,12 +14,6 @@ type ITextInputProps = React.ComponentProps<typeof PaperTextInput> & {
 // Component
 const TextInput = ({icon, ...rest}: ITextInputProps) => {
   // useMemos
-  const iconStyle: StyleProp<ViewStyle> = useMemo(() => {
-    return {
-      alignItems: 'center',
-    };
-  }, []);
-
   const leftIcon: ReactNode = useMemo(() => {
     if (icon) {
       return (
@@ -27,18 +21,10 @@ const TextInput = ({icon, ...rest}: ITextInputProps) => {
           color={theme.colors.primary}
           name={icon}
           size={24}
-          style={iconStyle}
+          style={styles.icon}
         />
       );
     }
-  }, []);
-
-  const textInputStyle: StyleProp<TextStyle> = useMemo(() => {
-    return {
-      backgroundColor: theme.colors.white,
-      marginBottom: 5,
-      width: '100%',
-    };
   }, []);
   // =====================================================================
 
@@ -50,7 +36,7 @@ const TextInput = ({icon, ...rest}: ITextInputProps) => {
         mode="outlined"
         outlineColor={theme.colors.accent}
         placeholderTextColor={theme.colors.text}
-        style={textInputStyle}
+        style={styles.textInput}
         {...rest}
       />
     </>
@@ -58,3 +44,14 @@ const TextInput = ({icon, ...rest}: ITextInputProps) => {
 };
 
 export default TextInput;
+
+const styles = StyleSheet.create({
+  icon: {
+    alignItems: 'center',
+  },
+  textInput: {
+    backgroundColor: theme.colors.white,
+    marginBottom: 5,
+    width: '100%',
+  },
+});
