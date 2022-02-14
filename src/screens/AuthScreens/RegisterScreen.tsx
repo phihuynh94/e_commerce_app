@@ -4,7 +4,7 @@ import React, {useCallback, useState} from 'react';
 import {Image, Keyboard, Text, TouchableWithoutFeedback} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Button, TextInput} from '../../common';
-import {ScreenNames} from '../../routes/routesHelper';
+import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles} from '../../styles';
 
 // Images

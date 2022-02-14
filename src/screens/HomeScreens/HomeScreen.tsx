@@ -1,9 +1,11 @@
 // Import
+import {useNavigation} from '@react-navigation/native';
 import React, {useCallback, useEffect, useRef, useState} from 'react';
 import {
   Dimensions,
   FlatList,
   Image,
+  Pressable,
   ScrollView,
   StyleSheet,
   Text,
@@ -15,6 +17,7 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {DotsIndicator, TextInput} from '../../common';
 import {banners, categories} from '../../mockData';
+import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
 import {IBanner} from '../../types';
@@ -29,7 +32,7 @@ const recomendedProductBanner = require('../../assets/images/recomended-product-
 // Component
 const HomeScreen = () => {
   // Hooks
-
+  const navigation = useNavigation();
   // =====================================================================
 
   // useSelectors
@@ -58,10 +61,32 @@ const HomeScreen = () => {
   // =====================================================================
 
   // useCallbacks
-  const renderCard = useCallback(({banner}) => {
+  // This is need for keyExtractor in Flatlist, so it doesn't give error
+  const keyExtractor = useCallback((item: IBanner) => {
+    return item.url;
+  }, []);
+
+  const onBanner = useCallback(
+    (banner: IBanner) => () => {
+      navigation.navigate(ScreenNames.FlashSale, {
+        title: banner.title,
+        url: banner.url,
+      });
+    },
+    [navigation],
+  );
+
+  const onFavoriteIcon = useCallback(() => {
+    navigation.navigate(ScreenNames.FavoriteProducts);
+  }, [navigation]);
+
+  // Render banner card
+  const renderCard = useCallback(banner => {
     return (
       <View style={styles.bannerContainer}>
-        <Image source={offerBanner} />
+        <Pressable onPress={onBanner(banner.item)}>
+          <Image source={offerBanner} />
+        </Pressable>
       </View>
     );
   }, []);
@@ -124,7 +149,13 @@ const HomeScreen = () => {
 
             {/* Favorite icon */}
             <View style={styles.icon}>
-              <Icon color={theme.colors.text} name="heart-outline" size={30} />
+              <Pressable onPress={onFavoriteIcon}>
+                <Icon
+                  color={theme.colors.text}
+                  name="heart-outline"
+                  size={staticValues.iconSize}
+                />
+              </Pressable>
             </View>
 
             {/* Notification icon */}
@@ -132,7 +163,11 @@ const HomeScreen = () => {
               <Badge style={styles.badge} size={10}>
                 2
               </Badge>
-              <Icon color={theme.colors.text} name="bell-outline" size={30} />
+              <Icon
+                color={theme.colors.text}
+                name="bell-outline"
+                size={staticValues.iconSize}
+              />
             </View>
           </View>
         </View>
@@ -178,7 +213,7 @@ const HomeScreen = () => {
                   <Icon
                     color={theme.colors.primary}
                     name="tshirt-crew-outline"
-                    size={30}
+                    size={staticValues.iconSize}
                   />
                 </View>
                 <Text style={styles.cateroryLabel}>Man Shirt</Text>

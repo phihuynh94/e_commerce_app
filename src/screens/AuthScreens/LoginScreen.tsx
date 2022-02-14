@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Button, TextInput} from '../../common';
-import {RouteNames, ScreenNames} from '../../routes/routesHelper';
+import {RouteNames, ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
 
@@ -61,7 +61,7 @@ const LoginScreen = () => {
 
   const onSignin = useCallback(() => {
     navigation.navigate(RouteNames.AppRoutes);
-  }, []);
+  }, [navigation]);
   // =====================================================================
 
   // useEffects
