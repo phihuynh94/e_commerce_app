@@ -9,8 +9,13 @@ import {Provider as PaperProvider} from 'react-native-paper';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 import AppRoutes from './src/routes/AppRoutes';
 import AuthRoutes from './src/routes/AuthRoutes';
-import {AppStackParamList, RouteNames} from './src/routes/routesHelper';
+import {RouteNames} from './src/routes/routesHelpers';
 import {navTheme, paperTheme} from './src/styles/theme';
+
+export type AppStackParamList = {
+  AppRoutes: undefined;
+  AuthRoutes: undefined;
+};
 
 const Stack = createStackNavigator<AppStackParamList>();
 

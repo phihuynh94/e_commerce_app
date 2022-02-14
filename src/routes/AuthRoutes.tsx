@@ -4,7 +4,12 @@ import {
 } from '@react-navigation/stack';
 import React from 'react';
 import {LoginScreen, RegisterScreen} from '../screens';
-import {AuthStackParamList, ScreenNames} from './routesHelper';
+import {ScreenNames} from './routesHelpers';
+
+export type AuthStackParamList = {
+  Login: undefined;
+  Register: undefined;
+};
 
 const Stack = createStackNavigator<AuthStackParamList>();
 
