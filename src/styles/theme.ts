@@ -31,6 +31,7 @@ export const theme = {
   colors: {
     ...navTheme.colors,
     ...paperTheme.colors,
+    dark: '#223263',
     white: '#FFFFFF',
   },
 };

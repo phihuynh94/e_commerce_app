@@ -1,9 +1,6 @@
-interface ICategory {
-  category: string;
-  icon: string;
-}
+import {ICategory} from '../models/caterogy-model';
 
-const categories: ICategory[] = [
+export const categories: ICategory[] = [
   {
     category: 'Man Shirt',
     icon: 'tshirt-crew-outline',
@@ -25,5 +22,3 @@ const categories: ICategory[] = [
     icon: 'tshirt-crew-outline',
   },
 ];
-
-export default categories;

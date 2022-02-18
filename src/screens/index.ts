@@ -5,4 +5,6 @@ export {default as CartScreen} from './CartScreens/CartScreen';
 export {default as ExploreScreen} from './ExploreScreens/ExploreScreen';
 export {default as FlashSaleScreen} from './HomeScreens/FlashSaleScreen';
 export {default as HomeScreen} from './HomeScreens/HomeScreen';
+export {default as NotificationDetailScreen} from './NotificationScreens/NotificationDetailScreen';
+export {default as NotificationScreen} from './NotificationScreens/NotificationScreen';
 export {default as OfferScreen} from './OfferScreens/OfferScreen';

@@ -6,6 +6,7 @@ import {
   FlatList,
   Image,
   Pressable,
+  SafeAreaView,
   ScrollView,
   StyleSheet,
   Text,
@@ -13,30 +14,26 @@ import {
   ViewToken,
 } from 'react-native';
 import {Badge} from 'react-native-paper';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {DotsIndicator, TextInput} from '../../common';
-import {banners, categories} from '../../mockData';
+import {banners} from '../../mockData/banners-mock';
+import {categories} from '../../mockData/categories-mock';
+import {IBanner} from '../../models/banner-model';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
-import {IBanner} from '../../types';
 
 // Images
 const offerBanner = require('../../assets/images/offer-banner.png');
 const recomendedProductBanner = require('../../assets/images/recomended-product-banner.png');
 // =====================================================================
 
-// Interface & Type
-
 // Component
 const HomeScreen = () => {
   // Hooks
   const navigation = useNavigation();
-  // =====================================================================
-
-  // useSelectors
-
+  const insets = useSafeAreaInsets();
   // =====================================================================
 
   // useStates
@@ -54,10 +51,6 @@ const HomeScreen = () => {
   });
 
   const viewConfigRef = useRef({viewAreaCoveragePercentThreshold: 50});
-  // =====================================================================
-
-  // useMemos
-
   // =====================================================================
 
   // useCallbacks
@@ -90,6 +83,10 @@ const HomeScreen = () => {
       </View>
     );
   }, []);
+
+  const onNotificationIcon = useCallback(() => {
+    navigation.navigate(ScreenNames.Notification);
+  }, [navigation]);
 
   const setScrollingTrue = useCallback(() => {
     setScrolling(true);
@@ -131,53 +128,49 @@ const HomeScreen = () => {
 
   // Render
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <View style={styles.container}>
-          {/* Search text input & icons in header */}
-          <View style={styles.headerContainer}>
-            {/* Search text input */}
-            <View style={styles.searchInput}>
-              <TextInput
-                autoComplete="off"
-                icon="text-search"
-                onChangeText={setSearch}
-                placeholder="Search Product"
-                value={search}
-              />
-            </View>
-
-            {/* Favorite icon */}
-            <View style={styles.icon}>
-              <Pressable onPress={onFavoriteIcon}>
-                <Icon
-                  color={theme.colors.text}
-                  name="heart-outline"
-                  size={staticValues.iconSize}
-                />
-              </Pressable>
-            </View>
-
-            {/* Notification icon */}
-            <View style={styles.icon}>
-              <Badge style={styles.badge} size={10}>
-                2
-              </Badge>
-              <Icon
-                color={theme.colors.text}
-                name="bell-outline"
-                size={staticValues.iconSize}
-              />
-            </View>
-          </View>
+    <SafeAreaView style={styles.safeAreaView}>
+      {/* Search text input & icons in header */}
+      <View style={styles.headerContainer}>
+        {/* Search text input */}
+        <View style={styles.searchInput}>
+          <TextInput
+            autoComplete="off"
+            icon="text-search"
+            onChangeText={setSearch}
+            placeholder="Search Product"
+            value={search}
+          />
         </View>
 
-        {/* Divider */}
-        <View style={globalStyles.dividerContainer}>
-          <View style={globalStyles.divider} />
-        </View>
+        {/* Favorite icon */}
+        <Pressable onPress={onFavoriteIcon} style={styles.icon}>
+          <Icon
+            color={theme.colors.text}
+            name="heart-outline"
+            size={staticValues.iconSize}
+          />
+        </Pressable>
 
-        <View style={styles.container}>
+        {/* Notification icon */}
+        <Pressable onPress={onNotificationIcon} style={styles.icon}>
+          <Badge style={styles.badge} size={10}>
+            2
+          </Badge>
+          <Icon
+            color={theme.colors.text}
+            name="bell-outline"
+            size={staticValues.iconSize}
+          />
+        </Pressable>
+      </View>
+
+      {/* Divider */}
+      <View style={globalStyles.dividerContainer}>
+        <View style={globalStyles.divider} />
+      </View>
+
+      <ScrollView style={globalStyles.container}>
+        <View style={{paddingBottom: insets.bottom}}>
           {/* Offer banner list */}
           <FlatList
             ref={bannerListRef}
@@ -282,15 +275,13 @@ const styles = StyleSheet.create({
     fontSize: 10,
     lineHeight: 15,
   },
-  container: {
-    padding: staticValues.padding,
-  },
   dotIndicatorContainer: {
     marginTop: 15,
   },
   headerContainer: {
     alignItems: 'center',
     flexDirection: 'row',
+    paddingHorizontal: staticValues.padding,
   },
   icon: {
     flex: 1,
@@ -299,6 +290,9 @@ const styles = StyleSheet.create({
   linkText: {
     ...globalStyles.linkText,
     fontSize: staticValues.normalFont,
+  },
+  safeAreaView: {
+    flex: 1,
   },
   searchInput: {
     flex: 6,

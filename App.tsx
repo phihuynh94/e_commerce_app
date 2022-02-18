@@ -26,14 +26,14 @@ const navOptions: StackNavigationOptions = {
 const App = () => {
   return (
     <PaperProvider theme={paperTheme}>
-      <NavigationContainer theme={navTheme}>
-        <SafeAreaProvider>
+      <SafeAreaProvider>
+        <NavigationContainer theme={navTheme}>
           <Stack.Navigator screenOptions={navOptions}>
             <Stack.Screen component={AuthRoutes} name={RouteNames.AuthRoutes} />
             <Stack.Screen component={AppRoutes} name={RouteNames.AppRoutes} />
           </Stack.Navigator>
-        </SafeAreaProvider>
-      </NavigationContainer>
+        </NavigationContainer>
+      </SafeAreaProvider>
     </PaperProvider>
   );
 };

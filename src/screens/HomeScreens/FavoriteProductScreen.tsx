@@ -1,54 +1,14 @@
 // Import
 import React from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
-import {staticValues} from '../../styles';
-
-// Images
-
-// =====================================================================
-
-// Interfaces & Types
-
-// =====================================================================
+import {globalStyles} from '../../styles';
 
 // Component
 const FavoriteProductsScreen = () => {
-  // Hooks
-
-  // =====================================================================
-
-  // useSelectors
-
-  // =====================================================================
-
-  // useStates
-
-  // =====================================================================
-
-  // useRefs
-
-  // =====================================================================
-
-  // useMemos
-
-  // =====================================================================
-
-  // useCallbacks
-
-  // =====================================================================
-
-  // useEffects
-
-  // =====================================================================
-
   // Render
-  return <ScrollView style={styles.container}></ScrollView>;
+  return <ScrollView style={globalStyles.container}></ScrollView>;
 };
 
 export default FavoriteProductsScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    padding: staticValues.padding,
-  },
-});
+const styles = StyleSheet.create({});

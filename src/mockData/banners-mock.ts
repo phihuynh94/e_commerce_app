@@ -1,6 +1,6 @@
-import {IBanner} from '../types';
+import {IBanner} from '../models/banner-model';
 
-const banners: IBanner[] = [
+export const banners: IBanner[] = [
   {
     title: 'Super Flash Sale',
     url: '../../assets/images/offer-banner.png',
@@ -34,5 +34,3 @@ const banners: IBanner[] = [
     url: '../../assets/images/offer-banner.png',
   },
 ];
-
-export default banners;
