@@ -17,6 +17,10 @@ export const globalStyles = StyleSheet.create({
     justifyContent: 'center',
     padding: staticValues.padding,
   },
+  container: {
+    flex: 1,
+    padding: staticValues.padding,
+  },
   divider: {
     backgroundColor: theme.colors.accent,
     flex: 1,

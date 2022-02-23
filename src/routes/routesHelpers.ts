@@ -25,6 +25,8 @@ export enum ScreenNames {
   FlashSale = 'FlashSale',
   Home = 'Home',
   Login = 'Login',
+  Notification = 'Notification',
+  NotificationDetail = 'NotificationDetail',
   Offer = 'Offer',
   Register = 'Register',
 }

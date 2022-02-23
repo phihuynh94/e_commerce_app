@@ -3,7 +3,7 @@ import {RouteProp, useRoute} from '@react-navigation/native';
 import React from 'react';
 import {Dimensions, Image, ScrollView, StyleSheet, View} from 'react-native';
 import {HomeStackParamList} from '../../routes/HomeRoutes';
-import {staticValues} from '../../styles';
+import {globalStyles, staticValues} from '../../styles';
 
 // Images
 const offerBanner = require('../../assets/images/offer-banner.png');
@@ -21,35 +21,9 @@ const FlashSaleScreen = () => {
   const {title, url} = route.params;
   // =====================================================================
 
-  console.log(title);
-  console.log(url);
-  // useSelectors
-
-  // =====================================================================
-
-  // useStates
-
-  // =====================================================================
-
-  // useRefs
-
-  // =====================================================================
-
-  // useMemos
-
-  // =====================================================================
-
-  // useCallbacks
-
-  // =====================================================================
-
-  // useEffects
-
-  // =====================================================================
-
   // Render
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView style={globalStyles.container}>
       <View style={styles.bannerContainer}>
         <Image source={offerBanner} />
       </View>
