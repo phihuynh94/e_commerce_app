@@ -19,27 +19,15 @@ import {theme} from '../../styles/theme';
 const logo = require('../../assets/images/logo.png');
 // =====================================================================
 
-// Interface & Type
-
-// =====================================================================
-
 // Component
 const LoginScreen = () => {
   // Hooks
   const navigation = useNavigation();
   // =====================================================================
 
-  // useSelectors
-
-  // =====================================================================
-
   // useStates
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  // =====================================================================
-
-  // useMemos
-
   // =====================================================================
 
   // useCallbacks
@@ -64,10 +52,6 @@ const LoginScreen = () => {
   }, [navigation]);
   // =====================================================================
 
-  // useEffects
-
-  // =====================================================================
-
   // Render
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -76,8 +60,10 @@ const LoginScreen = () => {
         <Image source={logo} />
 
         {/* Header */}
-        <Text style={globalStyles.header}>Welcome to Lafyuu</Text>
-        <Text style={globalStyles.smallText}>Sign in to continue</Text>
+        <Text style={styles.header}>Welcome to Lafyuu</Text>
+        <View style={styles.subHeader}>
+          <Text style={globalStyles.smallText}>Sign in to continue</Text>
+        </View>
 
         {/* Email input */}
         <TextInput
@@ -156,5 +142,15 @@ const styles = StyleSheet.create({
   },
   forgotPassword: {
     marginTop: 16,
+  },
+  header: {
+    fontWeight: '700',
+    fontSize: staticValues.largeFont,
+    lineHeight: 24,
+    marginTop: 16,
+  },
+  subHeader: {
+    marginBottom: 28,
+    marginTop: 8,
   },
 });

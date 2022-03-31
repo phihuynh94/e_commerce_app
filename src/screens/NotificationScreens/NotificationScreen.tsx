@@ -26,7 +26,7 @@ const NotificationScreen = () => {
   const onPress = useCallback(
     (title: 'Offer' | 'Feed' | 'Activity') => () => {
       navigation.navigate(ScreenNames.NotificationDetail, {
-        title: title,
+        title,
       });
     },
     [navigation],

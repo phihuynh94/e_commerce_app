@@ -33,5 +33,6 @@ export const theme = {
     ...paperTheme.colors,
     dark: '#223263',
     white: '#FFFFFF',
+    yellow: '#FFC833',
   },
 };

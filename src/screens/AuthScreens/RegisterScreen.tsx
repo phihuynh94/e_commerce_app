@@ -1,11 +1,18 @@
 // Import
 import {useNavigation} from '@react-navigation/core';
 import React, {useCallback, useState} from 'react';
-import {Image, Keyboard, Text, TouchableWithoutFeedback} from 'react-native';
+import {
+  Image,
+  Keyboard,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {Button, TextInput} from '../../common';
 import {ScreenNames} from '../../routes/routesHelpers';
-import {globalStyles} from '../../styles';
+import {globalStyles, staticValues} from '../../styles';
 
 // Images
 const logo = require('../../assets/images/logo.png');
@@ -59,8 +66,10 @@ const RegisterScreen = () => {
         <Image source={logo} />
 
         {/* Header */}
-        <Text style={globalStyles.header}>Let's Get Started</Text>
-        <Text style={globalStyles.smallText}>Create a new account</Text>
+        <Text style={styles.header}>Let's Get Started</Text>
+        <View style={styles.subHeader}>
+          <Text style={globalStyles.smallText}>Create a new account</Text>
+        </View>
 
         {/* Full name input */}
         <TextInput
@@ -115,3 +124,16 @@ const RegisterScreen = () => {
 };
 
 export default RegisterScreen;
+
+const styles = StyleSheet.create({
+  header: {
+    fontWeight: '700',
+    fontSize: staticValues.largeFont,
+    lineHeight: 24,
+    marginTop: 16,
+  },
+  subHeader: {
+    marginBottom: 28,
+    marginTop: 8,
+  },
+});

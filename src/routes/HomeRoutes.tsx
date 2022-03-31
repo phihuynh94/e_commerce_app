@@ -6,9 +6,11 @@ import {
 import React from 'react';
 import {StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {IProduct} from '../models/product-model';
 import {FlashSaleScreen, HomeScreen, NotificationScreen} from '../screens';
 import FavoriteProductsScreen from '../screens/HomeScreens/FavoriteProductScreen';
 import NotificationDetailScreen from '../screens/NotificationScreens/NotificationDetailScreen';
+import ProductDetailScreen from '../screens/ProductDetailScreen/ProductDetailScreen';
 import {staticValues} from '../styles';
 import {theme} from '../styles/theme';
 import {ScreenNames} from './routesHelpers';
@@ -24,6 +26,7 @@ export type HomeStackParamList = {
   NotificationDetail: {
     title: 'Offer' | 'Feed' | 'Activity';
   };
+  ProductDetail: {product: IProduct; title: string};
 };
 
 const Stack = createStackNavigator<HomeStackParamList>();
@@ -70,6 +73,17 @@ const notificationDetailScreenOptions = (
   };
 };
 
+const productDetailScreenOptions = (
+  route: RouteProp<HomeStackParamList, keyof HomeStackParamList>,
+): StackNavigationOptions => {
+  return {
+    title: route.params?.title,
+    headerTitleStyle: {
+      paddingLeft: 10,
+    },
+  };
+};
+
 const HomeRoutes = () => {
   return (
     <Stack.Navigator>
@@ -97,6 +111,11 @@ const HomeRoutes = () => {
         component={NotificationDetailScreen}
         name={ScreenNames.NotificationDetail}
         options={({route}) => notificationDetailScreenOptions(route)}
+      />
+      <Stack.Screen
+        component={ProductDetailScreen}
+        name={ScreenNames.ProductDetail}
+        options={({route}) => productDetailScreenOptions(route)}
       />
     </Stack.Navigator>
   );
