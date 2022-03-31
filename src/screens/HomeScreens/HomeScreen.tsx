@@ -17,8 +17,10 @@ import {Badge} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {DotsIndicator, TextInput} from '../../common';
+import ProductCard from '../../components/Product/ProductCard/ProductCard';
 import {banners} from '../../mockData/banners-mock';
 import {categories} from '../../mockData/categories-mock';
+import {products} from '../../mockData/products-mock';
 import {IBanner} from '../../models/banner-model';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
@@ -54,11 +56,6 @@ const HomeScreen = () => {
   // =====================================================================
 
   // useCallbacks
-  // This is need for keyExtractor in Flatlist, so it doesn't give error
-  const keyExtractor = useCallback((item: IBanner) => {
-    return item.url;
-  }, []);
-
   const onBanner = useCallback(
     (banner: IBanner) => () => {
       navigation.navigate(ScreenNames.FlashSale, {
@@ -73,20 +70,30 @@ const HomeScreen = () => {
     navigation.navigate(ScreenNames.FavoriteProducts);
   }, [navigation]);
 
+  const onNotificationIcon = useCallback(() => {
+    navigation.navigate(ScreenNames.Notification);
+  }, [navigation]);
+
   // Render banner card
-  const renderCard = useCallback(banner => {
+  const renderBannerCard = useCallback(({item}) => {
     return (
       <View style={styles.bannerContainer}>
-        <Pressable onPress={onBanner(banner.item)}>
+        <Pressable onPress={onBanner(item)}>
           <Image source={offerBanner} />
         </Pressable>
       </View>
     );
   }, []);
 
-  const onNotificationIcon = useCallback(() => {
-    navigation.navigate(ScreenNames.Notification);
-  }, [navigation]);
+  // Render product card
+  const renderProductCard = useCallback(({item}) => {
+    return <ProductCard product={item} />;
+  }, []);
+
+  // Render on sale product card
+  const renderSaleProductCard = useCallback(({item}) => {
+    return <ProductCard isSmallCard product={item} />;
+  }, []);
 
   const setScrollingTrue = useCallback(() => {
     setScrolling(true);
@@ -123,7 +130,7 @@ const HomeScreen = () => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [finishScrolling, bannerIndex, banners.length, scrolling]);
+  }, [finishScrolling, bannerIndex, banners, scrolling]);
   // =====================================================================
 
   // Render
@@ -177,13 +184,11 @@ const HomeScreen = () => {
             data={banners}
             horizontal
             initialScrollIndex={bannerIndex}
-            // keyExtractor={keyExtractor}
             onScrollBeginDrag={setScrollingTrue}
             onScrollEndDrag={setScrollingFalse}
-            // onScrollToIndexFailed={noop}
             onViewableItemsChanged={onViewRef.current}
             pagingEnabled
-            renderItem={renderCard}
+            renderItem={renderBannerCard}
             scrollEventThrottle={200}
             showsHorizontalScrollIndicator={false}
             viewabilityConfig={viewConfigRef.current}
@@ -214,21 +219,45 @@ const HomeScreen = () => {
             ))}
           </ScrollView>
 
-          {/*Flash sale list */}
-          <View style={styles.sectionHeaderContainer}>
-            <Text style={styles.sectionHeader}>Flash Sale</Text>
-            <Text style={styles.linkText}>See More</Text>
-          </View>
-
           {/* Mega sale list */}
           <View style={styles.sectionHeaderContainer}>
             <Text style={styles.sectionHeader}>Mega Sale</Text>
             <Text style={styles.linkText}>See More</Text>
           </View>
 
+          <FlatList
+            data={products}
+            horizontal
+            pagingEnabled
+            renderItem={renderSaleProductCard}
+            showsHorizontalScrollIndicator={false}
+          />
+
+          {/* Product list */}
+          <View style={styles.sectionHeaderContainer}>
+            <Text style={styles.sectionHeader}>Explore Products</Text>
+            <Text style={styles.linkText}>See More</Text>
+          </View>
+
+          <FlatList
+            data={products}
+            horizontal
+            pagingEnabled
+            renderItem={renderSaleProductCard}
+            showsHorizontalScrollIndicator={false}
+          />
+
           <View style={styles.bannerContainer}>
             <Image source={recomendedProductBanner} />
           </View>
+
+          <FlatList
+            data={products}
+            horizontal
+            pagingEnabled
+            renderItem={renderProductCard}
+            showsHorizontalScrollIndicator={false}
+          />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -248,7 +277,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     marginHorizontal: 10,
-    width: Dimensions.get('window').width - 50,
+    marginVertical: 10,
+    width: Dimensions.get('screen').width - 50,
   },
   cateroryContainer: {
     alignItems: 'center',

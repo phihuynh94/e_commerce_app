@@ -30,12 +30,6 @@ export const globalStyles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
-  header: {
-    fontWeight: '700',
-    fontSize: staticValues.largeFont,
-    lineHeight: 24,
-    marginTop: 16,
-  },
   linkText: {
     color: theme.colors.primary,
     fontWeight: '700',
@@ -47,7 +41,5 @@ export const globalStyles = StyleSheet.create({
     fontWeight: '400',
     fontSize: staticValues.smallFont,
     lineHeight: staticValues.lineHeight,
-    marginBottom: 28,
-    marginTop: 8,
   },
 });

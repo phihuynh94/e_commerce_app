@@ -28,5 +28,6 @@ export enum ScreenNames {
   Notification = 'Notification',
   NotificationDetail = 'NotificationDetail',
   Offer = 'Offer',
+  ProductDetail = 'ProductDetail',
   Register = 'Register',
 }
