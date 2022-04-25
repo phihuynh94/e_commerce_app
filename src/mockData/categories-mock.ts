@@ -6,11 +6,11 @@ export const categories: ICategory[] = [
     icon: 'tshirt-crew-outline',
   },
   {
-    category: 'Man Shirt',
+    category: 'Jewelery',
     icon: 'tshirt-crew-outline',
   },
   {
-    category: 'Man Shirt',
+    category: 'Women Shirt',
     icon: 'tshirt-crew-outline',
   },
   {

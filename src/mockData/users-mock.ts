@@ -1,4 +1,6 @@
-export const users = [
+import {IUser} from '../models/user-model';
+
+export const users: IUser[] = [
   {
     address: {
       geolocation: {

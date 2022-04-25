@@ -1,17 +1,26 @@
 // Import
-import React, {useMemo} from 'react';
+import React, {ReactNode, useMemo} from 'react';
 import {StyleProp, StyleSheet, TextStyle} from 'react-native';
 import {Button as PaperButton} from 'react-native-paper';
+import {IconSource} from 'react-native-paper/lib/typescript/components/Icon';
 import {theme} from '../../styles/theme';
 
 // Interface & Type
-type IButtonProps = React.ComponentProps<typeof PaperButton> & {
+interface IButtonProps {
+  children: ReactNode;
+  icon?: IconSource;
   mode?: 'contained' | 'outlined';
-};
+  onPress: () => void;
+}
 // =====================================================================
 
 // Component
-const Button = ({children, mode = 'contained', ...rest}: IButtonProps) => {
+const Button = ({
+  children,
+  icon,
+  mode = 'contained',
+  onPress,
+}: IButtonProps) => {
   // useMemos
   const buttonLabelStyle: StyleProp<TextStyle> = useMemo(() => {
     switch (mode) {
@@ -35,10 +44,11 @@ const Button = ({children, mode = 'contained', ...rest}: IButtonProps) => {
   // Render
   return (
     <PaperButton
+      icon={icon}
       labelStyle={buttonLabelStyle}
       mode={mode}
-      style={styles.button}
-      {...rest}>
+      onPress={onPress}
+      style={styles.button}>
       {children}
     </PaperButton>
   );

@@ -1,7 +1,9 @@
 // Import
 import {RouteProp, useRoute} from '@react-navigation/native';
-import React from 'react';
-import {Dimensions, Image, ScrollView, StyleSheet, View} from 'react-native';
+import React, {useCallback} from 'react';
+import {Dimensions, FlatList, Image, StyleSheet, View} from 'react-native';
+import ProductCard from '../../components/Product/ProductCard/ProductCard';
+import {products} from '../../mockData/products-mock';
 import {HomeStackParamList} from '../../routes/HomeRoutes';
 import {globalStyles, staticValues} from '../../styles';
 
@@ -21,13 +23,34 @@ const FlashSaleScreen = () => {
   const {title, url} = route.params;
   // =====================================================================
 
-  // Render
-  return (
-    <ScrollView style={globalStyles.container}>
+  // useCallbacks
+  // Render header
+  const renderHeader = useCallback(() => {
+    return (
       <View style={styles.bannerContainer}>
         <Image source={offerBanner} />
       </View>
-    </ScrollView>
+    );
+  }, []);
+
+  // Render product card
+  const renderProductCard = useCallback(({item}) => {
+    return <ProductCard product={item} />;
+  }, []);
+  // =====================================================================
+
+  // Render
+  return (
+    <View style={globalStyles.container}>
+      <FlatList
+        data={products}
+        ListHeaderComponent={renderHeader}
+        numColumns={2}
+        pagingEnabled
+        renderItem={renderProductCard}
+        showsVerticalScrollIndicator={false}
+      />
+    </View>
   );
 };
 
