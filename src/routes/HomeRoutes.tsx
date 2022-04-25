@@ -11,6 +11,7 @@ import {FlashSaleScreen, HomeScreen, NotificationScreen} from '../screens';
 import FavoriteProductsScreen from '../screens/HomeScreens/FavoriteProductScreen';
 import NotificationDetailScreen from '../screens/NotificationScreens/NotificationDetailScreen';
 import ProductDetailScreen from '../screens/ProductDetailScreen/ProductDetailScreen';
+import ReviewProductScreen from '../screens/ReviewScreens/ReviewProductScreen';
 import {staticValues} from '../styles';
 import {theme} from '../styles/theme';
 import {ScreenNames} from './routesHelpers';
@@ -27,6 +28,7 @@ export type HomeStackParamList = {
     title: 'Offer' | 'Feed' | 'Activity';
   };
   ProductDetail: {product: IProduct; title: string};
+  ReviewProduct: undefined;
 };
 
 const Stack = createStackNavigator<HomeStackParamList>();
@@ -84,6 +86,12 @@ const productDetailScreenOptions = (
   };
 };
 
+const reviewProductScreenOptions = (): StackNavigationOptions => {
+  return {
+    title: 'Reviews',
+  };
+};
+
 const HomeRoutes = () => {
   return (
     <Stack.Navigator>
@@ -116,6 +124,11 @@ const HomeRoutes = () => {
         component={ProductDetailScreen}
         name={ScreenNames.ProductDetail}
         options={({route}) => productDetailScreenOptions(route)}
+      />
+      <Stack.Screen
+        component={ReviewProductScreen}
+        name={ScreenNames.ReviewProduct}
+        options={reviewProductScreenOptions}
       />
     </Stack.Navigator>
   );

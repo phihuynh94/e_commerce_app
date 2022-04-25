@@ -30,4 +30,5 @@ export enum ScreenNames {
   Offer = 'Offer',
   ProductDetail = 'ProductDetail',
   Register = 'Register',
+  ReviewProduct = 'ReviewProduct',
 }

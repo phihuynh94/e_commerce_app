@@ -256,7 +256,7 @@ const HomeScreen = () => {
             horizontal
             pagingEnabled
             renderItem={renderProductCard}
-            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
           />
         </View>
       </ScrollView>

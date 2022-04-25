@@ -32,14 +32,14 @@ export const globalStyles = StyleSheet.create({
   },
   linkText: {
     color: theme.colors.primary,
-    fontWeight: '700',
     fontSize: staticValues.smallFont,
+    fontWeight: '700',
     lineHeight: staticValues.lineHeight,
   },
   smallText: {
     color: theme.colors.text,
-    fontWeight: '400',
     fontSize: staticValues.smallFont,
+    fontWeight: '400',
     lineHeight: staticValues.lineHeight,
   },
 });

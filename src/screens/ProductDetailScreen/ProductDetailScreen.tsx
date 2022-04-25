@@ -1,6 +1,6 @@
 // Import
-import {RouteProp, useRoute} from '@react-navigation/native';
-import React, {useCallback} from 'react';
+import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
+import React, {useCallback, useState} from 'react';
 import {
   Dimensions,
   Image,
@@ -18,6 +18,7 @@ import ProductCard from '../../components/Product/ProductCard/ProductCard';
 import ReviewCard from '../../components/Review/ReviewCard/ReviewCard';
 import {products} from '../../mockData/products-mock';
 import {HomeStackParamList} from '../../routes/HomeRoutes';
+import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
 
@@ -39,6 +40,8 @@ type RoutePropType = RouteProp<HomeStackParamList, 'ProductDetail'>;
 // Component
 const ProductDetailScreen = () => {
   // Hooks
+  const navigation = useNavigation();
+
   const route = useRoute<RoutePropType>();
 
   const {product} = route.params;
@@ -49,7 +52,9 @@ const ProductDetailScreen = () => {
   // =====================================================================
 
   // useState
-
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [selectedColor, setSelectedColor] = useState('');
+  const [selectedSize, setSelectedSize] = useState(-1);
   // =====================================================================
 
   // useEffect
@@ -63,32 +68,86 @@ const ProductDetailScreen = () => {
   // useCallbacks
   const onAddToCart = useCallback(() => {}, []);
 
-  const onColorButton = useCallback(() => {}, []);
+  const onColorButton = useCallback(
+    (color: string) => () => {
+      setSelectedColor(color);
+    },
+    [],
+  );
 
-  const onFavoriteIcon = useCallback(() => {}, []);
+  const onFavoriteIcon = useCallback(() => {
+    setIsFavorite(!isFavorite);
+  }, [isFavorite]);
 
-  const onSizeButton = useCallback(() => {}, []);
+  const onReview = useCallback(() => {
+    navigation.navigate(ScreenNames.ReviewProduct);
+  }, [navigation]);
 
-  const renderColorButton = useCallback(({item}) => {
-    return (
-      <Pressable
-        onPress={onColorButton}
-        style={[styles.colorButton, {backgroundColor: item}]}
-      />
-    );
-  }, []);
+  const onSizeButton = useCallback(
+    (size: number) => () => {
+      setSelectedSize(size);
+    },
+    [],
+  );
+
+  const renderColorButton = useCallback(
+    ({item}) => {
+      return (
+        <Pressable
+          onPress={onColorButton(item)}
+          style={selectedColorStyle(item)}
+        />
+      );
+    },
+    [selectedColor],
+  );
 
   const renderProductCard = useCallback(({item}) => {
     return <ProductCard product={item} />;
   }, []);
 
-  const renderSizeButton = useCallback(({item}) => {
-    return (
-      <Pressable onPress={onSizeButton} style={styles.sizeButton}>
-        <Text>{item}</Text>
-      </Pressable>
-    );
-  }, []);
+  const renderSizeButton = useCallback(
+    ({item}) => {
+      return (
+        <Pressable onPress={onSizeButton(item)} style={selectedSizeStyle(item)}>
+          <Text>{item}</Text>
+        </Pressable>
+      );
+    },
+    [selectedSize],
+  );
+
+  const selectedColorStyle = useCallback(
+    (color: string) => {
+      if (color === selectedColor) {
+        return {
+          ...styles.colorButton,
+          borderColor: color,
+          borderWidth: 15,
+        };
+      }
+
+      return {
+        ...styles.colorButton,
+        backgroundColor: color,
+      };
+    },
+    [selectedColor],
+  );
+
+  const selectedSizeStyle = useCallback(
+    (size: number) => {
+      if (size === selectedSize) {
+        return {
+          ...styles.sizeButton,
+          borderColor: theme.colors.primary,
+        };
+      }
+
+      return styles.sizeButton;
+    },
+    [selectedSize],
+  );
   // =====================================================================
 
   // Render
@@ -106,11 +165,19 @@ const ProductDetailScreen = () => {
 
             {/* Favorite icon */}
             <Pressable onPress={onFavoriteIcon} style={styles.icon}>
-              <Icon
-                color={theme.colors.text}
-                name="heart-outline"
-                size={staticValues.iconSize}
-              />
+              {!isFavorite ? (
+                <Icon
+                  color={theme.colors.text}
+                  name="heart-outline"
+                  size={staticValues.iconSize}
+                />
+              ) : (
+                <Icon
+                  color={theme.colors.yellow}
+                  name="heart"
+                  size={staticValues.iconSize}
+                />
+              )}
             </Pressable>
           </View>
 
@@ -144,10 +211,17 @@ const ProductDetailScreen = () => {
           <Text style={styles.sectionHeader}>Description</Text>
           <Text>{product.description}</Text>
 
+          {/* Add to cart button */}
+          <View style={styles.button}>
+            <Button onPress={onAddToCart}>Add To Cart</Button>
+          </View>
+
           {/* Review section */}
           <View style={styles.reviewRow}>
             <Text style={styles.sectionHeader}>Review Product</Text>
-            <Text style={styles.linkText}>See More</Text>
+            <Text onPress={onReview} style={styles.linkText}>
+              See More
+            </Text>
           </View>
           <View style={styles.ratingRow}>
             {/* Rating stars */}
@@ -170,11 +244,6 @@ const ProductDetailScreen = () => {
             renderItem={renderProductCard}
             showsHorizontalScrollIndicator={false}
           />
-
-          {/* Add to cart button */}
-          <View style={styles.button}>
-            <Button onPress={onAddToCart}>Add To Cart</Button>
-          </View>
         </View>
       </ScrollView>
     </SafeAreaView>

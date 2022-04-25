@@ -6,13 +6,23 @@ import {IconSource} from 'react-native-paper/lib/typescript/components/Icon';
 import {theme} from '../../styles/theme';
 
 // Interface & Type
-type ITextInputProps = React.ComponentProps<typeof PaperTextInput> & {
+interface ITextInputProps {
+  autoComplete?: string;
   icon?: IconSource;
-};
+  onChangeText: (text: string) => void;
+  placeholder: string;
+  value: string;
+  secureTextEntry?: boolean;
+}
 // =====================================================================
 
 // Component
-const TextInput = ({icon, ...rest}: ITextInputProps) => {
+const TextInput = ({
+  autoComplete,
+  icon,
+  onChangeText,
+  placeholder,
+}: ITextInputProps) => {
   // useMemos
   const leftIcon: ReactNode = useMemo(() => {
     if (icon) {
@@ -32,12 +42,14 @@ const TextInput = ({icon, ...rest}: ITextInputProps) => {
   return (
     <>
       <PaperTextInput
+        autoComplete={autoComplete}
         left={leftIcon}
         mode="outlined"
+        onChangeText={onChangeText}
         outlineColor={theme.colors.accent}
+        placeholder={placeholder}
         placeholderTextColor={theme.colors.text}
         style={styles.textInput}
-        {...rest}
       />
     </>
   );
