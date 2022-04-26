@@ -4,12 +4,12 @@ import React, {useCallback, useState} from 'react';
 import {
   Image,
   Keyboard,
+  Pressable,
+  SafeAreaView,
   StyleSheet,
   Text,
-  TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {Button, TextInput} from '../../common';
 import {RouteNames, ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
@@ -48,14 +48,16 @@ const LoginScreen = () => {
   }, [navigation]);
 
   const onSignin = useCallback(() => {
-    navigation.navigate(RouteNames.AppRoutes);
+    navigation.navigate(RouteNames.AppTab);
   }, [navigation]);
   // =====================================================================
 
   // Render
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView style={globalStyles.authScreensContainer}>
+    <SafeAreaView style={globalStyles.flex}>
+      <Pressable
+        onPress={Keyboard.dismiss}
+        style={globalStyles.authScreensContainer}>
         {/* Logo */}
         <Image source={logo} />
 
@@ -120,8 +122,8 @@ const LoginScreen = () => {
             Register
           </Text>
         </Text>
-      </SafeAreaView>
-    </TouchableWithoutFeedback>
+      </Pressable>
+    </SafeAreaView>
   );
 };
 

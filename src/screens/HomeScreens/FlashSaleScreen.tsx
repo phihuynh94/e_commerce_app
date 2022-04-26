@@ -1,18 +1,25 @@
 // Import
 import {RouteProp, useRoute} from '@react-navigation/native';
 import React, {useCallback} from 'react';
-import {Dimensions, FlatList, Image, StyleSheet, View} from 'react-native';
+import {
+  Dimensions,
+  FlatList,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  View,
+} from 'react-native';
+import {AppStackParamList} from '../../../App';
 import ProductCard from '../../components/Product/ProductCard/ProductCard';
 import {products} from '../../mockData/products-mock';
-import {HomeStackParamList} from '../../routes/HomeRoutes';
-import {globalStyles, staticValues} from '../../styles';
+import {globalStyles} from '../../styles';
 
 // Images
 const offerBanner = require('../../assets/images/offer-banner.png');
 // =====================================================================
 
 // Interfaces & Types
-type RoutePropType = RouteProp<HomeStackParamList, 'FlashSale'>;
+type RoutePropType = RouteProp<AppStackParamList, 'FlashSale'>;
 // =====================================================================
 
 // Component
@@ -41,16 +48,18 @@ const FlashSaleScreen = () => {
 
   // Render
   return (
-    <View style={globalStyles.container}>
-      <FlatList
-        data={products}
-        ListHeaderComponent={renderHeader}
-        numColumns={2}
-        pagingEnabled
-        renderItem={renderProductCard}
-        showsVerticalScrollIndicator={false}
-      />
-    </View>
+    <SafeAreaView style={globalStyles.flex}>
+      <View style={globalStyles.container}>
+        <FlatList
+          data={products}
+          ListHeaderComponent={renderHeader}
+          numColumns={2}
+          pagingEnabled
+          renderItem={renderProductCard}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
@@ -62,8 +71,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginHorizontal: 10,
     width: Dimensions.get('window').width - 50,
-  },
-  container: {
-    padding: staticValues.padding,
   },
 });

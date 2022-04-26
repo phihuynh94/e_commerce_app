@@ -1,13 +1,13 @@
 // Import
 import React, {useCallback} from 'react';
-import {View} from 'react-native';
+import {SafeAreaView, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import ProductCard from '../../components/Product/ProductCard/ProductCard';
 import {products} from '../../mockData/products-mock';
 import {globalStyles} from '../../styles';
 
 // Component
-const FavoriteProductsScreen = () => {
+const FavoriteProductScreen = () => {
   // useCallbacks
   // Render product card
   const renderProductCard = useCallback(({item}) => {
@@ -17,16 +17,18 @@ const FavoriteProductsScreen = () => {
 
   // Render
   return (
-    <View style={globalStyles.container}>
-      <FlatList
-        data={products}
-        numColumns={2}
-        pagingEnabled
-        renderItem={renderProductCard}
-        showsVerticalScrollIndicator={false}
-      />
-    </View>
+    <SafeAreaView style={globalStyles.flex}>
+      <View style={globalStyles.container}>
+        <FlatList
+          data={products}
+          numColumns={2}
+          pagingEnabled
+          renderItem={renderProductCard}
+          showsVerticalScrollIndicator={false}
+        />
+      </View>
+    </SafeAreaView>
   );
 };
 
-export default FavoriteProductsScreen;
+export default FavoriteProductScreen;

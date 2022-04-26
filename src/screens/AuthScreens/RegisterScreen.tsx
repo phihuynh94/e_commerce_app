@@ -4,12 +4,12 @@ import React, {useCallback, useState} from 'react';
 import {
   Image,
   Keyboard,
+  Pressable,
+  SafeAreaView,
   StyleSheet,
   Text,
-  TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
 import {Button, TextInput} from '../../common';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
@@ -60,8 +60,10 @@ const RegisterScreen = () => {
 
   // Render
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <SafeAreaView style={globalStyles.authScreensContainer}>
+    <SafeAreaView style={globalStyles.flex}>
+      <Pressable
+        onPress={Keyboard.dismiss}
+        style={globalStyles.authScreensContainer}>
         {/* Logo */}
         <Image source={logo} />
 
@@ -118,8 +120,8 @@ const RegisterScreen = () => {
             Sign In
           </Text>
         </Text>
-      </SafeAreaView>
-    </TouchableWithoutFeedback>
+      </Pressable>
+    </SafeAreaView>
   );
 };
 

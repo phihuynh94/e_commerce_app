@@ -135,7 +135,7 @@ const HomeScreen = () => {
 
   // Render
   return (
-    <SafeAreaView style={styles.safeAreaView}>
+    <SafeAreaView style={globalStyles.flex}>
       {/* Search text input & icons in header */}
       <View style={styles.headerContainer}>
         {/* Search text input */}
@@ -176,7 +176,9 @@ const HomeScreen = () => {
         <View style={globalStyles.divider} />
       </View>
 
-      <ScrollView style={globalStyles.container}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={globalStyles.container}>
         <View style={{paddingBottom: insets.bottom}}>
           {/* Offer banner list */}
           <FlatList
@@ -256,7 +258,7 @@ const HomeScreen = () => {
             horizontal
             pagingEnabled
             renderItem={renderProductCard}
-            showsVerticalScrollIndicator={false}
+            showsHorizontalScrollIndicator={false}
           />
         </View>
       </ScrollView>
@@ -320,9 +322,6 @@ const styles = StyleSheet.create({
   linkText: {
     ...globalStyles.linkText,
     fontSize: staticValues.normalFont,
-  },
-  safeAreaView: {
-    flex: 1,
   },
   searchInput: {
     flex: 6,

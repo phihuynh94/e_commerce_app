@@ -30,6 +30,9 @@ export const globalStyles = StyleSheet.create({
     alignItems: 'center',
     flexDirection: 'row',
   },
+  flex: {
+    flex: 1,
+  },
   linkText: {
     color: theme.colors.primary,
     fontSize: staticValues.smallFont,

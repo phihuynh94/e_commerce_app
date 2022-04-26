@@ -8,18 +8,18 @@ import {
   AccountScreen,
   CartScreen,
   ExploreScreen,
+  HomeScreen,
   OfferScreen,
 } from '../screens';
 import {staticValues} from '../styles';
 import {theme} from '../styles/theme';
-import HomeRoutes from './HomeRoutes';
-import {RouteNames, ScreenNames} from './routesHelpers';
+import {ScreenNames} from './routesHelpers';
 
 export type AppTabParamList = {
   Account: undefined;
   Cart: undefined;
   Explore: undefined;
-  HomeRoutes: undefined;
+  Home: undefined;
   Offer: undefined;
 };
 
@@ -65,7 +65,7 @@ const exploreScreenOptions = (): BottomTabNavigationOptions => {
   };
 };
 
-const homeRoutesOptions = (): BottomTabNavigationOptions => {
+const homeScreenOptions = (): BottomTabNavigationOptions => {
   return {
     tabBarIcon: ({color}) => {
       return (
@@ -87,13 +87,13 @@ const offerScreenOptions = (): BottomTabNavigationOptions => {
   };
 };
 
-const AppRoutes = () => {
+const AppTab = () => {
   return (
     <Tab.Navigator screenOptions={tabBarOptions}>
       <Tab.Screen
-        component={HomeRoutes}
-        name={RouteNames.HomeRoutes}
-        options={homeRoutesOptions}
+        component={HomeScreen}
+        name={ScreenNames.Home}
+        options={homeScreenOptions}
       />
       <Tab.Screen
         component={ExploreScreen}
@@ -119,4 +119,4 @@ const AppRoutes = () => {
   );
 };
 
-export default AppRoutes;
+export default AppTab;
