@@ -1,7 +1,7 @@
 // Import
 import {useNavigation} from '@react-navigation/native';
 import React, {useCallback} from 'react';
-import {Pressable, StyleSheet, View} from 'react-native';
+import {Pressable, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Badge, Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {ScreenNames} from '../../routes/routesHelpers';
@@ -57,20 +57,26 @@ const NotificationScreen = () => {
 
   // Render
   return (
-    <View style={globalStyles.container}>
-      {/* Offer notification */}
-      {renderNotification({badge: 2, icon: 'tag-outline', title: 'Offer'})}
+    <SafeAreaView style={globalStyles.flex}>
+      <View style={globalStyles.container}>
+        {/* Offer notification */}
+        {renderNotification({badge: 2, icon: 'tag-outline', title: 'Offer'})}
 
-      {/* Feed notification */}
-      {renderNotification({
-        badge: 2,
-        icon: 'newspaper-variant-outline',
-        title: 'Feed',
-      })}
+        {/* Feed notification */}
+        {renderNotification({
+          badge: 2,
+          icon: 'newspaper-variant-outline',
+          title: 'Feed',
+        })}
 
-      {/* Activity notification */}
-      {renderNotification({badge: 2, icon: 'bell-outline', title: 'Activity'})}
-    </View>
+        {/* Activity notification */}
+        {renderNotification({
+          badge: 2,
+          icon: 'bell-outline',
+          title: 'Activity',
+        })}
+      </View>
+    </SafeAreaView>
   );
 };
 

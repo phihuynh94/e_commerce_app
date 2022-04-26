@@ -3,25 +3,28 @@ import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import React, {useCallback, useState} from 'react';
 import {
   Dimensions,
+  FlatList,
   Image,
   Pressable,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   Text,
   View,
 } from 'react-native';
-import {FlatList, ScrollView} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {AppStackParamList} from '../../../App';
 import {Button} from '../../common';
 import RatingStars from '../../common/RatingStars/RatingStars';
 import ProductCard from '../../components/Product/ProductCard/ProductCard';
 import ReviewCard from '../../components/Review/ReviewCard/ReviewCard';
 import {products} from '../../mockData/products-mock';
-import {HomeStackParamList} from '../../routes/HomeRoutes';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
+// =====================================================================
 
+// Constants
 const colors = [
   '#00BFFF',
   '#FF1493',
@@ -32,9 +35,10 @@ const colors = [
 ];
 
 const sizes = [6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10, 10.5, 11];
+// =====================================================================
 
 // Interfaces & Types
-type RoutePropType = RouteProp<HomeStackParamList, 'ProductDetail'>;
+type RoutePropType = RouteProp<AppStackParamList, 'ProductDetail'>;
 // =====================================================================
 
 // Component
@@ -89,6 +93,8 @@ const ProductDetailScreen = () => {
     },
     [],
   );
+
+  const onWriteReview = useCallback(() => {}, []);
 
   const renderColorButton = useCallback(
     ({item}) => {
@@ -152,8 +158,8 @@ const ProductDetailScreen = () => {
 
   // Render
   return (
-    <SafeAreaView style={globalStyles.container}>
-      <ScrollView>
+    <SafeAreaView style={globalStyles.flex}>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {/* Image */}
         <Image source={{uri: product.image}} style={styles.image} />
 
@@ -234,6 +240,7 @@ const ProductDetailScreen = () => {
           </View>
           {/* User review */}
           <ReviewCard />
+          <Button onPress={onWriteReview}>Write Review</Button>
 
           {/* You might also like section */}
           <Text style={styles.sectionHeader}>You Might Also Like</Text>

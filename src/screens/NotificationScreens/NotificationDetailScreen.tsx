@@ -1,21 +1,21 @@
 // Import
 import {RouteProp, useRoute} from '@react-navigation/native';
 import React, {useCallback, useMemo} from 'react';
-import {Pressable, StyleSheet, View} from 'react-native';
+import {Pressable, SafeAreaView, StyleSheet, View} from 'react-native';
 import {Text} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {AppStackParamList} from '../../../App';
 import {
   notificationActivities,
   notificationFeeds,
   notificationOffers,
 } from '../../mockData/notifcation-mock';
 import {INotificationDetail} from '../../models/notification-model';
-import {HomeStackParamList} from '../../routes/HomeRoutes';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
 
 // Interfaces & Types
-type RoutePropType = RouteProp<HomeStackParamList, 'NotificationDetail'>;
+type RoutePropType = RouteProp<AppStackParamList, 'NotificationDetail'>;
 
 interface INotificationDetailItem {
   details: INotificationDetail[];
@@ -66,7 +66,7 @@ const NotificationDetailScreen = () => {
 
   // Render
   return (
-    <View style={globalStyles.container}>
+    <SafeAreaView style={globalStyles.flex}>
       {notificationDetails.details.map((detail, index) => {
         return (
           <Pressable
@@ -94,7 +94,7 @@ const NotificationDetailScreen = () => {
           </Pressable>
         );
       })}
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -102,9 +102,8 @@ export default NotificationDetailScreen;
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'flex-start',
     flexDirection: 'row',
-    marginBottom: 30,
+    marginVertical: 20,
   },
   description: {
     paddingVertical: 10,

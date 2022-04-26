@@ -1,20 +1,16 @@
 import {AppStackParamList} from '../../App';
 import {AuthStackParamList} from './AuthRoutes';
-import {HomeStackParamList} from './HomeRoutes';
 
 declare global {
   namespace ReactNavigation {
-    interface RootParamList
-      extends AppStackParamList,
-        AuthStackParamList,
-        HomeStackParamList {}
+    interface RootParamList extends AppStackParamList, AuthStackParamList {}
   }
 }
 
 export enum RouteNames {
+  AppTab = 'AppTab',
   AppRoutes = 'AppRoutes',
   AuthRoutes = 'AuthRoutes',
-  HomeRoutes = 'HomeRoutes',
 }
 
 export enum ScreenNames {

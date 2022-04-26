@@ -1,21 +1,73 @@
-import React, {useCallback} from 'react';
-import {FlatList, Image, StyleSheet, Text, View} from 'react-native';
+// Imports
+import React, {useCallback, useState} from 'react';
+import {
+  FlatList,
+  Image,
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Button} from '../../common';
 import RatingStars from '../../common/RatingStars/RatingStars';
 import {reviews} from '../../mockData/reviews-mock';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
+// =====================================================================
 
 const profileImage = require('../../assets/images/profile.png');
 
 // Component
 const ReviewProductScreen = () => {
+  // useStates
+  const [selectedRatingBox, setSelectedRatingBox] = useState(-1);
+  // =====================================================================
+
   // useCallbacks
+  const onRatingBox = useCallback(
+    (index: number) => () => {
+      setSelectedRatingBox(index);
+    },
+    [],
+  );
+
   const onWriteReview = useCallback(() => {}, []);
 
-  const renderFooter = useCallback(() => {
-    return <Button onPress={onWriteReview}>write review</Button>;
-  }, []);
+  const renderHeader = useCallback(() => {
+    return (
+      <>
+        {/* Select rating box */}
+        <ScrollView
+          bounces={false}
+          horizontal
+          showsHorizontalScrollIndicator={false}>
+          <Pressable
+            onPress={onRatingBox(-1)}
+            style={selectedRatingBoxStyle(-1)}>
+            <Text style={styles.textBox}>All</Text>
+          </Pressable>
+
+          {[...Array(5)].map((e, i) => (
+            <Pressable
+              onPress={onRatingBox(i)}
+              style={selectedRatingBoxStyle(i)}
+              key={i}>
+              <Icon color={theme.colors.yellow} name="star" size={18} />
+              <Text style={styles.textBox}>{i + 1}</Text>
+            </Pressable>
+          ))}
+        </ScrollView>
+
+        {/* Write review button */}
+        <View style={styles.button}>
+          <Button onPress={onWriteReview}>write review</Button>
+        </View>
+      </>
+    );
+  }, [selectedRatingBox, theme]);
 
   const renderReview = useCallback(({item}) => {
     return (
@@ -50,7 +102,9 @@ const ReviewProductScreen = () => {
         {item.imageUrls.length > 0 && item.imageUrls[0] !== '' && (
           <View style={styles.imageContainer}>
             {item.imageUrls.map((url: string) => {
-              return <Image source={{uri: url}} style={styles.image} />;
+              return (
+                <Image key={url} source={{uri: url}} style={styles.image} />
+              );
             })}
           </View>
         )}
@@ -64,20 +118,42 @@ const ReviewProductScreen = () => {
     );
   }, []);
 
+  const selectedRatingBoxStyle = useCallback(
+    (index: number) => {
+      if (index === selectedRatingBox) {
+        return {
+          ...styles.starsBox,
+          backgroundColor: theme.colors.primaryLight,
+        };
+      }
+
+      return {
+        ...styles.starsBox,
+      };
+    },
+    [selectedRatingBox, theme],
+  );
+  // =====================================================================
+
+  // Render
   return (
-    <FlatList
-      data={reviews}
-      ListFooterComponent={renderFooter}
-      ListFooterComponentStyle={styles.footer}
-      renderItem={renderReview}
-      style={globalStyles.container}
-    />
+    <SafeAreaView style={globalStyles.flex}>
+      <FlatList
+        data={reviews}
+        ListHeaderComponent={renderHeader}
+        renderItem={renderReview}
+        style={globalStyles.container}
+      />
+    </SafeAreaView>
   );
 };
 
 export default ReviewProductScreen;
 
 const styles = StyleSheet.create({
+  button: {
+    marginTop: 5,
+  },
   comment: {
     color: theme.colors.text,
     fontSize: 12,
@@ -111,6 +187,25 @@ const styles = StyleSheet.create({
     height: 50,
     marginRight: 15,
     width: 50,
+  },
+  starsBox: {
+    alignItems: 'center',
+    borderColor: theme.colors.border,
+    borderRadius: 5,
+    borderWidth: 1,
+    flexDirection: 'row',
+    height: 50,
+    justifyContent: 'center',
+    marginRight: 10,
+    padding: 16,
+    width: 60,
+  },
+  textBox: {
+    color: theme.colors.primary,
+    fontWeight: '700',
+    fontSize: 12,
+    lineHeight: 18,
+    marginLeft: 2,
   },
   reviewContainer: {
     marginVertical: 10,
