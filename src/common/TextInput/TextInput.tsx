@@ -9,8 +9,9 @@ import {theme} from '../../styles/theme';
 interface ITextInputProps {
   autoComplete?: string;
   icon?: IconSource;
+  multiline?: boolean;
   onChangeText: (text: string) => void;
-  placeholder: string;
+  placeholder?: string;
   value: string;
   secureTextEntry?: boolean;
 }
@@ -20,6 +21,7 @@ interface ITextInputProps {
 const TextInput = ({
   autoComplete,
   icon,
+  multiline,
   onChangeText,
   placeholder,
 }: ITextInputProps) => {
@@ -45,6 +47,7 @@ const TextInput = ({
         autoComplete={autoComplete}
         left={leftIcon}
         mode="outlined"
+        multiline={multiline}
         onChangeText={onChangeText}
         outlineColor={theme.colors.accent}
         placeholder={placeholder}

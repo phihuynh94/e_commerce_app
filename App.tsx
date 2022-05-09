@@ -20,6 +20,7 @@ import {
   NotificationScreen,
   ProductDetailScreen,
   ReviewProductScreen,
+  WriteReviewScreen,
 } from './src/screens';
 import {staticValues} from './src/styles';
 import {navTheme, paperTheme, theme} from './src/styles/theme';
@@ -38,6 +39,7 @@ export type AppStackParamList = {
   };
   ProductDetail: {product: IProduct; title: string};
   ReviewProduct: undefined;
+  WriteReview: undefined;
 };
 
 const Stack = createStackNavigator<AppStackParamList>();
@@ -110,6 +112,12 @@ const reviewProductScreenOptions = (): StackNavigationOptions => {
   };
 };
 
+const writeReviewScreenOptions = (): StackNavigationOptions => {
+  return {
+    title: 'Write Review',
+  };
+};
+
 const App = () => {
   return (
     <PaperProvider theme={paperTheme}>
@@ -155,6 +163,11 @@ const App = () => {
               component={ReviewProductScreen}
               name={ScreenNames.ReviewProduct}
               options={reviewProductScreenOptions}
+            />
+            <Stack.Screen
+              component={WriteReviewScreen}
+              name={ScreenNames.WriteReview}
+              options={writeReviewScreenOptions}
             />
           </Stack.Navigator>
         </NavigationContainer>

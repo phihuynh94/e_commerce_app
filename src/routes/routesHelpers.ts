@@ -9,7 +9,6 @@ declare global {
 
 export enum RouteNames {
   AppTab = 'AppTab',
-  AppRoutes = 'AppRoutes',
   AuthRoutes = 'AuthRoutes',
 }
 
@@ -27,4 +26,5 @@ export enum ScreenNames {
   ProductDetail = 'ProductDetail',
   Register = 'Register',
   ReviewProduct = 'ReviewProduct',
+  WriteReview = 'WriteReview',
 }

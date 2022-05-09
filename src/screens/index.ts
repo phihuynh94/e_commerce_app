@@ -11,3 +11,4 @@ export {default as NotificationScreen} from './NotificationScreens/NotificationS
 export {default as OfferScreen} from './OfferScreens/OfferScreen';
 export {default as ProductDetailScreen} from './ProductDetailScreen/ProductDetailScreen';
 export {default as ReviewProductScreen} from './ReviewScreens/ReviewProductScreen';
+export {default as WriteReviewScreen} from './ReviewScreens/WriteReviewScreen';
