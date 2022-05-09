@@ -1,19 +1,20 @@
 // Import
-import React, {useMemo} from 'react';
-import {StyleSheet, View} from 'react-native';
+import React, {useCallback, useMemo} from 'react';
+import {Pressable, StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {theme} from '../../styles/theme';
+// =====================================================================
 
-// Interfaces & Types
-const size = 18;
-
+// Interface
 interface IRatingStarsProps {
+  onRating?: (rate: number) => void;
   rating: number;
+  size?: number;
 }
 // =====================================================================
 
 // Component
-const RatingStars = ({rating}: IRatingStarsProps) => {
+const RatingStars = ({onRating, rating, size = 18}: IRatingStarsProps) => {
   // useMemos
   const emptyStar = useMemo(() => {
     return <Icon color={theme.colors.yellow} name="star-outline" size={size} />;
@@ -90,22 +91,36 @@ const RatingStars = ({rating}: IRatingStarsProps) => {
   }, [emptyStar, fullStar, halfStar, rating]);
   // =====================================================================
 
+  // useCallbacks
+  const onStar = useCallback(
+    (star: number) => () => {
+      if (onRating) {
+        onRating(star);
+      }
+    },
+    [],
+  );
+  // =====================================================================
+
   // Render
   return (
     <View style={styles.starsContainer}>
-      {firstStar}
-      {secondStar}
-      {thirdStar}
-      {fourthStar}
-      {fifthStar}
+      <Pressable onPress={onStar(1)}>{firstStar}</Pressable>
+      <Pressable onPress={onStar(2)}>{secondStar}</Pressable>
+      <Pressable onPress={onStar(3)}>{thirdStar}</Pressable>
+      <Pressable onPress={onStar(4)}>{fourthStar}</Pressable>
+      <Pressable onPress={onStar(5)}>{fifthStar}</Pressable>
     </View>
   );
 };
+// =====================================================================
 
-export default RatingStars;
-
+// Styles
 const styles = StyleSheet.create({
   starsContainer: {
     flexDirection: 'row',
   },
 });
+// =====================================================================
+
+export default RatingStars;

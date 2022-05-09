@@ -19,6 +19,7 @@ import RatingStars from '../../common/RatingStars/RatingStars';
 import ProductCard from '../../components/Product/ProductCard/ProductCard';
 import ReviewCard from '../../components/Review/ReviewCard/ReviewCard';
 import {products} from '../../mockData/products-mock';
+import {reviews} from '../../mockData/reviews-mock';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
@@ -51,22 +52,10 @@ const ProductDetailScreen = () => {
   const {product} = route.params;
   // =====================================================================
 
-  // useSelectors
-
-  // =====================================================================
-
   // useState
   const [isFavorite, setIsFavorite] = useState(false);
   const [selectedColor, setSelectedColor] = useState('');
   const [selectedSize, setSelectedSize] = useState(-1);
-  // =====================================================================
-
-  // useEffect
-
-  // =====================================================================
-
-  // useMemos
-
   // =====================================================================
 
   // useCallbacks
@@ -94,7 +83,9 @@ const ProductDetailScreen = () => {
     [],
   );
 
-  const onWriteReview = useCallback(() => {}, []);
+  const onWriteReview = useCallback(() => {
+    navigation.navigate(ScreenNames.WriteReview);
+  }, [navigation]);
 
   const renderColorButton = useCallback(
     ({item}) => {
@@ -239,7 +230,7 @@ const ProductDetailScreen = () => {
             </Text>
           </View>
           {/* User review */}
-          <ReviewCard />
+          <ReviewCard review={reviews[0]} />
           <Button onPress={onWriteReview}>Write Review</Button>
 
           {/* You might also like section */}
@@ -256,9 +247,9 @@ const ProductDetailScreen = () => {
     </SafeAreaView>
   );
 };
+// =====================================================================
 
-export default ProductDetailScreen;
-
+// Styles
 const styles = StyleSheet.create({
   button: {
     marginVertical: 10,
@@ -325,3 +316,6 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
 });
+// =====================================================================
+
+export default ProductDetailScreen;

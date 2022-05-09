@@ -1,8 +1,8 @@
 // Imports
+import {useNavigation} from '@react-navigation/native';
 import React, {useCallback, useState} from 'react';
 import {
   FlatList,
-  Image,
   Pressable,
   SafeAreaView,
   ScrollView,
@@ -12,16 +12,19 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Button} from '../../common';
-import RatingStars from '../../common/RatingStars/RatingStars';
+import ReviewCard from '../../components/Review/ReviewCard/ReviewCard';
 import {reviews} from '../../mockData/reviews-mock';
+import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
 // =====================================================================
 
-const profileImage = require('../../assets/images/profile.png');
-
 // Component
 const ReviewProductScreen = () => {
+  // Hooks
+  const navigation = useNavigation();
+  // =====================================================================
+
   // useStates
   const [selectedRatingBox, setSelectedRatingBox] = useState(-1);
   // =====================================================================
@@ -34,7 +37,9 @@ const ReviewProductScreen = () => {
     [],
   );
 
-  const onWriteReview = useCallback(() => {}, []);
+  const onWriteReview = useCallback(() => {
+    navigation.navigate(ScreenNames.WriteReview);
+  }, [navigation]);
 
   const renderHeader = useCallback(() => {
     return (
@@ -70,52 +75,7 @@ const ReviewProductScreen = () => {
   }, [selectedRatingBox, theme]);
 
   const renderReview = useCallback(({item}) => {
-    return (
-      <View style={styles.reviewContainer}>
-        {/* User's profile */}
-        <View style={styles.profile}>
-          {/* User's profile image */}
-          {item.user.profileUrl ? (
-            <Image
-              source={{uri: item.user.profileUrl}}
-              style={styles.profileImage}
-            />
-          ) : (
-            <Image source={profileImage} style={styles.profileImage} />
-          )}
-
-          <View>
-            {/* Username */}
-            <Text style={styles.username}>
-              {item.user.name.firstname} {item.user.name.lastname}
-            </Text>
-
-            {/* Rating */}
-            <RatingStars rating={item.rating} />
-          </View>
-        </View>
-
-        {/* Comment */}
-        <Text style={styles.comment}>{item.comment}</Text>
-
-        {/* Images */}
-        {item.imageUrls.length > 0 && item.imageUrls[0] !== '' && (
-          <View style={styles.imageContainer}>
-            {item.imageUrls.map((url: string) => {
-              return (
-                <Image key={url} source={{uri: url}} style={styles.image} />
-              );
-            })}
-          </View>
-        )}
-
-        {/* Date */}
-        <Text style={styles.date}>{item.date}</Text>
-
-        {/* Divider */}
-        <View style={globalStyles.divider} />
-      </View>
-    );
+    return <ReviewCard review={item} />;
   }, []);
 
   const selectedRatingBoxStyle = useCallback(
