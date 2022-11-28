@@ -5,6 +5,7 @@ import {
   Dimensions,
   FlatList,
   Image,
+  Keyboard,
   Pressable,
   SafeAreaView,
   ScrollView,
@@ -25,6 +26,7 @@ import {IBanner} from '../../models/banner-model';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
+// =====================================================================
 
 // Images
 const offerBanner = require('../../assets/images/offer-banner.png');
@@ -75,15 +77,18 @@ const HomeScreen = () => {
   }, [navigation]);
 
   // Render banner card
-  const renderBannerCard = useCallback(({item}) => {
-    return (
-      <View style={styles.bannerContainer}>
-        <Pressable onPress={onBanner(item)}>
-          <Image source={offerBanner} />
-        </Pressable>
-      </View>
-    );
-  }, []);
+  const renderBannerCard = useCallback(
+    ({item}) => {
+      return (
+        <View style={styles.bannerContainer}>
+          <Pressable onPress={onBanner(item)}>
+            <Image source={offerBanner} />
+          </Pressable>
+        </View>
+      );
+    },
+    [onBanner],
+  );
 
   // Render product card
   const renderProductCard = useCallback(({item}) => {
@@ -92,7 +97,7 @@ const HomeScreen = () => {
 
   // Render on sale product card
   const renderSaleProductCard = useCallback(({item}) => {
-    return <ProductCard isSmallCard product={item} />;
+    return <ProductCard product={item} size="small" />;
   }, []);
 
   const setScrollingTrue = useCallback(() => {
@@ -130,46 +135,48 @@ const HomeScreen = () => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [finishScrolling, bannerIndex, banners, scrolling]);
+  }, [finishScrolling, bannerIndex, scrolling]);
   // =====================================================================
 
   // Render
   return (
-    <SafeAreaView style={globalStyles.flex}>
-      {/* Search text input & icons in header */}
-      <View style={styles.headerContainer}>
-        {/* Search text input */}
-        <View style={styles.searchInput}>
-          <TextInput
-            autoComplete="off"
-            icon="text-search"
-            onChangeText={setSearch}
-            placeholder="Search Product"
-            value={search}
-          />
+    <SafeAreaView style={globalStyles.container}>
+      <Pressable onPress={Keyboard.dismiss}>
+        {/* Search text input & icons in header */}
+        <View style={styles.headerContainer}>
+          {/* Search text input */}
+          <View style={styles.searchInput}>
+            <TextInput
+              autoComplete="off"
+              icon="text-search"
+              onChangeText={setSearch}
+              placeholder="Search Product"
+              value={search}
+            />
+          </View>
+
+          {/* Favorite icon */}
+          <Pressable onPress={onFavoriteIcon} style={styles.icon}>
+            <Icon
+              color={theme.colors.primaryGray}
+              name="heart-outline"
+              size={staticValues.iconSize}
+            />
+          </Pressable>
+
+          {/* Notification icon */}
+          <Pressable onPress={onNotificationIcon} style={styles.icon}>
+            <Badge size={10} style={styles.badge}>
+              2
+            </Badge>
+            <Icon
+              color={theme.colors.primaryGray}
+              name="bell-outline"
+              size={staticValues.iconSize}
+            />
+          </Pressable>
         </View>
-
-        {/* Favorite icon */}
-        <Pressable onPress={onFavoriteIcon} style={styles.icon}>
-          <Icon
-            color={theme.colors.text}
-            name="heart-outline"
-            size={staticValues.iconSize}
-          />
-        </Pressable>
-
-        {/* Notification icon */}
-        <Pressable onPress={onNotificationIcon} style={styles.icon}>
-          <Badge style={styles.badge} size={10}>
-            2
-          </Badge>
-          <Icon
-            color={theme.colors.text}
-            name="bell-outline"
-            size={staticValues.iconSize}
-          />
-        </Pressable>
-      </View>
+      </Pressable>
 
       {/* Divider */}
       <View style={globalStyles.dividerContainer}>
@@ -178,11 +185,11 @@ const HomeScreen = () => {
 
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={globalStyles.container}>
+        style={globalStyles.container}
+      >
         <View style={{paddingBottom: insets.bottom}}>
           {/* Offer banner list */}
           <FlatList
-            ref={bannerListRef}
             data={banners}
             horizontal
             initialScrollIndex={bannerIndex}
@@ -190,6 +197,7 @@ const HomeScreen = () => {
             onScrollEndDrag={setScrollingFalse}
             onViewableItemsChanged={onViewRef.current}
             pagingEnabled
+            ref={bannerListRef}
             renderItem={renderBannerCard}
             scrollEventThrottle={200}
             showsHorizontalScrollIndicator={false}
@@ -203,7 +211,7 @@ const HomeScreen = () => {
           {/* Caterory list */}
           <View style={styles.sectionHeaderContainer}>
             <Text style={styles.sectionHeader}>Category</Text>
-            <Text style={styles.linkText}>See More</Text>
+            <Text style={globalStyles.linkText}>See More</Text>
           </View>
 
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
@@ -211,7 +219,7 @@ const HomeScreen = () => {
               <View key={index} style={styles.cateroryContainer}>
                 <View style={styles.cateroryIconContainer}>
                   <Icon
-                    color={theme.colors.primary}
+                    color={theme.colors.primaryBlue}
                     name="tshirt-crew-outline"
                     size={staticValues.iconSize}
                   />
@@ -224,7 +232,7 @@ const HomeScreen = () => {
           {/* Mega sale list */}
           <View style={styles.sectionHeaderContainer}>
             <Text style={styles.sectionHeader}>Mega Sale</Text>
-            <Text style={styles.linkText}>See More</Text>
+            <Text style={globalStyles.linkText}>See More</Text>
           </View>
 
           <FlatList
@@ -238,7 +246,7 @@ const HomeScreen = () => {
           {/* Product list */}
           <View style={styles.sectionHeaderContainer}>
             <Text style={styles.sectionHeader}>Explore Products</Text>
-            <Text style={styles.linkText}>See More</Text>
+            <Text style={globalStyles.linkText}>See More</Text>
           </View>
 
           <FlatList
@@ -265,9 +273,9 @@ const HomeScreen = () => {
     </SafeAreaView>
   );
 };
+// =====================================================================
 
-export default HomeScreen;
-
+// Styles
 const styles = StyleSheet.create({
   badge: {
     position: 'absolute',
@@ -289,7 +297,7 @@ const styles = StyleSheet.create({
   },
   cateroryIconContainer: {
     alignItems: 'center',
-    borderColor: theme.colors.accent,
+    borderColor: theme.colors.secondaryGray,
     borderRadius: 35,
     borderWidth: 2,
     height: 70,
@@ -297,12 +305,8 @@ const styles = StyleSheet.create({
     marginBottom: 5,
     width: 70,
   },
-  caterogyScrollView: {
-    flex: 1,
-    justifyContent: 'space-between',
-  },
   cateroryLabel: {
-    color: theme.colors.text,
+    color: theme.colors.primaryGray,
     fontWeight: '400',
     fontSize: 10,
     lineHeight: 15,
@@ -313,23 +317,18 @@ const styles = StyleSheet.create({
   headerContainer: {
     alignItems: 'center',
     flexDirection: 'row',
+    marginBottom: 10,
     paddingHorizontal: staticValues.padding,
   },
   icon: {
     flex: 1,
     alignItems: 'flex-end',
   },
-  linkText: {
-    ...globalStyles.linkText,
-    fontSize: staticValues.normalFont,
-  },
   searchInput: {
-    flex: 6,
+    flex: 8,
   },
   sectionHeader: {
-    fontWeight: '700',
-    fontSize: staticValues.normalFont,
-    lineHeight: staticValues.lineHeight,
+    ...theme.typography.h5,
   },
   sectionHeaderContainer: {
     flexDirection: 'row',
@@ -338,3 +337,6 @@ const styles = StyleSheet.create({
     marginBottom: 15,
   },
 });
+// =====================================================================
+
+export default HomeScreen;

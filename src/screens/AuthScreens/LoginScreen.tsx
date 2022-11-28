@@ -12,8 +12,9 @@ import {
 } from 'react-native';
 import {Button, TextInput} from '../../common';
 import {RouteNames, ScreenNames} from '../../routes/routesHelpers';
-import {globalStyles, staticValues} from '../../styles';
+import {globalStyles} from '../../styles';
 import {theme} from '../../styles/theme';
+// =====================================================================
 
 // Images
 const logo = require('../../assets/images/logo.png');
@@ -54,17 +55,15 @@ const LoginScreen = () => {
 
   // Render
   return (
-    <SafeAreaView style={globalStyles.flex}>
-      <Pressable
-        onPress={Keyboard.dismiss}
-        style={globalStyles.authScreensContainer}>
+    <SafeAreaView style={globalStyles.container}>
+      <Pressable onPress={Keyboard.dismiss} style={styles.container}>
         {/* Logo */}
         <Image source={logo} />
 
         {/* Header */}
         <Text style={styles.header}>Welcome to Lafyuu</Text>
         <View style={styles.subHeader}>
-          <Text style={globalStyles.smallText}>Sign in to continue</Text>
+          <Text style={styles.smallText}>Sign in to continue</Text>
         </View>
 
         {/* Email input */}
@@ -92,33 +91,31 @@ const LoginScreen = () => {
         {/* Divider */}
         <View style={styles.dividerContainer}>
           <View style={globalStyles.divider} />
-          <View>
-            <Text style={styles.divierText}>OR</Text>
-          </View>
+          <Text style={styles.divierText}>OR</Text>
           <View style={globalStyles.divider} />
         </View>
 
         {/* Login with Google button */}
-        <Button mode="outlined" icon="google" onPress={onLoginGoogle}>
+        <Button icon="google" mode="outlined" onPress={onLoginGoogle}>
           login with google
         </Button>
 
         {/* Login with Facebook button */}
-        <Button mode="outlined" icon="facebook" onPress={onLoginFacebook}>
+        <Button icon="facebook" mode="outlined" onPress={onLoginFacebook}>
           login with facebook
         </Button>
 
         {/* Forgot password text link */}
         <View style={styles.forgotPassword}>
-          <Text style={globalStyles.linkText} onPress={onForgotPassword}>
+          <Text onPress={onForgotPassword} style={globalStyles.linkText}>
             Forgot Password?
           </Text>
         </View>
 
         {/* Register text link */}
-        <Text style={globalStyles.smallText}>
+        <Text style={styles.smallText}>
           Don't have a account?{' '}
-          <Text style={globalStyles.linkText} onPress={onRegister}>
+          <Text onPress={onRegister} style={globalStyles.linkText}>
             Register
           </Text>
         </Text>
@@ -126,15 +123,19 @@ const LoginScreen = () => {
     </SafeAreaView>
   );
 };
+// =====================================================================
 
-export default LoginScreen;
-
+// Styles
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 16,
+  },
   divierText: {
-    color: theme.colors.text,
-    fontSize: staticValues.normalFont,
-    fontWeight: '700',
-    lineHeight: staticValues.lineHeight,
+    ...theme.typography.h5,
+    color: theme.colors.primaryGray,
     textAlign: 'center',
     width: 50,
   },
@@ -146,13 +147,18 @@ const styles = StyleSheet.create({
     marginTop: 16,
   },
   header: {
-    fontWeight: '700',
-    fontSize: staticValues.largeFont,
-    lineHeight: 24,
+    ...theme.typography.h4,
     marginTop: 16,
+  },
+  smallText: {
+    ...theme.typography.small,
+    color: theme.colors.primaryGray,
   },
   subHeader: {
     marginBottom: 28,
     marginTop: 8,
   },
 });
+// =====================================================================
+
+export default LoginScreen;

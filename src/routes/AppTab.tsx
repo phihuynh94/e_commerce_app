@@ -27,7 +27,7 @@ const Tab = createBottomTabNavigator<AppTabParamList>();
 
 const tabBarOptions: BottomTabNavigationOptions = {
   headerShown: false,
-  tabBarActiveTintColor: theme.colors.primary,
+  tabBarActiveTintColor: theme.colors.primaryBlue,
 };
 
 const accountScreenOptions = (): BottomTabNavigationOptions => {

@@ -1,6 +1,6 @@
 // Import
 import React, {ReactNode, useMemo} from 'react';
-import {StyleProp, StyleSheet, TextStyle} from 'react-native';
+import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
 import {Button as PaperButton} from 'react-native-paper';
 import {IconSource} from 'react-native-paper/lib/typescript/components/Icon';
 import {theme} from '../../styles/theme';
@@ -22,49 +22,64 @@ const Button = ({
   onPress,
 }: IButtonProps) => {
   // useMemos
-  const buttonLabelStyle: StyleProp<TextStyle> = useMemo(() => {
-    switch (mode) {
-      case 'outlined':
-        return {
-          ...styles.label,
-          alignItems: 'center',
-          color: theme.colors.text,
-          flex: 1,
-          textAlign: 'center',
-        };
-      default:
-        return {
-          ...styles.label,
-          color: theme.colors.white,
-        };
+  const containerStyle: ViewStyle = useMemo(() => {
+    if (mode === 'outlined') {
+      return {
+        ...styles.container,
+        backgroundColor: theme.colors.primaryWhite,
+      };
     }
-  }, []);
+
+    return {
+      ...styles.container,
+    };
+  }, [mode]);
+
+  const labelStyle: TextStyle = useMemo(() => {
+    if (mode === 'outlined') {
+      return {
+        ...styles.label,
+        alignItems: 'center',
+        color: theme.colors.primaryGray,
+        flex: 1,
+        textAlign: 'center',
+      };
+    }
+
+    return {
+      ...styles.label,
+      color: theme.colors.primaryWhite,
+    };
+  }, [mode]);
   // =====================================================================
 
   // Render
   return (
     <PaperButton
       icon={icon}
-      labelStyle={buttonLabelStyle}
+      labelStyle={labelStyle}
       mode={mode}
       onPress={onPress}
-      style={styles.button}>
+      style={containerStyle}
+    >
       {children}
     </PaperButton>
   );
 };
+// =====================================================================
 
-export default Button;
-
+// Styles
 const styles = StyleSheet.create({
-  button: {
+  container: {
+    backgroundColor: theme.colors.primaryBlue,
     marginVertical: 5,
     padding: 5,
     width: '100%',
   },
   label: {
-    fontSize: 14,
-    fontWeight: '700',
-    lineHeight: 25,
+    ...theme.typography.h5,
   },
 });
+// =====================================================================
+
+export default Button;

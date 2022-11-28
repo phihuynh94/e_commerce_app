@@ -4,42 +4,55 @@ import React, {useCallback, useMemo} from 'react';
 import {
   Image,
   Pressable,
-  StyleProp,
   StyleSheet,
+  Text,
   View,
   ViewStyle,
 } from 'react-native';
-import {Card, Surface, Text} from 'react-native-paper';
-import RatingStars from '../../../common/RatingStars/RatingStars';
+import {Card, Surface} from 'react-native-paper';
+import {RatingStars} from '../../../common';
 import {IProduct} from '../../../models/product-model';
 import {ScreenNames} from '../../../routes/routesHelpers';
-import {globalStyles, staticValues} from '../../../styles';
+import {globalStyles} from '../../../styles';
 import {theme} from '../../../styles/theme';
 
 // Interfaces & Types
 interface IProductCardProps {
   product: IProduct;
-  isSmallCard?: boolean;
+  size?: 'small' | 'normal';
 }
 // =====================================================================
 
 // Component
-const ProductCard = ({product, isSmallCard}: IProductCardProps) => {
+const ProductCard = ({product, size}: IProductCardProps) => {
   // Hooks
   const navigation = useNavigation();
   // =====================================================================
 
   // useMemos
-  const cardStyle: StyleProp<ViewStyle> = useMemo(() => {
-    if (isSmallCard) {
+  const cardStyle: ViewStyle = useMemo(() => {
+    if (size === 'small') {
       return {
         ...styles.card,
+        height: 240,
         width: 140,
       };
     }
 
     return styles.card;
-  }, [isSmallCard]);
+  }, [size]);
+
+  const surfaceStyle: ViewStyle = useMemo(() => {
+    if (size === 'small') {
+      return {
+        ...styles.surface,
+        height: 110,
+        width: 110,
+      };
+    }
+
+    return styles.surface;
+  }, [size]);
   // =====================================================================
 
   // useCallbacks
@@ -58,7 +71,7 @@ const ProductCard = ({product, isSmallCard}: IProductCardProps) => {
         <Card.Content>
           {/* Image */}
           <View style={styles.imageContainer}>
-            <Surface style={styles.surface}>
+            <Surface style={surfaceStyle}>
               <Image
                 source={{
                   uri: product.image,
@@ -91,7 +104,7 @@ export default ProductCard;
 const styles = StyleSheet.create({
   card: {
     alignItems: 'center',
-    height: 240,
+    height: 280,
     justifyContent: 'center',
     margin: 5,
     width: 170,
@@ -108,16 +121,15 @@ const styles = StyleSheet.create({
   },
   surface: {
     alignItems: 'center',
-    backgroundColor: theme.colors.background,
+    borderRadius: 5,
     elevation: 9,
-    height: 110,
+    height: 140,
     justifyContent: 'center',
-    width: 110,
+    width: 140,
   },
   title: {
-    color: theme.colors.dark,
-    fontSize: staticValues.smallFont,
-    fontWeight: '700',
+    ...theme.typography.h6,
+    color: theme.colors.primaryBlack,
     lineHeight: 18,
     marginTop: 15,
     marginBottom: 5,

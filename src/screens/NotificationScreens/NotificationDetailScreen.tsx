@@ -1,8 +1,7 @@
 // Import
 import {RouteProp, useRoute} from '@react-navigation/native';
 import React, {useCallback, useMemo} from 'react';
-import {Pressable, SafeAreaView, StyleSheet, View} from 'react-native';
-import {Text} from 'react-native-paper';
+import {Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AppStackParamList} from '../../../App';
 import {
@@ -13,6 +12,7 @@ import {
 import {INotificationDetail} from '../../models/notification-model';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
+// =====================================================================
 
 // Interfaces & Types
 type RoutePropType = RouteProp<AppStackParamList, 'NotificationDetail'>;
@@ -72,10 +72,11 @@ const NotificationDetailScreen = () => {
           <Pressable
             key={detail.title + index}
             onPress={onPress}
-            style={styles.container}>
+            style={styles.container}
+          >
             {/* Icon */}
             <Icon
-              color={theme.colors.primary}
+              color={theme.colors.primaryBlue}
               name={notificationDetails.icon}
               size={staticValues.iconSize}
               style={styles.icon}
@@ -97,9 +98,9 @@ const NotificationDetailScreen = () => {
     </SafeAreaView>
   );
 };
+// =====================================================================
 
-export default NotificationDetailScreen;
-
+// Styles
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
@@ -116,8 +117,10 @@ const styles = StyleSheet.create({
     flex: 11,
   },
   title: {
-    color: theme.colors.dark,
-    fontSize: staticValues.normalFont,
-    fontWeight: '700',
+    ...theme.typography.h5,
+    color: theme.colors.primaryBlack,
   },
 });
+// =====================================================================
+
+export default NotificationDetailScreen;

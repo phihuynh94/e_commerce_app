@@ -1,10 +1,8 @@
 // Import
 import React, {useCallback, useState} from 'react';
-import {Pressable, SafeAreaView, StyleSheet, View} from 'react-native';
-import {Text} from 'react-native-paper';
+import {Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Button, TextInput} from '../../common';
-import RatingStars from '../../common/RatingStars/RatingStars';
+import {Button, RatingStars, TextInput} from '../../common';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
 // =====================================================================
@@ -67,7 +65,7 @@ const WriteReviewScreen = () => {
         <Text style={styles.text}>Add Photo</Text>
         <Pressable onPress={onAddPhoto} style={styles.addPhoto}>
           <Icon
-            color={theme.colors.text}
+            color={theme.colors.primaryGray}
             name="plus"
             size={staticValues.iconSize}
           />
@@ -87,7 +85,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: theme.colors.text,
+    borderColor: theme.colors.primaryGray,
     height: 72,
     justifyContent: 'center',
     marginVertical: 10,
@@ -105,9 +103,8 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   text: {
-    color: theme.colors.dark,
-    fontSize: staticValues.normalFont,
-    fontWeight: '700',
+    color: theme.colors.primaryBlack,
+    ...theme.typography.h5,
   },
 });
 // =====================================================================

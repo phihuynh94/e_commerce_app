@@ -1,3 +1,4 @@
+// Imports
 import {NavigationContainer, RouteProp} from '@react-navigation/native';
 import {
   createStackNavigator,
@@ -23,7 +24,8 @@ import {
   WriteReviewScreen,
 } from './src/screens';
 import {staticValues} from './src/styles';
-import {navTheme, paperTheme, theme} from './src/styles/theme';
+import {navTheme, theme} from './src/styles/theme';
+// =====================================================================
 
 export type AppStackParamList = {
   AppTab: undefined;
@@ -41,9 +43,11 @@ export type AppStackParamList = {
   ReviewProduct: undefined;
   WriteReview: undefined;
 };
+// =====================================================================
 
 const Stack = createStackNavigator<AppStackParamList>();
 
+// Screen Options
 const authRoutesOptions = (): StackNavigationOptions => {
   return {
     headerShown: false,
@@ -70,7 +74,7 @@ const flashSaleScreenOptions = (
     headerBackTitle: 'Home',
     headerRight: () => (
       <Icon
-        color={theme.colors.text}
+        color={theme.colors.primaryBlack}
         name="magnify"
         size={staticValues.iconSize}
         style={styles.icon}
@@ -117,10 +121,12 @@ const writeReviewScreenOptions = (): StackNavigationOptions => {
     title: 'Write Review',
   };
 };
+// =====================================================================
 
+// App
 const App = () => {
   return (
-    <PaperProvider theme={paperTheme}>
+    <PaperProvider>
       <SafeAreaProvider>
         <NavigationContainer theme={navTheme}>
           <Stack.Navigator>
@@ -175,11 +181,14 @@ const App = () => {
     </PaperProvider>
   );
 };
+// =====================================================================
 
-export default App;
-
+// Styles
 const styles = StyleSheet.create({
   icon: {
     marginRight: 10,
   },
 });
+// =====================================================================
+
+export default App;

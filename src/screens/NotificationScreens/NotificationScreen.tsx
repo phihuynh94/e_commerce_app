@@ -1,12 +1,13 @@
 // Import
 import {useNavigation} from '@react-navigation/native';
 import React, {useCallback} from 'react';
-import {Pressable, SafeAreaView, StyleSheet, View} from 'react-native';
-import {Badge, Text} from 'react-native-paper';
+import {Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {Badge} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
+// =====================================================================
 
 // Interface
 interface INotification {
@@ -35,9 +36,9 @@ const NotificationScreen = () => {
   const renderNotification = useCallback(
     ({icon, title, badge}: INotification) => {
       return (
-        <Pressable style={styles.container} onPress={onPress(title)}>
+        <Pressable onPress={onPress(title)} style={styles.container}>
           <Icon
-            color={theme.colors.primary}
+            color={theme.colors.primaryBlue}
             name={icon}
             size={staticValues.iconSize}
             style={styles.icon}
@@ -51,7 +52,7 @@ const NotificationScreen = () => {
         </Pressable>
       );
     },
-    [],
+    [onPress],
   );
   // =====================================================================
 
@@ -79,9 +80,9 @@ const NotificationScreen = () => {
     </SafeAreaView>
   );
 };
+// =====================================================================
 
-export default NotificationScreen;
-
+// Styles
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
@@ -92,9 +93,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   title: {
-    color: theme.colors.dark,
+    ...theme.typography.h6,
+    color: theme.colors.primaryBlack,
     flex: 1,
-    fontSize: staticValues.smallFont,
-    fontWeight: '700',
   },
 });
+// =====================================================================
+
+export default NotificationScreen;

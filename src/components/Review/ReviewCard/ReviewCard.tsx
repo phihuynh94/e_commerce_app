@@ -1,10 +1,11 @@
 // Imports
 import React, {useMemo, useState} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import RatingStars from '../../../common/RatingStars/RatingStars';
+import {RatingStars} from '../../../common';
 import {IReview} from '../../../models/review-model';
-import {globalStyles, staticValues} from '../../../styles';
+import {globalStyles} from '../../../styles';
 import {theme} from '../../../styles/theme';
+
 // =====================================================================
 
 const profileImage = require('../../../assets/images/profile.png');
@@ -86,14 +87,14 @@ export default ReviewCard;
 
 const styles = StyleSheet.create({
   comment: {
-    color: theme.colors.text,
+    color: theme.colors.primaryBlack,
     fontSize: 12,
     fontWeight: '400',
     lineHeight: 20,
     marginVertical: 15,
   },
   date: {
-    color: theme.colors.text,
+    color: theme.colors.primaryBlack,
     fontSize: 10,
     fontWeight: '400',
     lineHeight: 15,
@@ -120,8 +121,7 @@ const styles = StyleSheet.create({
     marginVertical: 10,
   },
   username: {
-    fontSize: staticValues.normalFont,
-    fontWeight: '700',
+    ...theme.typography.h5,
     marginLeft: 5,
     marginVertical: 5,
   },

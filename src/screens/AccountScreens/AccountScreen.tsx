@@ -1,7 +1,6 @@
 // Import
 import React from 'react';
 import {ScrollView, StyleSheet} from 'react-native';
-import {staticValues} from '../../styles';
 
 // Images
 
@@ -42,13 +41,9 @@ const AccountScreen = () => {
   // =====================================================================
 
   // Render
-  return <ScrollView style={styles.container}></ScrollView>;
+  return <ScrollView />;
 };
 
 export default AccountScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    padding: staticValues.padding,
-  },
-});
+const styles = StyleSheet.create({});

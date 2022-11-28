@@ -12,13 +12,14 @@ import {
 } from 'react-native';
 import {Button, TextInput} from '../../common';
 import {ScreenNames} from '../../routes/routesHelpers';
-import {globalStyles, staticValues} from '../../styles';
+import {globalStyles} from '../../styles';
+import {theme} from '../../styles/theme';
 
 // Images
 const logo = require('../../assets/images/logo.png');
 // =====================================================================
 
-// Interface & Type
+// Interface
 
 // =====================================================================
 
@@ -60,17 +61,15 @@ const RegisterScreen = () => {
 
   // Render
   return (
-    <SafeAreaView style={globalStyles.flex}>
-      <Pressable
-        onPress={Keyboard.dismiss}
-        style={globalStyles.authScreensContainer}>
+    <SafeAreaView style={globalStyles.container}>
+      <Pressable onPress={Keyboard.dismiss} style={styles.container}>
         {/* Logo */}
         <Image source={logo} />
 
         {/* Header */}
         <Text style={styles.header}>Let's Get Started</Text>
         <View style={styles.subHeader}>
-          <Text style={globalStyles.smallText}>Create a new account</Text>
+          <Text style={styles.smallText}>Create a new account</Text>
         </View>
 
         {/* Full name input */}
@@ -114,9 +113,9 @@ const RegisterScreen = () => {
         {/* Sign up button */}
         <Button onPress={onSignup}>sign up</Button>
 
-        <Text style={globalStyles.smallText}>
+        <Text style={styles.smallText}>
           Have an account?{' '}
-          <Text style={globalStyles.linkText} onPress={onSignin}>
+          <Text onPress={onSignin} style={globalStyles.linkText}>
             Sign In
           </Text>
         </Text>
@@ -124,18 +123,29 @@ const RegisterScreen = () => {
     </SafeAreaView>
   );
 };
+// =====================================================================
 
-export default RegisterScreen;
-
+// Styles
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 16,
+  },
   header: {
-    fontWeight: '700',
-    fontSize: staticValues.largeFont,
-    lineHeight: 24,
+    ...theme.typography.h4,
     marginTop: 16,
+  },
+  smallText: {
+    ...theme.typography.small,
+    color: theme.colors.primaryGray,
   },
   subHeader: {
     marginBottom: 28,
     marginTop: 8,
   },
 });
+// =====================================================================
+
+export default RegisterScreen;

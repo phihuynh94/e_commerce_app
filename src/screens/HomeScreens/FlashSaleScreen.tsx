@@ -1,5 +1,4 @@
 // Import
-import {RouteProp, useRoute} from '@react-navigation/native';
 import React, {useCallback} from 'react';
 import {
   Dimensions,
@@ -9,7 +8,6 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import {AppStackParamList} from '../../../App';
 import ProductCard from '../../components/Product/ProductCard/ProductCard';
 import {products} from '../../mockData/products-mock';
 import {globalStyles} from '../../styles';
@@ -19,19 +17,18 @@ const offerBanner = require('../../assets/images/offer-banner.png');
 // =====================================================================
 
 // Interfaces & Types
-type RoutePropType = RouteProp<AppStackParamList, 'FlashSale'>;
+// type RoutePropType = RouteProp<AppStackParamList, 'FlashSale'>;
 // =====================================================================
 
 // Component
 const FlashSaleScreen = () => {
   // Hooks
-  const route = useRoute<RoutePropType>();
+  // const route = useRoute<RoutePropType>();
 
-  const {title, url} = route.params;
+  // const {title, url} = route.params;
   // =====================================================================
 
   // useCallbacks
-  // Render header
   const renderHeader = useCallback(() => {
     return (
       <View style={styles.bannerContainer}>
@@ -40,7 +37,6 @@ const FlashSaleScreen = () => {
     );
   }, []);
 
-  // Render product card
   const renderProductCard = useCallback(({item}) => {
     return <ProductCard product={item} />;
   }, []);
@@ -51,8 +47,8 @@ const FlashSaleScreen = () => {
     <SafeAreaView style={globalStyles.flex}>
       <View style={globalStyles.container}>
         <FlatList
-          data={products}
           ListHeaderComponent={renderHeader}
+          data={products}
           numColumns={2}
           pagingEnabled
           renderItem={renderProductCard}

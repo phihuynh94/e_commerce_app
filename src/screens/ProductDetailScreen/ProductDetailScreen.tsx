@@ -14,8 +14,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {AppStackParamList} from '../../../App';
-import {Button} from '../../common';
-import RatingStars from '../../common/RatingStars/RatingStars';
+import {Button, RatingStars} from '../../common';
 import ProductCard from '../../components/Product/ProductCard/ProductCard';
 import ReviewCard from '../../components/Review/ReviewCard/ReviewCard';
 import {products} from '../../mockData/products-mock';
@@ -87,33 +86,6 @@ const ProductDetailScreen = () => {
     navigation.navigate(ScreenNames.WriteReview);
   }, [navigation]);
 
-  const renderColorButton = useCallback(
-    ({item}) => {
-      return (
-        <Pressable
-          onPress={onColorButton(item)}
-          style={selectedColorStyle(item)}
-        />
-      );
-    },
-    [selectedColor],
-  );
-
-  const renderProductCard = useCallback(({item}) => {
-    return <ProductCard product={item} />;
-  }, []);
-
-  const renderSizeButton = useCallback(
-    ({item}) => {
-      return (
-        <Pressable onPress={onSizeButton(item)} style={selectedSizeStyle(item)}>
-          <Text>{item}</Text>
-        </Pressable>
-      );
-    },
-    [selectedSize],
-  );
-
   const selectedColorStyle = useCallback(
     (color: string) => {
       if (color === selectedColor) {
@@ -137,13 +109,40 @@ const ProductDetailScreen = () => {
       if (size === selectedSize) {
         return {
           ...styles.sizeButton,
-          borderColor: theme.colors.primary,
+          borderColor: theme.colors.primaryBlue,
         };
       }
 
       return styles.sizeButton;
     },
     [selectedSize],
+  );
+
+  const renderColorButton = useCallback(
+    ({item}) => {
+      return (
+        <Pressable
+          onPress={onColorButton(item)}
+          style={selectedColorStyle(item)}
+        />
+      );
+    },
+    [onColorButton, selectedColorStyle],
+  );
+
+  const renderProductCard = useCallback(({item}) => {
+    return <ProductCard product={item} />;
+  }, []);
+
+  const renderSizeButton = useCallback(
+    ({item}) => {
+      return (
+        <Pressable onPress={onSizeButton(item)} style={selectedSizeStyle(item)}>
+          <Text>{item}</Text>
+        </Pressable>
+      );
+    },
+    [onSizeButton, selectedSizeStyle],
   );
   // =====================================================================
 
@@ -164,13 +163,13 @@ const ProductDetailScreen = () => {
             <Pressable onPress={onFavoriteIcon} style={styles.icon}>
               {!isFavorite ? (
                 <Icon
-                  color={theme.colors.text}
+                  color={theme.colors.primaryGray}
                   name="heart-outline"
                   size={staticValues.iconSize}
                 />
               ) : (
                 <Icon
-                  color={theme.colors.yellow}
+                  color={theme.colors.primaryYellow}
                   name="heart"
                   size={staticValues.iconSize}
                 />
@@ -269,11 +268,10 @@ const styles = StyleSheet.create({
   },
   linkText: {
     ...globalStyles.linkText,
-    fontSize: staticValues.normalFont,
     marginVertical: 15,
   },
   price: {
-    color: theme.colors.primary,
+    color: theme.colors.primaryBlue,
     fontWeight: '700',
     fontSize: 20,
     lineHeight: 30,
@@ -288,16 +286,14 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   sectionHeader: {
-    fontWeight: '700',
-    fontSize: staticValues.normalFont,
-    lineHeight: staticValues.lineHeight,
+    ...theme.typography.h5,
     marginVertical: 15,
   },
   sizeButton: {
     alignItems: 'center',
-    borderColor: theme.colors.border,
+    borderColor: theme.colors.secondaryGray,
     borderRadius: 25,
-    borderWidth: 1,
+    borderWidth: 2,
     height: 50,
     justifyContent: 'center',
     marginRight: 10,

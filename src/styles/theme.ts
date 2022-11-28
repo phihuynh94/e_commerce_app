@@ -1,39 +1,23 @@
-import {
-  DefaultTheme as NavDefaultTheme,
-  Theme as NavTheme,
-} from '@react-navigation/native';
+import {DefaultTheme, Theme as NavTheme} from '@react-navigation/native';
 import 'react-native-gesture-handler';
-import {DefaultTheme as PaperDefaultTheme} from 'react-native-paper';
-import {Theme as PaperTheme} from 'react-native-paper/lib/typescript/types';
+import {colors} from './colors';
+import {ThemeColors} from './themeColors';
+import {ThemeTypography, typography} from './typography';
 
 export const navTheme: NavTheme = {
-  ...NavDefaultTheme,
+  ...DefaultTheme,
   colors: {
-    ...NavDefaultTheme.colors,
+    ...DefaultTheme.colors,
     background: '#FFFFFF',
   },
 };
 
-export const paperTheme: PaperTheme = {
-  ...PaperDefaultTheme,
-  roundness: 5,
-  colors: {
-    ...PaperDefaultTheme.colors,
-    primary: '#40BFFF',
-    accent: '#EBF0FF',
-    text: '#9098B1',
-  },
-};
+interface Theme {
+  colors: ThemeColors;
+  typography: ThemeTypography;
+}
 
-export const theme = {
-  ...navTheme,
-  ...paperTheme,
-  colors: {
-    ...navTheme.colors,
-    ...paperTheme.colors,
-    dark: '#223263',
-    primaryLight: '#40BFFF1A',
-    white: '#FFFFFF',
-    yellow: '#FFC833',
-  },
+export const theme: Theme = {
+  colors: colors,
+  typography: typography,
 };
