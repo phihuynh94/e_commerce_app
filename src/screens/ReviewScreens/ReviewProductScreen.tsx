@@ -15,7 +15,7 @@ import {Button} from '../../common';
 import ReviewCard from '../../components/Review/ReviewCard/ReviewCard';
 import {reviews} from '../../mockData/reviews-mock';
 import {ScreenNames} from '../../routes/routesHelpers';
-import {globalStyles, staticValues} from '../../styles';
+import {globalStyles} from '../../styles';
 import {theme} from '../../styles/theme';
 // =====================================================================
 
@@ -41,6 +41,22 @@ const ReviewProductScreen = () => {
     navigation.navigate(ScreenNames.WriteReview);
   }, [navigation]);
 
+  const selectedRatingBoxStyle = useCallback(
+    (index: number) => {
+      if (index === selectedRatingBox) {
+        return {
+          ...styles.starsBox,
+          backgroundColor: theme.colors.secondaryBlue,
+        };
+      }
+
+      return {
+        ...styles.starsBox,
+      };
+    },
+    [selectedRatingBox],
+  );
+
   const renderHeader = useCallback(() => {
     return (
       <>
@@ -48,19 +64,22 @@ const ReviewProductScreen = () => {
         <ScrollView
           bounces={false}
           horizontal
-          showsHorizontalScrollIndicator={false}>
+          showsHorizontalScrollIndicator={false}
+        >
           <Pressable
             onPress={onRatingBox(-1)}
-            style={selectedRatingBoxStyle(-1)}>
+            style={selectedRatingBoxStyle(-1)}
+          >
             <Text style={styles.textBox}>All</Text>
           </Pressable>
 
           {[...Array(5)].map((e, i) => (
             <Pressable
+              key={i}
               onPress={onRatingBox(i)}
               style={selectedRatingBoxStyle(i)}
-              key={i}>
-              <Icon color={theme.colors.yellow} name="star" size={18} />
+            >
+              <Icon color={theme.colors.primaryYellow} name="star" size={18} />
               <Text style={styles.textBox}>{i + 1}</Text>
             </Pressable>
           ))}
@@ -72,87 +91,37 @@ const ReviewProductScreen = () => {
         </View>
       </>
     );
-  }, [selectedRatingBox, theme]);
+  }, [onRatingBox, onWriteReview, selectedRatingBoxStyle]);
 
   const renderReview = useCallback(({item}) => {
     return <ReviewCard review={item} />;
   }, []);
-
-  const selectedRatingBoxStyle = useCallback(
-    (index: number) => {
-      if (index === selectedRatingBox) {
-        return {
-          ...styles.starsBox,
-          backgroundColor: theme.colors.primaryLight,
-        };
-      }
-
-      return {
-        ...styles.starsBox,
-      };
-    },
-    [selectedRatingBox, theme],
-  );
   // =====================================================================
 
   // Render
   return (
     <SafeAreaView style={globalStyles.flex}>
       <FlatList
-        data={reviews}
         ListHeaderComponent={renderHeader}
+        data={reviews}
         renderItem={renderReview}
         style={globalStyles.container}
       />
     </SafeAreaView>
   );
 };
+// =====================================================================
 
-export default ReviewProductScreen;
-
+// Styles
 const styles = StyleSheet.create({
   button: {
     marginTop: 5,
   },
-  comment: {
-    color: theme.colors.text,
-    fontSize: 12,
-    fontWeight: '400',
-    lineHeight: 20,
-    marginVertical: 15,
-  },
-  date: {
-    color: theme.colors.text,
-    fontSize: 10,
-    fontWeight: '400',
-    lineHeight: 15,
-    marginVertical: 10,
-  },
-  footer: {
-    marginBottom: 20,
-  },
-  image: {
-    height: 75,
-    marginRight: 15,
-    width: 75,
-  },
-  imageContainer: {
-    flexDirection: 'row',
-  },
-  profile: {
-    flexDirection: 'row',
-  },
-  profileImage: {
-    borderRadius: 25,
-    height: 50,
-    marginRight: 15,
-    width: 50,
-  },
   starsBox: {
     alignItems: 'center',
-    borderColor: theme.colors.border,
+    borderColor: theme.colors.secondaryGray,
     borderRadius: 5,
-    borderWidth: 1,
+    borderWidth: 2,
     flexDirection: 'row',
     height: 50,
     justifyContent: 'center',
@@ -161,19 +130,13 @@ const styles = StyleSheet.create({
     width: 60,
   },
   textBox: {
-    color: theme.colors.primary,
+    color: theme.colors.primaryBlue,
     fontWeight: '700',
     fontSize: 12,
     lineHeight: 18,
     marginLeft: 2,
   },
-  reviewContainer: {
-    marginVertical: 10,
-  },
-  username: {
-    fontSize: staticValues.normalFont,
-    fontWeight: '700',
-    marginLeft: 5,
-    marginVertical: 5,
-  },
 });
+// =====================================================================
+
+export default ReviewProductScreen;

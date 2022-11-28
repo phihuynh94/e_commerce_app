@@ -104,9 +104,9 @@ const styles = StyleSheet.create({
     height: 8,
     borderRadius: 4,
     margin: 2,
-    backgroundColor: theme.colors.accent,
+    backgroundColor: theme.colors.secondaryGray,
   },
   selectedDot: {
-    backgroundColor: theme.colors.primary,
+    backgroundColor: theme.colors.primaryBlue,
   },
 });

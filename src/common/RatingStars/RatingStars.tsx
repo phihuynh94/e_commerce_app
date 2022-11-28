@@ -17,18 +17,28 @@ interface IRatingStarsProps {
 const RatingStars = ({onRating, rating, size = 18}: IRatingStarsProps) => {
   // useMemos
   const emptyStar = useMemo(() => {
-    return <Icon color={theme.colors.yellow} name="star-outline" size={size} />;
-  }, [size, theme]);
+    return (
+      <Icon
+        color={theme.colors.primaryYellow}
+        name="star-outline"
+        size={size}
+      />
+    );
+  }, [size]);
 
   const fullStar = useMemo(() => {
-    return <Icon color={theme.colors.yellow} name="star" size={size} />;
-  }, [size, theme]);
+    return <Icon color={theme.colors.primaryYellow} name="star" size={size} />;
+  }, [size]);
 
   const halfStar = useMemo(() => {
     return (
-      <Icon color={theme.colors.yellow} name="star-half-full" size={size} />
+      <Icon
+        color={theme.colors.primaryYellow}
+        name="star-half-full"
+        size={size}
+      />
     );
-  }, [size, theme]);
+  }, [size]);
 
   const firstStar = useMemo(() => {
     if (rating >= 1) {
@@ -98,7 +108,7 @@ const RatingStars = ({onRating, rating, size = 18}: IRatingStarsProps) => {
         onRating(star);
       }
     },
-    [],
+    [onRating],
   );
   // =====================================================================
 

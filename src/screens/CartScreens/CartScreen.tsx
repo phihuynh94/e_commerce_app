@@ -1,6 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
-import {Text} from 'react-native-paper';
+import {Text} from 'react-native';
 
 // Interfaces & Types
 
@@ -41,5 +40,3 @@ const CartScreen = () => {
 };
 
 export default CartScreen;
-
-const styles = StyleSheet.create({});
