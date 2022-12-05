@@ -10,6 +10,7 @@ import {TextInput as PaperTextInput} from 'react-native-paper';
 import {IconSource} from 'react-native-paper/lib/typescript/components/Icon';
 import {staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
+// =====================================================================
 
 // Interface & Type
 interface ITextInputProps {

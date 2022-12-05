@@ -87,9 +87,7 @@ export default ReviewCard;
 
 const styles = StyleSheet.create({
   comment: {
-    color: theme.colors.primaryBlack,
     fontSize: 12,
-    fontWeight: '400',
     lineHeight: 20,
     marginVertical: 15,
   },
