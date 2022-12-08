@@ -11,23 +11,14 @@ import {
 import ProductCard from '../../components/Product/ProductCard/ProductCard';
 import {products} from '../../mockData/products-mock';
 import {globalStyles} from '../../styles';
+// =====================================================================
 
 // Images
 const offerBanner = require('../../assets/images/offer-banner.png');
 // =====================================================================
 
-// Interfaces & Types
-// type RoutePropType = RouteProp<AppStackParamList, 'FlashSale'>;
-// =====================================================================
-
 // Component
 const FlashSaleScreen = () => {
-  // Hooks
-  // const route = useRoute<RoutePropType>();
-
-  // const {title, url} = route.params;
-  // =====================================================================
-
   // useCallbacks
   const renderHeader = useCallback(() => {
     return (
@@ -58,9 +49,9 @@ const FlashSaleScreen = () => {
     </SafeAreaView>
   );
 };
+// =====================================================================
 
-export default FlashSaleScreen;
-
+// Styles
 const styles = StyleSheet.create({
   bannerContainer: {
     alignItems: 'center',
@@ -69,3 +60,6 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width - 50,
   },
 });
+// =====================================================================
+
+export default FlashSaleScreen;

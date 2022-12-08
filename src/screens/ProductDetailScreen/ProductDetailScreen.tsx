@@ -13,12 +13,12 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {AppStackParamList} from '../../../App';
 import {Button, RatingStars} from '../../common';
 import ProductCard from '../../components/Product/ProductCard/ProductCard';
 import ReviewCard from '../../components/Review/ReviewCard/ReviewCard';
 import {products} from '../../mockData/products-mock';
 import {reviews} from '../../mockData/reviews-mock';
+import {AppStackParamList} from '../../routes/AppRoutes';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
