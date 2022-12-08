@@ -1,20 +1,28 @@
 // Imports
+import {useNavigation} from '@react-navigation/native';
 import React, {useCallback, useState} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button, TextInput} from '../../common';
 import CartCard from '../../components/Cart/CartCard/CartCard';
+import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles} from '../../styles';
 import {theme} from '../../styles/theme';
 // =====================================================================
 
 // Component
 const CartScreen = () => {
+  // Hooks
+  const navigation = useNavigation();
+  // =====================================================================
+
   // useStates
   const [coupon, setCoupon] = useState('');
   // =====================================================================
 
   // useCallbacks
-  const onCheckout = useCallback(() => {}, []);
+  const onCheckout = useCallback(() => {
+    navigation.navigate(ScreenNames.ShipTo);
+  }, [navigation]);
 
   const onCoupon = useCallback(() => {}, []);
   // =====================================================================

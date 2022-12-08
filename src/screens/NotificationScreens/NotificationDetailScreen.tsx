@@ -3,13 +3,14 @@ import {RouteProp, useRoute} from '@react-navigation/native';
 import React, {useCallback, useMemo} from 'react';
 import {Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {AppStackParamList} from '../../../App';
+
 import {
   notificationActivities,
   notificationFeeds,
   notificationOffers,
 } from '../../mockData/notifcation-mock';
 import {INotificationDetail} from '../../models/notification-model';
+import {AppStackParamList} from '../../routes/AppRoutes';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
 // =====================================================================

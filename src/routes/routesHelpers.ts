@@ -1,4 +1,4 @@
-import {AppStackParamList} from '../../App';
+import {AppStackParamList} from './AppRoutes';
 import {AuthStackParamList} from './AuthRoutes';
 
 declare global {
@@ -23,8 +23,11 @@ export enum ScreenNames {
   Notification = 'Notification',
   NotificationDetail = 'NotificationDetail',
   Offer = 'Offer',
+  Payment = 'Payment',
   ProductDetail = 'ProductDetail',
   Register = 'Register',
   ReviewProduct = 'ReviewProduct',
+  ShipTo = 'ShipTo',
+  Success = 'Success',
   WriteReview = 'WriteReview',
 }
