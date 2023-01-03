@@ -13,7 +13,7 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {TextInput} from '../../common';
+import {Divider, TextInput} from '../../common';
 import {categories} from '../../mockData/categories-mock';
 import {products} from '../../mockData/products-mock';
 import {IProduct} from '../../models/product-model';
@@ -165,9 +165,7 @@ const ExploreScreen = () => {
       </View>
 
       {/* Divider */}
-      <View style={globalStyles.dividerContainer}>
-        <View style={globalStyles.divider} />
-      </View>
+      <Divider />
 
       {/* Normal explore screen */}
       {!isSearch ? (

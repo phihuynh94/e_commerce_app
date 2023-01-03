@@ -17,7 +17,7 @@ import {
 import {Badge} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {DotsIndicator, TextInput} from '../../common';
+import {Divider, DotsIndicator, TextInput} from '../../common';
 import ProductCard from '../../components/Product/ProductCard/ProductCard';
 import {banners} from '../../mockData/banners-mock';
 import {categories} from '../../mockData/categories-mock';
@@ -179,9 +179,7 @@ const HomeScreen = () => {
       </Pressable>
 
       {/* Divider */}
-      <View style={globalStyles.dividerContainer}>
-        <View style={globalStyles.divider} />
-      </View>
+      <Divider />
 
       <ScrollView
         showsVerticalScrollIndicator={false}

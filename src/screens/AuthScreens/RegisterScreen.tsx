@@ -128,10 +128,9 @@ const RegisterScreen = () => {
 // Styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    ...globalStyles.container,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 16,
   },
   header: {
     ...theme.typography.h4,

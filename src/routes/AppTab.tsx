@@ -1,40 +1,48 @@
+// Imports
 import {
   BottomTabNavigationOptions,
   createBottomTabNavigator,
 } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import IonIcon from 'react-native-vector-icons/Ionicons';
+import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   AccountScreen,
   CartScreen,
   ExploreScreen,
   HomeScreen,
-  OfferScreen,
+  OrderScreen,
 } from '../screens';
 import {staticValues} from '../styles';
 import {theme} from '../styles/theme';
 import {ScreenNames} from './routesHelpers';
+// =====================================================================
 
+// Type
 export type AppTabParamList = {
   Account: undefined;
   Cart: undefined;
   Explore: undefined;
   Home: undefined;
-  Offer: undefined;
+  Order: undefined;
 };
+// =====================================================================
 
 const Tab = createBottomTabNavigator<AppTabParamList>();
 
+// Tab bar options
 const tabBarOptions: BottomTabNavigationOptions = {
   headerShown: false,
   tabBarActiveTintColor: theme.colors.primaryBlue,
 };
+// =====================================================================
 
+// Screen Options
 const accountScreenOptions = (): BottomTabNavigationOptions => {
   return {
     tabBarIcon: ({color}) => {
       return (
-        <Icon
+        <MCIcon
           color={color}
           name="account-outline"
           size={staticValues.iconSize}
@@ -49,7 +57,11 @@ const cartScreenOptions = (): BottomTabNavigationOptions => {
   return {
     tabBarIcon: ({color}) => {
       return (
-        <Icon color={color} name="cart-outline" size={staticValues.iconSize} />
+        <MCIcon
+          color={color}
+          name="cart-outline"
+          size={staticValues.iconSize}
+        />
       );
     },
     tabBarLabel: ScreenNames.Cart,
@@ -59,7 +71,9 @@ const cartScreenOptions = (): BottomTabNavigationOptions => {
 const exploreScreenOptions = (): BottomTabNavigationOptions => {
   return {
     tabBarIcon: ({color}) => {
-      return <Icon color={color} name="magnify" size={staticValues.iconSize} />;
+      return (
+        <MCIcon color={color} name="magnify" size={staticValues.iconSize} />
+      );
     },
     tabBarLabel: ScreenNames.Explore,
   };
@@ -69,24 +83,34 @@ const homeScreenOptions = (): BottomTabNavigationOptions => {
   return {
     tabBarIcon: ({color}) => {
       return (
-        <Icon color={color} name="home-outline" size={staticValues.iconSize} />
+        <MCIcon
+          color={color}
+          name="home-outline"
+          size={staticValues.iconSize}
+        />
       );
     },
     tabBarLabel: ScreenNames.Home,
   };
 };
 
-const offerScreenOptions = (): BottomTabNavigationOptions => {
+const orderScreenOptions = (): BottomTabNavigationOptions => {
   return {
     tabBarIcon: ({color}) => {
       return (
-        <Icon color={color} name="tag-outline" size={staticValues.iconSize} />
+        <IonIcon
+          color={color}
+          name="receipt-outline"
+          size={staticValues.iconSize}
+        />
       );
     },
-    tabBarLabel: ScreenNames.Offer,
+    tabBarLabel: ScreenNames.Order,
   };
 };
+// =====================================================================
 
+// AppTab
 const AppTab = () => {
   return (
     <Tab.Navigator screenOptions={tabBarOptions}>
@@ -106,9 +130,9 @@ const AppTab = () => {
         options={cartScreenOptions}
       />
       <Tab.Screen
-        component={OfferScreen}
-        name={ScreenNames.Offer}
-        options={offerScreenOptions}
+        component={OrderScreen}
+        name={ScreenNames.Order}
+        options={orderScreenOptions}
       />
       <Tab.Screen
         component={AccountScreen}
@@ -118,5 +142,6 @@ const AppTab = () => {
     </Tab.Navigator>
   );
 };
+// =====================================================================
 
 export default AppTab;

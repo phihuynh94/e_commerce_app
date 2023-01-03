@@ -15,6 +15,7 @@ import {
   FlashSaleScreen,
   NotificationDetailScreen,
   NotificationScreen,
+  OrderDetailScreen,
   PaymentScreen,
   ProductDetailScreen,
   ReviewProductScreen,
@@ -33,6 +34,7 @@ import {RouteNames, ScreenNames} from './routesHelpers';
 export type AppStackParamList = {
   AppTab: undefined;
   AuthRoutes: undefined;
+  Cart: undefined;
   FavoriteProducts: undefined;
   FlashSale: {
     title: string;
@@ -43,6 +45,7 @@ export type AppStackParamList = {
   NotificationDetail: {
     title: 'Offer' | 'Feed' | 'Activity';
   };
+  OrderDetail: undefined;
   Payment: undefined;
   ProductDetail: {product: IProduct; title: string};
   ReviewProduct: undefined;
@@ -106,19 +109,17 @@ const notificationDetailScreenOptions = (
   };
 };
 
+const orderDetailScreenOptions = (): StackNavigationOptions => {
+  return {
+    headerBackTitle: 'Orders',
+    title: 'Order Details',
+  };
+};
+
 const paymentScreenOptions = (): StackNavigationOptions => {
   return {
-    title: '',
-    headerBackTitle: 'Payment',
-    headerBackTitleStyle: {
-      ...theme.typography.h4,
-      color: theme.colors.primaryBlack,
-      marginLeft: 10,
-    },
-    headerLeftContainerStyle: {
-      paddingLeft: 10,
-    },
-    headerTintColor: theme.colors.primaryBlack,
+    headerBackTitle: 'Address',
+    title: 'Payment',
   };
 };
 
@@ -126,9 +127,6 @@ const productDetailScreenOptions = (
   route: RouteProp<AppStackParamList, keyof AppStackParamList>,
 ): StackNavigationOptions => {
   return {
-    headerTitleStyle: {
-      paddingLeft: 10,
-    },
     title: route.params?.title,
   };
 };
@@ -141,16 +139,7 @@ const reviewProductScreenOptions = (): StackNavigationOptions => {
 
 const shipToScreenOptions = (): StackNavigationOptions => {
   return {
-    title: '',
-    headerBackTitle: 'Ship To',
-    headerBackTitleStyle: {
-      ...theme.typography.h4,
-      color: theme.colors.primaryBlack,
-      marginLeft: 10,
-    },
-    headerLeftContainerStyle: {
-      paddingLeft: 10,
-    },
+    headerBackTitle: 'Cart',
     headerRight: () => (
       <FeatherIcon
         color={theme.colors.primaryBlue}
@@ -159,10 +148,7 @@ const shipToScreenOptions = (): StackNavigationOptions => {
         style={styles.icon}
       />
     ),
-    headerRightContainerStyle: {
-      paddingRight: 10,
-    },
-    headerTintColor: theme.colors.primaryBlack,
+    title: 'Ship to Address',
   };
 };
 
@@ -212,6 +198,11 @@ const AppRoutes = () => {
         component={NotificationDetailScreen}
         name={ScreenNames.NotificationDetail}
         options={({route}) => notificationDetailScreenOptions(route)}
+      />
+      <Stack.Screen
+        component={OrderDetailScreen}
+        name={ScreenNames.OrderDetail}
+        options={orderDetailScreenOptions}
       />
       <Stack.Screen
         component={PaymentScreen}

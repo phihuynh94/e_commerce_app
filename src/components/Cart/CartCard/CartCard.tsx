@@ -8,8 +8,14 @@ import {staticValues} from '../../../styles';
 import {theme} from '../../../styles/theme';
 // =====================================================================
 
+// Interface
+interface ICartCard {
+  inOrderDetails?: boolean;
+}
+// =====================================================================
+
 // Component
-const CartCard = () => {
+const CartCard = ({inOrderDetails}: ICartCard) => {
   // useStates
   const [isFavorite, setIsFavorite] = useState(false);
   const [quantity, setQuantity] = useState(0);
@@ -69,13 +75,15 @@ const CartCard = () => {
           </Pressable>
 
           {/* Trash icon */}
-          <Pressable onPress={onTrashIcon} style={styles.icon}>
-            <FeatherIcon
-              color={theme.colors.primaryGray}
-              name="trash"
-              size={staticValues.iconSize}
-            />
-          </Pressable>
+          {!inOrderDetails ? (
+            <Pressable onPress={onTrashIcon} style={styles.icon}>
+              <FeatherIcon
+                color={theme.colors.primaryGray}
+                name="trash"
+                size={staticValues.iconSize}
+              />
+            </Pressable>
+          ) : null}
         </View>
 
         <View style={styles.bottomRow}>
@@ -83,29 +91,31 @@ const CartCard = () => {
           <Text style={styles.price}>${products[0].price}</Text>
 
           {/* Minus icon */}
-          <View style={styles.quantity}>
-            <FeatherIcon
-              color={theme.colors.primaryGray}
-              name="minus"
-              onPress={onMinus}
-              size={staticValues.iconSize}
-              style={styles.quantityIcon}
-            />
+          {!inOrderDetails ? (
+            <View style={styles.quantity}>
+              <FeatherIcon
+                color={theme.colors.primaryGray}
+                name="minus"
+                onPress={onMinus}
+                size={staticValues.iconSize}
+                style={styles.quantityIcon}
+              />
 
-            {/* Quantity */}
-            <View style={styles.quantityText}>
-              <Text>{quantity}</Text>
+              {/* Quantity */}
+              <View style={styles.quantityText}>
+                <Text>{quantity}</Text>
+              </View>
+
+              {/* Plus icon */}
+              <FeatherIcon
+                color={theme.colors.primaryGray}
+                name="plus"
+                onPress={onPlus}
+                size={staticValues.iconSize}
+                style={styles.quantityIcon}
+              />
             </View>
-
-            {/* Plus icon */}
-            <FeatherIcon
-              color={theme.colors.primaryGray}
-              name="plus"
-              onPress={onPlus}
-              size={staticValues.iconSize}
-              style={styles.quantityIcon}
-            />
-          </View>
+          ) : null}
         </View>
       </View>
     </View>

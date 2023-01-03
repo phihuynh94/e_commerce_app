@@ -1,9 +1,8 @@
 // Imports
 import React, {useMemo, useState} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import {RatingStars} from '../../../common';
+import {Divider, RatingStars} from '../../../common';
 import {IReview} from '../../../models/review-model';
-import {globalStyles} from '../../../styles';
 import {theme} from '../../../styles/theme';
 
 // =====================================================================
@@ -77,7 +76,7 @@ const ReviewCard = ({review}: IReviewCardProps) => {
         <Text style={styles.date}>{review.date}</Text>
 
         {/* Divider */}
-        <View style={globalStyles.divider} />
+        <Divider />
       </View>
     </>
   );

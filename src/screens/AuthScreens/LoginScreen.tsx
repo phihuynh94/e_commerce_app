@@ -90,9 +90,9 @@ const LoginScreen = () => {
 
         {/* Divider */}
         <View style={styles.dividerContainer}>
-          <View style={globalStyles.divider} />
-          <Text style={styles.divierText}>OR</Text>
-          <View style={globalStyles.divider} />
+          <View style={styles.divider} />
+          <Text style={styles.dividerText}>OR</Text>
+          <View style={styles.divider} />
         </View>
 
         {/* Login with Google button */}
@@ -128,20 +128,25 @@ const LoginScreen = () => {
 // Styles
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    ...globalStyles.container,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 16,
   },
-  divierText: {
+  divider: {
+    backgroundColor: theme.colors.secondaryGray,
+    flex: 1,
+    height: 1,
+  },
+  dividerContainer: {
+    alignItems: 'center',
+    flexDirection: 'row',
+    marginVertical: 20,
+  },
+  dividerText: {
     ...theme.typography.h5,
     color: theme.colors.primaryGray,
     textAlign: 'center',
     width: 50,
-  },
-  dividerContainer: {
-    ...globalStyles.dividerContainer,
-    marginVertical: 20,
   },
   forgotPassword: {
     marginTop: 16,

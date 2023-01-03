@@ -16,7 +16,7 @@ const SuccessScreen = () => {
 
   // useCallbacks
   const onBack = useCallback(() => {
-    navigation.navigate(ScreenNames.Home);
+    navigation.navigate(ScreenNames.Cart);
   }, [navigation]);
   // =====================================================================
 
