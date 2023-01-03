@@ -11,15 +11,6 @@ export const globalStyles = StyleSheet.create({
     flex: 1,
     padding: staticValues.padding,
   },
-  divider: {
-    backgroundColor: theme.colors.secondaryGray,
-    flex: 1,
-    height: 1,
-  },
-  dividerContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-  },
   flex: {
     flex: 1,
   },

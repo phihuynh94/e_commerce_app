@@ -2,7 +2,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useCallback, useState} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
-import {Button, TextInput} from '../../common';
+import {Button, Divider, TextInput} from '../../common';
 import CartCard from '../../components/Cart/CartCard/CartCard';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles} from '../../styles';
@@ -36,10 +36,9 @@ const CartScreen = () => {
       </View>
 
       {/* Divider */}
-      <View style={globalStyles.dividerContainer}>
-        <View style={globalStyles.divider} />
-      </View>
+      <Divider />
 
+      {/* Container */}
       <View style={globalStyles.container}>
         <ScrollView showsVerticalScrollIndicator={false}>
           {/* List of products in cart */}
@@ -83,9 +82,7 @@ const CartScreen = () => {
             </View>
 
             {/* Divider */}
-            <View style={globalStyles.dividerContainer}>
-              <View style={globalStyles.divider} />
-            </View>
+            <Divider />
 
             {/* Total price */}
             <View style={styles.total}>
