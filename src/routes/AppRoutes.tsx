@@ -11,13 +11,16 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {IProduct} from '../models/product-model';
 import {
+  ChangePasswordScreen,
+  EditProfileScreen,
   FavoriteProductScreen,
   FlashSaleScreen,
   NotificationDetailScreen,
   NotificationScreen,
-  OrderDetailScreen,
+  OrderDetailsScreen,
   PaymentScreen,
-  ProductDetailScreen,
+  ProductDetailsScreen,
+  ProfileScreen,
   ReviewProductScreen,
   ShipToScreen,
   SuccessScreen,
@@ -35,6 +38,8 @@ export type AppStackParamList = {
   AppTab: undefined;
   AuthRoutes: undefined;
   Cart: undefined;
+  ChangePassword: undefined;
+  EditProfile: undefined;
   FavoriteProducts: undefined;
   FlashSale: {
     title: string;
@@ -45,9 +50,11 @@ export type AppStackParamList = {
   NotificationDetail: {
     title: 'Offer' | 'Feed' | 'Activity';
   };
+  Order: undefined;
   OrderDetail: undefined;
   Payment: undefined;
   ProductDetail: {product: IProduct; title: string};
+  Profile: undefined;
   ReviewProduct: undefined;
   ShipTo: undefined;
   Success: undefined;
@@ -67,6 +74,18 @@ const authRoutesOptions = (): StackNavigationOptions => {
 const appRoutesOptions = (): StackNavigationOptions => {
   return {
     headerShown: false,
+  };
+};
+
+const changePasswordScreenOptions = (): StackNavigationOptions => {
+  return {
+    title: 'Change Password',
+  };
+};
+
+const editProfileScreenOptions = (): StackNavigationOptions => {
+  return {
+    title: 'Edit Profile',
   };
 };
 
@@ -123,11 +142,17 @@ const paymentScreenOptions = (): StackNavigationOptions => {
   };
 };
 
-const productDetailScreenOptions = (
+const productDetailsScreenOptions = (
   route: RouteProp<AppStackParamList, keyof AppStackParamList>,
 ): StackNavigationOptions => {
   return {
     title: route.params?.title,
+  };
+};
+
+const profileScreenOptions = (): StackNavigationOptions => {
+  return {
+    headerBackTitle: 'Account',
   };
 };
 
@@ -180,6 +205,16 @@ const AppRoutes = () => {
         options={appRoutesOptions}
       />
       <Stack.Screen
+        component={ChangePasswordScreen}
+        name={ScreenNames.ChangePassword}
+        options={changePasswordScreenOptions}
+      />
+      <Stack.Screen
+        component={EditProfileScreen}
+        name={ScreenNames.EditProfile}
+        options={editProfileScreenOptions}
+      />
+      <Stack.Screen
         component={FavoriteProductScreen}
         name={ScreenNames.FavoriteProducts}
         options={favoriteProductsOptions}
@@ -200,7 +235,7 @@ const AppRoutes = () => {
         options={({route}) => notificationDetailScreenOptions(route)}
       />
       <Stack.Screen
-        component={OrderDetailScreen}
+        component={OrderDetailsScreen}
         name={ScreenNames.OrderDetail}
         options={orderDetailScreenOptions}
       />
@@ -210,9 +245,14 @@ const AppRoutes = () => {
         options={paymentScreenOptions}
       />
       <Stack.Screen
-        component={ProductDetailScreen}
+        component={ProductDetailsScreen}
         name={ScreenNames.ProductDetail}
-        options={({route}) => productDetailScreenOptions(route)}
+        options={({route}) => productDetailsScreenOptions(route)}
+      />
+      <Stack.Screen
+        component={ProfileScreen}
+        name={ScreenNames.Profile}
+        options={profileScreenOptions}
       />
       <Stack.Screen
         component={ReviewProductScreen}
