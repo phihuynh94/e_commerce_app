@@ -15,6 +15,8 @@ export enum RouteNames {
 export enum ScreenNames {
   Account = 'Account',
   Cart = 'Cart',
+  ChangePassword = 'ChangePassword',
+  EditProfile = 'EditProfile',
   Explore = 'Explore',
   FavoriteProducts = 'FavoriteProducts',
   FlashSale = 'FlashSale',
@@ -26,6 +28,7 @@ export enum ScreenNames {
   OrderDetail = 'OrderDetail',
   Payment = 'Payment',
   ProductDetail = 'ProductDetail',
+  Profile = 'Profile',
   Register = 'Register',
   ReviewProduct = 'ReviewProduct',
   ShipTo = 'ShipTo',

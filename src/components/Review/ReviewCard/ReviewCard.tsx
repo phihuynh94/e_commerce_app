@@ -4,7 +4,6 @@ import {Image, StyleSheet, Text, View} from 'react-native';
 import {Divider, RatingStars} from '../../../common';
 import {IReview} from '../../../models/review-model';
 import {theme} from '../../../styles/theme';
-
 // =====================================================================
 
 const profileImage = require('../../../assets/images/profile.png');

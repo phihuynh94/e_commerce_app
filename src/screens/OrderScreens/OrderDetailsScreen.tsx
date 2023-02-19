@@ -10,7 +10,7 @@ import {theme} from '../../styles/theme';
 // =====================================================================
 
 // Component
-const OrderDetailScreen = () => {
+const OrderDetailsScreen = () => {
   // Render
   return (
     <SafeAreaView style={globalStyles.flex}>
@@ -191,4 +191,4 @@ const styles = StyleSheet.create({
 });
 // =====================================================================
 
-export default OrderDetailScreen;
+export default OrderDetailsScreen;
