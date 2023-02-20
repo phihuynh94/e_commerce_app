@@ -31,7 +31,7 @@ const ProfileScreen = () => {
 
   // Render
   return (
-    <SafeAreaView style={globalStyles.container}>
+    <SafeAreaView style={globalStyles.flex}>
       <View style={globalStyles.container}>
         {/* Avatar & name */}
         <View style={styles.profile}>

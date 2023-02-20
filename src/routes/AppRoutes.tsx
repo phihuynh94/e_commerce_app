@@ -11,6 +11,9 @@ import FeatherIcon from 'react-native-vector-icons/Feather';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {IProduct} from '../models/product-model';
 import {
+  AddAddressScreen,
+  AddCardScreen,
+  AddressScreen,
   ChangePasswordScreen,
   EditProfileScreen,
   FavoriteProductScreen,
@@ -35,6 +38,9 @@ import {RouteNames, ScreenNames} from './routesHelpers';
 
 // Type
 export type AppStackParamList = {
+  AddAddress: undefined;
+  AddCard: undefined;
+  Address: undefined;
   AppTab: undefined;
   AuthRoutes: undefined;
   Cart: undefined;
@@ -65,6 +71,25 @@ export type AppStackParamList = {
 const Stack = createStackNavigator<AppStackParamList>();
 
 // Screen Options
+const addAddressScreenOptions = (): StackNavigationOptions => {
+  return {
+    title: 'Add Address',
+  };
+};
+
+const addCardScreenOptions = (): StackNavigationOptions => {
+  return {
+    headerBackTitle: 'Account',
+    title: 'Add Card',
+  };
+};
+
+const addressScreenOptions = (): StackNavigationOptions => {
+  return {
+    headerBackTitle: 'Account',
+  };
+};
+
 const authRoutesOptions = (): StackNavigationOptions => {
   return {
     headerShown: false,
@@ -203,6 +228,21 @@ const AppRoutes = () => {
         component={AppTab}
         name={RouteNames.AppTab}
         options={appRoutesOptions}
+      />
+      <Stack.Screen
+        component={AddAddressScreen}
+        name={ScreenNames.AddAddress}
+        options={addAddressScreenOptions}
+      />
+      <Stack.Screen
+        component={AddCardScreen}
+        name={ScreenNames.AddCard}
+        options={addCardScreenOptions}
+      />
+      <Stack.Screen
+        component={AddressScreen}
+        name={ScreenNames.Address}
+        options={addressScreenOptions}
       />
       <Stack.Screen
         component={ChangePasswordScreen}
