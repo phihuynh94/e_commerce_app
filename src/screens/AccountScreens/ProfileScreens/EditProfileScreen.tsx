@@ -21,7 +21,7 @@ const EditProfileScreen = () => {
 
   // Render
   return (
-    <SafeAreaView style={globalStyles.container}>
+    <SafeAreaView style={globalStyles.flex}>
       <View style={globalStyles.container}>
         {/* Full name input */}
         <TextInput
@@ -43,7 +43,6 @@ const EditProfileScreen = () => {
 
         {/* Birthday input */}
         <TextInput
-          autoComplete="birthdate-full"
           icon="calendar-outline"
           onChangeText={setBirthDate}
           placeholder="Birthday"

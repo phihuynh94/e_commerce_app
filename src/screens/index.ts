@@ -1,4 +1,7 @@
 export {default as AccountScreen} from './AccountScreens/AccountScreen';
+export {default as AddAddressScreen} from './AccountScreens/AddressScreens/AddAddressScreen';
+export {default as AddressScreen} from './AccountScreens/AddressScreens/AddressScreen';
+export {default as AddCardScreen} from './AccountScreens/PaymentScreens/AddCardScreen';
 export {default as ChangePasswordScreen} from './AccountScreens/ProfileScreens/ChangePasswordScreen';
 export {default as EditProfileScreen} from './AccountScreens/ProfileScreens/EditProfileScreen';
 export {default as ProfileScreen} from './AccountScreens/ProfileScreens/ProfileScreen';

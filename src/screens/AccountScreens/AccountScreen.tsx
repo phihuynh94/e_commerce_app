@@ -11,48 +11,28 @@ import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
 // =====================================================================
 
-// Interfaces & Types
-
-// =====================================================================
-
 // Component
 const AccountScreen = () => {
   // Hooks
   const navigation = useNavigation();
   // =====================================================================
 
-  // useSelectors
-
-  // =====================================================================
-
-  // useStates
-
-  // =====================================================================
-
-  // useRefs
-
-  // =====================================================================
-
-  // useMemos
-
-  // =====================================================================
-
   // useCallbacks
-  const onAddress = useCallback(() => {}, []);
+  const onAddress = useCallback(() => {
+    navigation.navigate(ScreenNames.Address);
+  }, [navigation]);
 
   const onOrders = useCallback(() => {
     navigation.navigate(ScreenNames.Order);
   }, [navigation]);
 
-  const onPayment = useCallback(() => {}, []);
+  const onPayment = useCallback(() => {
+    navigation.navigate(ScreenNames.AddCard);
+  }, [navigation]);
 
   const onProfile = useCallback(() => {
     navigation.navigate(ScreenNames.Profile);
   }, [navigation]);
-  // =====================================================================
-
-  // useEffects
-
   // =====================================================================
 
   // Render

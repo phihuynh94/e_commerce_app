@@ -14,6 +14,9 @@ export enum RouteNames {
 
 export enum ScreenNames {
   Account = 'Account',
+  AddCard = 'AddCard',
+  AddAddress = 'AddAddress',
+  Address = 'Address',
   Cart = 'Cart',
   ChangePassword = 'ChangePassword',
   EditProfile = 'EditProfile',
