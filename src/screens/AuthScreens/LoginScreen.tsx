@@ -1,6 +1,6 @@
 // Import
-import {useNavigation} from '@react-navigation/core';
-import React, {useCallback, useState} from 'react';
+import { useNavigation } from '@react-navigation/core';
+import React, { useCallback, useState } from 'react';
 import {
   Image,
   Keyboard,
@@ -10,10 +10,12 @@ import {
   Text,
   View,
 } from 'react-native';
-import {Button, TextInput} from '../../common';
-import {RouteNames, ScreenNames} from '../../routes/routesHelpers';
-import {globalStyles} from '../../styles';
-import {theme} from '../../styles/theme';
+import { Button, TextInput } from '../../common';
+import { login } from '../../redux/auth/auth.action';
+import { useAppDispatch } from '../../redux/hooks';
+import { RouteNames, ScreenNames } from '../../routes/routesHelpers';
+import { globalStyles } from '../../styles';
+import { theme } from '../../styles/theme';
 // =====================================================================
 
 // Images
@@ -23,6 +25,7 @@ const logo = require('../../assets/images/logo.png');
 // Component
 const LoginScreen = () => {
   // Hooks
+  const dispatch = useAppDispatch();
   const navigation = useNavigation();
   // =====================================================================
 
@@ -49,8 +52,9 @@ const LoginScreen = () => {
   }, [navigation]);
 
   const onSignin = useCallback(() => {
+    dispatch(login({ email, password }));
     navigation.navigate(RouteNames.AppTab);
-  }, [navigation]);
+  }, [dispatch, email, navigation, password]);
   // =====================================================================
 
   // Render
