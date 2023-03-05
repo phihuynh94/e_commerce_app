@@ -1,6 +1,6 @@
 // Import
-import { useNavigation } from '@react-navigation/core';
-import React, { useCallback, useState } from 'react';
+import {useNavigation} from '@react-navigation/core';
+import React, {useCallback, useState} from 'react';
 import {
   Image,
   Keyboard,
@@ -10,12 +10,12 @@ import {
   Text,
   View,
 } from 'react-native';
-import { Button, TextInput } from '../../common';
-import { login } from '../../redux/auth/auth.action';
-import { useAppDispatch } from '../../redux/hooks';
-import { RouteNames, ScreenNames } from '../../routes/routesHelpers';
-import { globalStyles } from '../../styles';
-import { theme } from '../../styles/theme';
+import {Button, TextInput} from '../../common';
+import {login} from '../../redux/auth/auth.action';
+import {useAppDispatch} from '../../redux/hooks';
+import {RouteNames, ScreenNames} from '../../routes/routesHelpers';
+import {globalStyles} from '../../styles';
+import {theme} from '../../styles/theme';
 // =====================================================================
 
 // Images
@@ -52,7 +52,7 @@ const LoginScreen = () => {
   }, [navigation]);
 
   const onSignin = useCallback(() => {
-    dispatch(login({ email, password }));
+    dispatch(login({email, password}));
     navigation.navigate(RouteNames.AppTab);
   }, [dispatch, email, navigation, password]);
   // =====================================================================
@@ -61,33 +61,33 @@ const LoginScreen = () => {
   return (
     <SafeAreaView style={globalStyles.container}>
       <Pressable onPress={Keyboard.dismiss} style={styles.container}>
-        {/* Logo */}
-        <Image source={logo} />
+        <View style={styles.alignCenter}>
+          {/* Logo */}
+          <Image source={logo} />
 
-        {/* Header */}
-        <Text style={styles.header}>Welcome to Lafyuu</Text>
-        <View style={styles.subHeader}>
-          <Text style={styles.smallText}>Sign in to continue</Text>
+          {/* Header */}
+          <Text style={styles.header}>Welcome to Lafyuu</Text>
+          <View style={styles.subHeader}>
+            <Text style={styles.smallText}>Sign in to continue</Text>
+          </View>
+
+          {/* Email input */}
+          <TextInput
+            icon="email-outline"
+            onChangeText={setEmail}
+            placeholder="Your Email"
+            value={email}
+          />
+
+          {/* Password input */}
+          <TextInput
+            icon="lock-outline"
+            onChangeText={setPassword}
+            placeholder="Password"
+            secureTextEntry={true}
+            value={password}
+          />
         </View>
-
-        {/* Email input */}
-        <TextInput
-          autoComplete="email"
-          icon="email-outline"
-          onChangeText={setEmail}
-          placeholder="Your Email"
-          value={email}
-        />
-
-        {/* Password input */}
-        <TextInput
-          autoComplete="password"
-          icon="lock-outline"
-          onChangeText={setPassword}
-          placeholder="Password"
-          secureTextEntry={true}
-          value={password}
-        />
 
         {/* Sign in button */}
         <Button onPress={onSignin}>sign in</Button>
@@ -109,20 +109,22 @@ const LoginScreen = () => {
           login with facebook
         </Button>
 
-        {/* Forgot password text link */}
-        <View style={styles.forgotPassword}>
-          <Text onPress={onForgotPassword} style={globalStyles.linkText}>
-            Forgot Password?
+        <View style={styles.alignCenter}>
+          {/* Forgot password text link */}
+          <View style={styles.forgotPassword}>
+            <Text onPress={onForgotPassword} style={globalStyles.linkText}>
+              Forgot Password?
+            </Text>
+          </View>
+
+          {/* Register text link */}
+          <Text style={styles.smallText}>
+            Don't have a account?{' '}
+            <Text onPress={onRegister} style={globalStyles.linkText}>
+              Register
+            </Text>
           </Text>
         </View>
-
-        {/* Register text link */}
-        <Text style={styles.smallText}>
-          Don't have a account?{' '}
-          <Text onPress={onRegister} style={globalStyles.linkText}>
-            Register
-          </Text>
-        </Text>
       </Pressable>
     </SafeAreaView>
   );
@@ -131,9 +133,11 @@ const LoginScreen = () => {
 
 // Styles
 const styles = StyleSheet.create({
+  alignCenter: {
+    alignItems: 'center',
+  },
   container: {
     ...globalStyles.container,
-    alignItems: 'center',
     justifyContent: 'center',
   },
   divider: {

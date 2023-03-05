@@ -25,7 +25,6 @@ const EditProfileScreen = () => {
       <View style={globalStyles.container}>
         {/* Full name input */}
         <TextInput
-          autoComplete="name"
           icon="account-outline"
           onChangeText={setFullName}
           placeholder="Full Name"
@@ -34,7 +33,6 @@ const EditProfileScreen = () => {
 
         {/* Email input */}
         <TextInput
-          autoComplete="email"
           icon="email-outline"
           onChangeText={setEmail}
           placeholder="Email"
@@ -59,7 +57,6 @@ const EditProfileScreen = () => {
 
         {/* Phone number input */}
         <TextInput
-          autoComplete="tel"
           icon="phone-outline"
           onChangeText={setPhoneNumber}
           placeholder="Phone Number"

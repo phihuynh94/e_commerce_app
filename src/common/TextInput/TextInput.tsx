@@ -14,9 +14,9 @@ import {theme} from '../../styles/theme';
 
 // Interface & Type
 interface ITextInputProps {
-  autoComplete?: string;
   blur?: boolean;
   icon?: IconSource;
+  label?: string;
   multiline?: boolean;
   onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onChangeText: (text: string) => void;
@@ -29,14 +29,15 @@ interface ITextInputProps {
 
 // Component
 const TextInput = ({
-  autoComplete,
   blur,
   icon,
+  label,
   multiline,
   onBlur,
   onChangeText,
   onFocus,
   placeholder,
+  secureTextEntry,
 }: ITextInputProps) => {
   // useRefs
   const textInputRef = useRef<RNTextInput>(null);
@@ -48,7 +49,7 @@ const TextInput = ({
       return (
         <PaperTextInput.Icon
           color={theme.colors.primaryBlue}
-          name={icon}
+          icon={icon}
           size={staticValues.iconSize}
           style={styles.icon}
         />
@@ -69,7 +70,7 @@ const TextInput = ({
   return (
     <PaperTextInput
       activeOutlineColor={theme.colors.primaryBlue}
-      autoComplete={autoComplete}
+      label={label}
       left={leftIcon}
       mode="outlined"
       multiline={multiline}
@@ -80,6 +81,7 @@ const TextInput = ({
       placeholder={placeholder}
       placeholderTextColor={theme.colors.primaryGray}
       ref={textInputRef}
+      secureTextEntry={secureTextEntry}
       selectionColor={theme.colors.primaryBlue}
       style={styles.textInput}
     />

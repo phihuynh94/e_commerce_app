@@ -104,6 +104,7 @@ export default ProductCard;
 const styles = StyleSheet.create({
   card: {
     alignItems: 'center',
+    backgroundColor: theme.colors.primaryWhite,
     height: 280,
     justifyContent: 'center',
     margin: 5,
@@ -121,6 +122,7 @@ const styles = StyleSheet.create({
   },
   surface: {
     alignItems: 'center',
+    backgroundColor: theme.colors.primaryWhite,
     borderRadius: 5,
     elevation: 9,
     height: 140,

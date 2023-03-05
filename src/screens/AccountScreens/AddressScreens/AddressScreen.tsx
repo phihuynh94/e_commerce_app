@@ -16,7 +16,7 @@ const AddressScreen = () => {
 
   // useCallbacks
   const onAdd = useCallback(() => {
-    navigation.navigate(ScreenNames.AddAddress);
+    navigation.navigate(ScreenNames.AddAddress, {type: 'add'});
   }, [navigation]);
   // =====================================================================
 

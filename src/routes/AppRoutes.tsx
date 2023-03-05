@@ -1,5 +1,5 @@
 // Imports
-import {RouteProp} from '@react-navigation/native';
+import {NavigationProp, RouteProp} from '@react-navigation/native';
 import {
   createStackNavigator,
   StackNavigationOptions,
@@ -38,7 +38,7 @@ import {RouteNames, ScreenNames} from './routesHelpers';
 
 // Type
 export type AppStackParamList = {
-  AddAddress: undefined;
+  AddAddress: {type: 'add' | 'edit'};
   AddCard: undefined;
   Address: undefined;
   AppTab: undefined;
@@ -122,7 +122,7 @@ const favoriteProductsOptions = (): StackNavigationOptions => {
 };
 
 const flashSaleScreenOptions = (
-  route: RouteProp<AppStackParamList, keyof AppStackParamList>,
+  route: RouteProp<AppStackParamList, 'FlashSale'>,
 ): StackNavigationOptions => {
   return {
     headerBackTitle: 'Home',
@@ -146,7 +146,7 @@ const notificationScreenOptions = (): StackNavigationOptions => {
 };
 
 const notificationDetailScreenOptions = (
-  route: RouteProp<AppStackParamList, keyof AppStackParamList>,
+  route: RouteProp<AppStackParamList, 'NotificationDetail'>,
 ): StackNavigationOptions => {
   return {
     title: route.params?.title,
@@ -168,7 +168,7 @@ const paymentScreenOptions = (): StackNavigationOptions => {
 };
 
 const productDetailsScreenOptions = (
-  route: RouteProp<AppStackParamList, keyof AppStackParamList>,
+  route: RouteProp<AppStackParamList, 'ProductDetail'>,
 ): StackNavigationOptions => {
   return {
     title: route.params?.title,
@@ -187,13 +187,18 @@ const reviewProductScreenOptions = (): StackNavigationOptions => {
   };
 };
 
-const shipToScreenOptions = (): StackNavigationOptions => {
+const shipToScreenOptions = (
+  navigation: NavigationProp<AppStackParamList, 'AddAddress'>,
+): StackNavigationOptions => {
   return {
     headerBackTitle: 'Cart',
     headerRight: () => (
       <FeatherIcon
         color={theme.colors.primaryBlue}
         name="plus"
+        onPress={() =>
+          navigation.navigate(ScreenNames.AddAddress, {type: 'add'})
+        }
         size={staticValues.iconSize}
         style={styles.icon}
       />
@@ -307,7 +312,7 @@ const AppRoutes = () => {
       <Stack.Screen
         component={ShipToScreen}
         name={ScreenNames.ShipTo}
-        options={shipToScreenOptions}
+        options={({navigation}) => shipToScreenOptions(navigation)}
       />
       <Stack.Screen
         component={WriteReviewScreen}

@@ -18,6 +18,7 @@ import ProductCard from '../../components/Product/ProductCard/ProductCard';
 import ReviewCard from '../../components/Review/ReviewCard/ReviewCard';
 import {products} from '../../mockData/products-mock';
 import {reviews} from '../../mockData/reviews-mock';
+import {IProduct} from '../../models/product-model';
 import {AppStackParamList} from '../../routes/AppRoutes';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
@@ -119,7 +120,7 @@ const ProductDetailScreen = () => {
   );
 
   const renderColorButton = useCallback(
-    ({item}) => {
+    ({item}: {item: string}) => {
       return (
         <Pressable
           onPress={onColorButton(item)}
@@ -130,12 +131,12 @@ const ProductDetailScreen = () => {
     [onColorButton, selectedColorStyle],
   );
 
-  const renderProductCard = useCallback(({item}) => {
+  const renderProductCard = useCallback(({item}: {item: IProduct}) => {
     return <ProductCard product={item} />;
   }, []);
 
   const renderSizeButton = useCallback(
-    ({item}) => {
+    ({item}: {item: number}) => {
       return (
         <Pressable onPress={onSizeButton(item)} style={selectedSizeStyle(item)}>
           <Text>{item}</Text>

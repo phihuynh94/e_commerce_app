@@ -3,7 +3,6 @@ import {RouteProp, useRoute} from '@react-navigation/native';
 import React, {useCallback, useMemo} from 'react';
 import {Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
 import {
   notificationActivities,
   notificationFeeds,
@@ -73,8 +72,7 @@ const NotificationDetailScreen = () => {
           <Pressable
             key={detail.title + index}
             onPress={onPress}
-            style={styles.container}
-          >
+            style={styles.container}>
             {/* Icon */}
             <Icon
               color={theme.colors.primaryBlue}
