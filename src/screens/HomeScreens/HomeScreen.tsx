@@ -1,6 +1,6 @@
 // Import
 import {useNavigation} from '@react-navigation/native';
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import {useCallback, useEffect, useRef, useState} from 'react';
 import {
   Dimensions,
   FlatList,
@@ -23,6 +23,7 @@ import {banners} from '../../mockData/banners-mock';
 import {categories} from '../../mockData/categories-mock';
 import {products} from '../../mockData/products-mock';
 import {IBanner} from '../../models/banner-model';
+import {IProduct} from '../../models/product-model';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
@@ -78,7 +79,7 @@ const HomeScreen = () => {
 
   // Render banner card
   const renderBannerCard = useCallback(
-    ({item}) => {
+    ({item}: {item: IBanner}) => {
       return (
         <View style={styles.bannerContainer}>
           <Pressable onPress={onBanner(item)}>
@@ -91,12 +92,12 @@ const HomeScreen = () => {
   );
 
   // Render product card
-  const renderProductCard = useCallback(({item}) => {
+  const renderProductCard = useCallback(({item}: {item: IProduct}) => {
     return <ProductCard product={item} />;
   }, []);
 
   // Render on sale product card
-  const renderSaleProductCard = useCallback(({item}) => {
+  const renderSaleProductCard = useCallback(({item}: {item: IProduct}) => {
     return <ProductCard product={item} size="small" />;
   }, []);
 
@@ -140,14 +141,13 @@ const HomeScreen = () => {
 
   // Render
   return (
-    <SafeAreaView style={globalStyles.container}>
+    <SafeAreaView style={globalStyles.flex}>
       <Pressable onPress={Keyboard.dismiss}>
         {/* Search text input & icons in header */}
         <View style={styles.headerContainer}>
           {/* Search text input */}
           <View style={styles.searchInput}>
             <TextInput
-              autoComplete="off"
               icon="text-search"
               onChangeText={setSearch}
               placeholder="Search Product"
@@ -183,8 +183,7 @@ const HomeScreen = () => {
 
       <ScrollView
         showsVerticalScrollIndicator={false}
-        style={globalStyles.container}
-      >
+        style={globalStyles.container}>
         <View style={{paddingBottom: insets.bottom}}>
           {/* Offer banner list */}
           <FlatList

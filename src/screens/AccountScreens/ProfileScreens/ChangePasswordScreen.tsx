@@ -23,7 +23,6 @@ const EditProfileScreen = () => {
       <View style={globalStyles.container}>
         {/* Old password input */}
         <TextInput
-          autoComplete="password"
           icon="lock-outline"
           onChangeText={setOldPassword}
           placeholder="Old Password"
@@ -32,7 +31,6 @@ const EditProfileScreen = () => {
 
         {/* Password input */}
         <TextInput
-          autoComplete="password"
           icon="lock-outline"
           onChangeText={setPassword}
           placeholder="New Password"
@@ -41,7 +39,6 @@ const EditProfileScreen = () => {
 
         {/* Confirm password input */}
         <TextInput
-          autoComplete="password"
           icon="lock-outline"
           onChangeText={setConfirmPassword}
           placeholder="Confirm New Password"

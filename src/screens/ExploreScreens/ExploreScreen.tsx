@@ -110,7 +110,6 @@ const ExploreScreen = () => {
         {/* Search text input */}
         <View style={styles.searchInput}>
           <TextInput
-            autoComplete="off"
             blur={!isSearch}
             icon="text-search"
             onBlur={onSearchBlur}

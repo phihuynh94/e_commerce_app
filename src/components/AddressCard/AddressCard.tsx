@@ -1,16 +1,24 @@
 // Imports
+import {useNavigation} from '@react-navigation/native';
 import React, {useCallback} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import {Button} from '../../common';
+import {ScreenNames} from '../../routes/routesHelpers';
 import {staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
 // =====================================================================
 
 // Component
 const AddressCard = () => {
+  // Hooks
+  const navigation = useNavigation();
+  // =====================================================================
+
   // useCallbacks
-  const onEdit = useCallback(() => {}, []);
+  const onEdit = useCallback(() => {
+    navigation.navigate(ScreenNames.AddAddress, {type: 'edit'});
+  }, [navigation]);
 
   const onTrashIcon = useCallback(() => {}, []);
   // =====================================================================

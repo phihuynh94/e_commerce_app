@@ -1,6 +1,6 @@
 // Import
 import React, {ReactNode, useMemo} from 'react';
-import {StyleSheet, TextStyle, ViewStyle} from 'react-native';
+import {StyleSheet, TextStyle} from 'react-native';
 import {Button as PaperButton} from 'react-native-paper';
 import {IconSource} from 'react-native-paper/lib/typescript/components/Icon';
 import {theme} from '../../styles/theme';
@@ -22,17 +22,12 @@ const Button = ({
   onPress,
 }: IButtonProps) => {
   // useMemos
-  const containerStyle: ViewStyle = useMemo(() => {
+  const buttonColor = useMemo(() => {
     if (mode === 'outlined') {
-      return {
-        ...styles.container,
-        backgroundColor: theme.colors.primaryWhite,
-      };
+      return theme.colors.primaryWhite;
     }
 
-    return {
-      ...styles.container,
-    };
+    return theme.colors.primaryBlue;
   }, [mode]);
 
   const labelStyle: TextStyle = useMemo(() => {
@@ -56,12 +51,13 @@ const Button = ({
   // Render
   return (
     <PaperButton
+      buttonColor={buttonColor}
       icon={icon}
       labelStyle={labelStyle}
       mode={mode}
       onPress={onPress}
-      style={containerStyle}
-    >
+      style={styles.container}
+      uppercase>
       {children}
     </PaperButton>
   );
@@ -71,10 +67,9 @@ const Button = ({
 // Styles
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: theme.colors.primaryBlue,
+    borderRadius: 10,
     marginVertical: 5,
     padding: 5,
-    width: '100%',
   },
   label: {
     ...theme.typography.h5,

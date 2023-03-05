@@ -1,4 +1,4 @@
-import {ThemeColors} from './themeColors';
+import {ThemeColors} from './themeColors.type';
 
 export const colors: ThemeColors = {
   // Black
