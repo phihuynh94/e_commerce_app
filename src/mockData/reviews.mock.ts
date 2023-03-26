@@ -1,5 +1,5 @@
-import {IReview} from '../models/review-model';
-import {users} from './users-mock';
+import {IReview} from '../models/review.model';
+import {users} from './users.mock';
 
 export const reviews: IReview[] = [
   {

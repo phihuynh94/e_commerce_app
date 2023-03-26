@@ -9,7 +9,7 @@ import {StyleSheet} from 'react-native';
 import 'react-native-gesture-handler';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {IProduct} from '../models/product-model';
+import {IProduct} from '../models/product.model';
 import {
   AddAddressScreen,
   AddCardScreen,

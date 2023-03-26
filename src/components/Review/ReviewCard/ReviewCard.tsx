@@ -2,7 +2,7 @@
 import React, {useMemo, useState} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {Divider, RatingStars} from '../../../common';
-import {IReview} from '../../../models/review-model';
+import {IReview} from '../../../models/review.model';
 import {theme} from '../../../styles/theme';
 // =====================================================================
 

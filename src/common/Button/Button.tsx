@@ -4,11 +4,13 @@ import {StyleSheet, TextStyle} from 'react-native';
 import {Button as PaperButton} from 'react-native-paper';
 import {IconSource} from 'react-native-paper/lib/typescript/components/Icon';
 import {theme} from '../../styles/theme';
+// =====================================================================
 
 // Interface & Type
 interface IButtonProps {
   children: ReactNode;
   icon?: IconSource;
+  loading?: boolean;
   mode?: 'contained' | 'outlined';
   onPress: () => void;
 }
@@ -18,6 +20,7 @@ interface IButtonProps {
 const Button = ({
   children,
   icon,
+  loading,
   mode = 'contained',
   onPress,
 }: IButtonProps) => {
@@ -54,6 +57,7 @@ const Button = ({
       buttonColor={buttonColor}
       icon={icon}
       labelStyle={labelStyle}
+      loading={loading}
       mode={mode}
       onPress={onPress}
       style={styles.container}

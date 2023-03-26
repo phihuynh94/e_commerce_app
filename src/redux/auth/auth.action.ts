@@ -1,19 +1,19 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { ILoginRequest, IRegisterRequest } from './auth.request';
-import { ILoginResponse, IRegisterResponse } from './auth.response';
+import {createAsyncThunk} from '@reduxjs/toolkit';
+import {ILoginRequest, IRegisterRequest} from './auth.request';
+import {ILoginResponse, IRegisterResponse} from './auth.response';
 
 // Login
 export const login = createAsyncThunk<ILoginResponse, ILoginRequest>(
   '[Auth] Login',
-  async ({ email, password }, { rejectWithValue }) => {
+  async ({email, password}, {rejectWithValue}) => {
     try {
       console.log(email, password);
 
-      const data = await { token: 'token' };
+      const data = await {token: 'token'};
 
       return data;
-    } catch (error) {
-      return rejectWithValue(error);
+    } catch (err) {
+      return rejectWithValue(err);
     }
   },
 );
@@ -22,15 +22,15 @@ export const login = createAsyncThunk<ILoginResponse, ILoginRequest>(
 // Register
 export const register = createAsyncThunk<IRegisterResponse, IRegisterRequest>(
   '[Auth] Register',
-  async ({ email, name, password }, { rejectWithValue }) => {
+  async ({email, name, password}, {rejectWithValue}) => {
     try {
       console.log(email, name, password);
 
-      const data = await { token: 'token' };
+      const data = await {token: 'token'};
 
       return data;
-    } catch (error) {
-      return rejectWithValue(error);
+    } catch (err) {
+      return rejectWithValue(err);
     }
   },
 );

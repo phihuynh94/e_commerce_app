@@ -1,15 +1,15 @@
-import { IAuthState } from './auth.state';
+import {IAuthState} from './auth.state';
 
 export const initialAuthState: IAuthState = {
-  login: {
+  loginState: {
     loggingIn: false,
     loggingInFail: false,
     loggingInSuccess: false,
   },
-  register: {
-    submittingRegister: false,
-    submittingRegisterFail: false,
-    submittingRegisterSuccess: false,
+  registerState: {
+    registering: false,
+    registerFail: false,
+    registerSuccess: false,
   },
   token: undefined,
 };

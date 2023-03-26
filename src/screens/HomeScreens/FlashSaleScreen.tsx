@@ -9,7 +9,7 @@ import {
   View,
 } from 'react-native';
 import ProductCard from '../../components/Product/ProductCard/ProductCard';
-import {products} from '../../mockData/products-mock';
+import {products} from '../../mockData/products.mock';
 import {globalStyles} from '../../styles';
 // =====================================================================
 

@@ -3,7 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useCallback} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button, Divider} from '../../common';
-import {orders} from '../../mockData/orders-mock';
+import {orders} from '../../mockData/orders.mock';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles} from '../../styles';
 import {theme} from '../../styles/theme';

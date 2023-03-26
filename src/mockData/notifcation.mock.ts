@@ -1,4 +1,4 @@
-import {INotificationDetail} from '../models/notification-model';
+import {INotificationDetail} from '../models/notification.model';
 
 export const notificationActivities: INotificationDetail[] = [
   {

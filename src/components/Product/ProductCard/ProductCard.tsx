@@ -11,10 +11,11 @@ import {
 } from 'react-native';
 import {Card, Surface} from 'react-native-paper';
 import {RatingStars} from '../../../common';
-import {IProduct} from '../../../models/product-model';
+import {IProduct} from '../../../models/product.model';
 import {ScreenNames} from '../../../routes/routesHelpers';
 import {globalStyles} from '../../../styles';
 import {theme} from '../../../styles/theme';
+// =====================================================================
 
 // Interfaces & Types
 interface IProductCardProps {
@@ -98,9 +99,9 @@ const ProductCard = ({product, size}: IProductCardProps) => {
     </Pressable>
   );
 };
+// =====================================================================
 
-export default ProductCard;
-
+// Styles
 const styles = StyleSheet.create({
   card: {
     alignItems: 'center',
@@ -137,3 +138,6 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 });
+// =====================================================================
+
+export default ProductCard;

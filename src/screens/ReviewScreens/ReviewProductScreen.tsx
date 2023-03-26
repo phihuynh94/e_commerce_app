@@ -13,7 +13,7 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Button} from '../../common';
 import ReviewCard from '../../components/Review/ReviewCard/ReviewCard';
-import {reviews} from '../../mockData/reviews-mock';
+import {reviews} from '../../mockData/reviews.mock';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles} from '../../styles';
 import {theme} from '../../styles/theme';
@@ -64,12 +64,10 @@ const ReviewProductScreen = () => {
         <ScrollView
           bounces={false}
           horizontal
-          showsHorizontalScrollIndicator={false}
-        >
+          showsHorizontalScrollIndicator={false}>
           <Pressable
             onPress={onRatingBox(-1)}
-            style={selectedRatingBoxStyle(-1)}
-          >
+            style={selectedRatingBoxStyle(-1)}>
             <Text style={styles.textBox}>All</Text>
           </Pressable>
 
@@ -77,8 +75,7 @@ const ReviewProductScreen = () => {
             <Pressable
               key={i}
               onPress={onRatingBox(i)}
-              style={selectedRatingBoxStyle(i)}
-            >
+              style={selectedRatingBoxStyle(i)}>
               <Icon color={theme.colors.primaryYellow} name="star" size={18} />
               <Text style={styles.textBox}>{i + 1}</Text>
             </Pressable>
