@@ -1,4 +1,4 @@
-import {IBanner} from '../models/banner-model';
+import {IBanner} from '../models/banner.model';
 
 export const banners: IBanner[] = [
   {

@@ -4,7 +4,7 @@ import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import {Divider} from '../../common';
 import CartCard from '../../components/Cart/CartCard/CartCard';
-import {orders} from '../../mockData/orders-mock';
+import {orders} from '../../mockData/orders.mock';
 import {globalStyles} from '../../styles';
 import {theme} from '../../styles/theme';
 // =====================================================================

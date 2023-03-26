@@ -1,4 +1,4 @@
-import {IOrder, OrderStatusEnum} from '../models/order-model.type';
+import {IOrder, OrderStatusEnum} from '../models/order.model';
 
 export const orders: IOrder[] = [
   {

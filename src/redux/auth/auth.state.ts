@@ -1,6 +1,6 @@
 export interface IAuthState {
-  login: ILoginState;
-  register: IRegisterState;
+  loginState: ILoginState;
+  registerState: IRegisterState;
   token?: string;
 }
 
@@ -11,7 +11,7 @@ export interface ILoginState {
 }
 
 export interface IRegisterState {
-  submittingRegister: boolean;
-  submittingRegisterFail: boolean;
-  submittingRegisterSuccess: boolean;
+  registering: boolean;
+  registerFail: boolean;
+  registerSuccess: boolean;
 }

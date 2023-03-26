@@ -3,7 +3,7 @@ import React, {useCallback} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import {FlatList} from 'react-native-gesture-handler';
 import ProductCard from '../../components/Product/ProductCard/ProductCard';
-import {products} from '../../mockData/products-mock';
+import {products} from '../../mockData/products.mock';
 import {globalStyles} from '../../styles';
 // =====================================================================
 

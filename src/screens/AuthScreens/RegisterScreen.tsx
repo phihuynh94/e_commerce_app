@@ -1,6 +1,6 @@
 // Import
 import {useNavigation} from '@react-navigation/core';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   Image,
   Keyboard,
@@ -12,8 +12,9 @@ import {
 } from 'react-native';
 import {Button, TextInput} from '../../common';
 import {register} from '../../redux/auth/auth.action';
+import {useRegisterState, useTokenState} from '../../redux/auth/auth.selector';
 import {useAppDispatch} from '../../redux/hooks';
-import {ScreenNames} from '../../routes/routesHelpers';
+import {RouteNames, ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles} from '../../styles';
 import {theme} from '../../styles/theme';
 // =====================================================================
@@ -27,6 +28,12 @@ const RegisterScreen = () => {
   // Hooks
   const dispatch = useAppDispatch();
   const navigation = useNavigation();
+  // =====================================================================
+
+  // useSelectors
+  const {registering} = useRegisterState();
+
+  const token = useTokenState();
   // =====================================================================
 
   // useStates
@@ -46,6 +53,14 @@ const RegisterScreen = () => {
   const onSignin = useCallback(() => {
     navigation.navigate(ScreenNames.Login);
   }, [navigation]);
+  // =====================================================================
+
+  // useEffects
+  useEffect(() => {
+    if (token) {
+      navigation.navigate(RouteNames.AppTab);
+    }
+  }, [navigation, token]);
   // =====================================================================
 
   // Render
@@ -98,8 +113,11 @@ const RegisterScreen = () => {
         </View>
 
         {/* Sign up button */}
-        <Button onPress={onSignup}>sign up</Button>
+        <Button loading={registering} onPress={onSignup}>
+          sign up
+        </Button>
 
+        {/* Sign in link */}
         <View style={styles.alignCenter}>
           <Text style={styles.smallText}>
             Have an account?{' '}

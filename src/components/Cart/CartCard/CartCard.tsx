@@ -3,7 +3,7 @@ import React, {useCallback, useState} from 'react';
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {products} from '../../../mockData/products-mock';
+import {products} from '../../../mockData/products.mock';
 import {staticValues} from '../../../styles';
 import {theme} from '../../../styles/theme';
 // =====================================================================

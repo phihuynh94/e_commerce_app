@@ -1,4 +1,4 @@
-import {ICategory} from '../models/caterogy-model';
+import {ICategory} from '../models/caterogy.model';
 
 export const categories: ICategory[] = [
   {

@@ -1,6 +1,6 @@
 // Import
 import {useNavigation} from '@react-navigation/core';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {
   Image,
   Keyboard,
@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import {Button, TextInput} from '../../common';
 import {login} from '../../redux/auth/auth.action';
+import {useLoginState, useTokenState} from '../../redux/auth/auth.selector';
 import {useAppDispatch} from '../../redux/hooks';
 import {RouteNames, ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles} from '../../styles';
@@ -27,6 +28,12 @@ const LoginScreen = () => {
   // Hooks
   const dispatch = useAppDispatch();
   const navigation = useNavigation();
+  // =====================================================================
+
+  // useSelectors
+  const {loggingIn} = useLoginState();
+
+  const token = useTokenState();
   // =====================================================================
 
   // useStates
@@ -53,8 +60,16 @@ const LoginScreen = () => {
 
   const onSignin = useCallback(() => {
     dispatch(login({email, password}));
-    navigation.navigate(RouteNames.AppTab);
-  }, [dispatch, email, navigation, password]);
+  }, [dispatch, email, password]);
+  // =====================================================================
+
+  // useEffects
+  // Navigate to Home screen
+  useEffect(() => {
+    if (token) {
+      navigation.navigate(RouteNames.AppTab);
+    }
+  }, [navigation, token]);
   // =====================================================================
 
   // Render
@@ -90,7 +105,9 @@ const LoginScreen = () => {
         </View>
 
         {/* Sign in button */}
-        <Button onPress={onSignin}>sign in</Button>
+        <Button loading={loggingIn} onPress={onSignin}>
+          sign in
+        </Button>
 
         {/* Divider */}
         <View style={styles.dividerContainer}>

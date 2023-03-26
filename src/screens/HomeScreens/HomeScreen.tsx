@@ -19,11 +19,16 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Divider, DotsIndicator, TextInput} from '../../common';
 import ProductCard from '../../components/Product/ProductCard/ProductCard';
-import {banners} from '../../mockData/banners-mock';
-import {categories} from '../../mockData/categories-mock';
-import {products} from '../../mockData/products-mock';
-import {IBanner} from '../../models/banner-model';
-import {IProduct} from '../../models/product-model';
+import {banners} from '../../mockData/banners.mock';
+import {categories} from '../../mockData/categories.mock';
+import {IBanner} from '../../models/banner.model';
+import {IProduct} from '../../models/product.model';
+import {useAppDispatch} from '../../redux/hooks';
+import {fetchProducts} from '../../redux/product/product.action';
+import {
+  useFetchProductsState,
+  useProducts,
+} from '../../redux/product/product.selector';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
@@ -37,8 +42,16 @@ const recomendedProductBanner = require('../../assets/images/recomended-product-
 // Component
 const HomeScreen = () => {
   // Hooks
-  const navigation = useNavigation();
+  const dispatch = useAppDispatch();
   const insets = useSafeAreaInsets();
+  const navigation = useNavigation();
+  // =====================================================================
+
+  // useSelectors
+  const {fetchingProducts, fetchingProductsFail, fetchingProductsSuccess} =
+    useFetchProductsState();
+
+  const products = useProducts();
   // =====================================================================
 
   // useStates
@@ -137,6 +150,22 @@ const HomeScreen = () => {
       clearTimeout(timeout);
     };
   }, [finishScrolling, bannerIndex, scrolling]);
+
+  // Fetch Products
+  useEffect(() => {
+    if (
+      !fetchingProducts &&
+      !fetchingProductsFail &&
+      !fetchingProductsSuccess
+    ) {
+      dispatch(fetchProducts());
+    }
+  }, [
+    dispatch,
+    fetchingProducts,
+    fetchingProductsFail,
+    fetchingProductsSuccess,
+  ]);
   // =====================================================================
 
   // Render
