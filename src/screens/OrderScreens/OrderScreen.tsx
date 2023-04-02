@@ -1,9 +1,11 @@
 // Imports
 import {useNavigation} from '@react-navigation/native';
-import React, {useCallback} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {Button, Divider} from '../../common';
-import {orders} from '../../mockData/orders.mock';
+import {useAppDispatch} from '../../redux/hooks';
+import {fetchOrders} from '../../redux/order/order.action';
+import {useFetchOrdersState, useOrders} from '../../redux/order/order.selector';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles} from '../../styles';
 import {theme} from '../../styles/theme';
@@ -12,7 +14,9 @@ import {theme} from '../../styles/theme';
 // Component
 const OrderScreen = () => {
   // hooks
+  const dispatch = useAppDispatch();
   const navigation = useNavigation();
+  // =====================================================================
 
   // useCallbacks
   const onView = useCallback(() => {
@@ -20,107 +24,124 @@ const OrderScreen = () => {
   }, [navigation]);
   // =====================================================================
 
+  // useSelectors
+  const {fetchingOrders, fetchingOrdersFail, fetchingOrdersSuccess} =
+    useFetchOrdersState();
+
+  const orders = useOrders();
+  // =====================================================================
+
+  // useEffects
+  useEffect(() => {
+    if (!fetchingOrders && !fetchingOrdersFail && !fetchingOrdersSuccess) {
+      dispatch(fetchOrders());
+    }
+  }, [dispatch, fetchingOrders, fetchingOrdersFail, fetchingOrdersSuccess]);
+  // =====================================================================
+
   // Render
-  return (
-    <SafeAreaView style={globalStyles.flex}>
-      {/* Order header */}
-      <View style={styles.header}>
-        <Text style={theme.typography.h4}>Order</Text>
-      </View>
-
-      {/* Divider */}
-      <Divider />
-
-      {/* Container */}
-      <ScrollView style={globalStyles.container}>
-        {/* Order card */}
-        <View style={styles.card}>
-          {/* Order header */}
-          <View style={styles.row}>
-            <View>
-              {/* Order title */}
-              <View style={styles.row}>
-                <Text style={theme.typography.h4}>{orders[0].id}</Text>
-              </View>
-
-              {/* Order date */}
-              <Text>Order at Shop: {orders[0].date}</Text>
-            </View>
-
-            {/* View order button */}
-            <View>
-              <Button onPress={onView}>View</Button>
-            </View>
-          </View>
-
-          {/* Divider */}
-          <Divider />
-          <View style={styles.row} />
-
-          {/* Shipping status */}
-          <View style={styles.row}>
-            <Text>Status</Text>
-            <Text>{orders[0].status.toUpperCase()}</Text>
-          </View>
-
-          {/* Number of items */}
-          <View style={styles.row}>
-            <Text>Nums of Items</Text>
-            <Text>{orders[0].items} items</Text>
-          </View>
-
-          {/* Order total */}
-          <View style={styles.row}>
-            <Text>Total</Text>
-            <Text style={styles.price}>${orders[0].total}</Text>
-          </View>
+  if (fetchingOrdersSuccess) {
+    return (
+      <SafeAreaView style={globalStyles.flex}>
+        {/* Order header */}
+        <View style={styles.header}>
+          <Text style={theme.typography.h4}>Order</Text>
         </View>
 
-        {/* Order card */}
-        <View style={styles.card}>
-          {/* Order header */}
-          <View style={styles.row}>
-            <View>
-              {/* Order title */}
-              <View style={styles.row}>
-                <Text style={theme.typography.h4}>{orders[0].id}</Text>
+        {/* Divider */}
+        <Divider />
+
+        {/* Container */}
+        <ScrollView style={globalStyles.container}>
+          {/* Order card */}
+          <View style={styles.card}>
+            {/* Order header */}
+            <View style={styles.row}>
+              <View>
+                {/* Order title */}
+                <View style={styles.row}>
+                  <Text style={theme.typography.h4}>{orders[0].id}</Text>
+                </View>
+
+                {/* Order date */}
+                <Text>Order at Shop: {orders[0].date}</Text>
               </View>
 
-              {/* Order date */}
-              <Text>Order at Shop: {orders[0].date}</Text>
+              {/* View order button */}
+              <View>
+                <Button onPress={onView}>View</Button>
+              </View>
             </View>
 
-            {/* View order button */}
-            <View>
-              <Button onPress={onView}>View</Button>
+            {/* Divider */}
+            <Divider />
+            <View style={styles.row} />
+
+            {/* Shipping status */}
+            <View style={styles.row}>
+              <Text>Status</Text>
+              <Text>{orders[0].status.toUpperCase()}</Text>
+            </View>
+
+            {/* Number of items */}
+            <View style={styles.row}>
+              <Text>Nums of Items</Text>
+              <Text>{orders[0].items} items</Text>
+            </View>
+
+            {/* Order total */}
+            <View style={styles.row}>
+              <Text>Total</Text>
+              <Text style={styles.price}>${orders[0].total}</Text>
             </View>
           </View>
 
-          {/* Divider */}
-          <Divider />
-          <View style={styles.row} />
+          {/* Order card */}
+          <View style={styles.card}>
+            {/* Order header */}
+            <View style={styles.row}>
+              <View>
+                {/* Order title */}
+                <View style={styles.row}>
+                  <Text style={theme.typography.h4}>{orders[0].id}</Text>
+                </View>
 
-          {/* Shipping status */}
-          <View style={styles.row}>
-            <Text>Status</Text>
-            <Text>{orders[0].status.toUpperCase()}</Text>
-          </View>
+                {/* Order date */}
+                <Text>Order at Shop: {orders[0].date}</Text>
+              </View>
 
-          {/* Number of items */}
-          <View style={styles.row}>
-            <Text>Nums of Items</Text>
-            <Text>{orders[0].items} items</Text>
-          </View>
+              {/* View order button */}
+              <View>
+                <Button onPress={onView}>View</Button>
+              </View>
+            </View>
 
-          {/* Order total */}
-          <View style={styles.row}>
-            <Text>Total</Text>
-            <Text style={styles.price}>${orders[0].total}</Text>
+            {/* Divider */}
+            <Divider />
+            <View style={styles.row} />
+
+            {/* Shipping status */}
+            <View style={styles.row}>
+              <Text>Status</Text>
+              <Text>{orders[0].status.toUpperCase()}</Text>
+            </View>
+
+            {/* Number of items */}
+            <View style={styles.row}>
+              <Text>Nums of Items</Text>
+              <Text>{orders[0].items} items</Text>
+            </View>
+
+            {/* Order total */}
+            <View style={styles.row}>
+              <Text>Total</Text>
+              <Text style={styles.price}>${orders[0].total}</Text>
+            </View>
           </View>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+        </ScrollView>
+      </SafeAreaView>
+    );
+  }
 };
 // =====================================================================
 

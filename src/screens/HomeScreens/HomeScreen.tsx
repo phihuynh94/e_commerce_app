@@ -19,10 +19,14 @@ import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {Divider, DotsIndicator, TextInput} from '../../common';
 import ProductCard from '../../components/Product/ProductCard/ProductCard';
-import {banners} from '../../mockData/banners.mock';
 import {categories} from '../../mockData/categories.mock';
 import {IBanner} from '../../models/banner.model';
 import {IProduct} from '../../models/product.model';
+import {fetchBanners} from '../../redux/banner/banner.action';
+import {
+  useBanners,
+  useFetchBannersState,
+} from '../../redux/banner/banner.selector';
 import {useAppDispatch} from '../../redux/hooks';
 import {fetchProducts} from '../../redux/product/product.action';
 import {
@@ -48,6 +52,11 @@ const HomeScreen = () => {
   // =====================================================================
 
   // useSelectors
+  const banners = useBanners();
+
+  const {fetchingBanners, fetchingBannersFail, fetchingBannersSuccess} =
+    useFetchBannersState();
+
   const {fetchingProducts, fetchingProductsFail, fetchingProductsSuccess} =
     useFetchProductsState();
 
@@ -129,7 +138,7 @@ const HomeScreen = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       // If user doesn't swipe the carousel or open the meal details, scroll every 5 seconds
-      if (!scrolling) {
+      if (!scrolling && banners.length > 0) {
         if (!finishScrolling) {
           const newBannerIndex =
             bannerIndex + 1 === banners.length ? 0 : bannerIndex + 1;
@@ -149,7 +158,14 @@ const HomeScreen = () => {
     return () => {
       clearTimeout(timeout);
     };
-  }, [finishScrolling, bannerIndex, scrolling]);
+  }, [finishScrolling, bannerIndex, scrolling, banners]);
+
+  // Fetch Banners
+  useEffect(() => {
+    if (!fetchingBanners && !fetchingBannersFail && !fetchingBannersSuccess) {
+      dispatch(fetchBanners());
+    }
+  }, [dispatch, fetchingBanners, fetchingBannersFail, fetchingBannersSuccess]);
 
   // Fetch Products
   useEffect(() => {
@@ -215,24 +231,28 @@ const HomeScreen = () => {
         style={globalStyles.container}>
         <View style={{paddingBottom: insets.bottom}}>
           {/* Offer banner list */}
-          <FlatList
-            data={banners}
-            horizontal
-            initialScrollIndex={bannerIndex}
-            onScrollBeginDrag={setScrollingTrue}
-            onScrollEndDrag={setScrollingFalse}
-            onViewableItemsChanged={onViewRef.current}
-            pagingEnabled
-            ref={bannerListRef}
-            renderItem={renderBannerCard}
-            scrollEventThrottle={200}
-            showsHorizontalScrollIndicator={false}
-            viewabilityConfig={viewConfigRef.current}
-          />
+          {fetchingBannersSuccess && banners.length > 0 && (
+            <>
+              <FlatList
+                data={banners}
+                horizontal
+                initialScrollIndex={bannerIndex}
+                onScrollBeginDrag={setScrollingTrue}
+                onScrollEndDrag={setScrollingFalse}
+                onViewableItemsChanged={onViewRef.current}
+                pagingEnabled
+                ref={bannerListRef}
+                renderItem={renderBannerCard}
+                scrollEventThrottle={200}
+                showsHorizontalScrollIndicator={false}
+                viewabilityConfig={viewConfigRef.current}
+              />
 
-          <View style={styles.dotIndicatorContainer}>
-            <DotsIndicator array={banners} index={bannerIndex} />
-          </View>
+              <View style={styles.dotIndicatorContainer}>
+                <DotsIndicator array={banners} index={bannerIndex} />
+              </View>
+            </>
+          )}
 
           {/* Caterory list */}
           <View style={styles.sectionHeaderContainer}>
@@ -255,45 +275,51 @@ const HomeScreen = () => {
             ))}
           </ScrollView>
 
-          {/* Mega sale list */}
-          <View style={styles.sectionHeaderContainer}>
-            <Text style={styles.sectionHeader}>Mega Sale</Text>
-            <Text style={globalStyles.linkText}>See More</Text>
-          </View>
+          {fetchingProductsSuccess && (
+            <>
+              {/* Mega sale list */}
+              <View style={styles.sectionHeaderContainer}>
+                <Text style={styles.sectionHeader}>Mega Sale</Text>
+                <Text style={globalStyles.linkText}>See More</Text>
+              </View>
 
-          <FlatList
-            data={products}
-            horizontal
-            pagingEnabled
-            renderItem={renderSaleProductCard}
-            showsHorizontalScrollIndicator={false}
-          />
+              <FlatList
+                data={products}
+                horizontal
+                pagingEnabled
+                renderItem={renderSaleProductCard}
+                showsHorizontalScrollIndicator={false}
+              />
 
-          {/* Product list */}
-          <View style={styles.sectionHeaderContainer}>
-            <Text style={styles.sectionHeader}>Explore Products</Text>
-            <Text style={globalStyles.linkText}>See More</Text>
-          </View>
+              {/* Product list */}
+              <View style={styles.sectionHeaderContainer}>
+                <Text style={styles.sectionHeader}>Explore Products</Text>
+                <Text style={globalStyles.linkText}>See More</Text>
+              </View>
 
-          <FlatList
-            data={products}
-            horizontal
-            pagingEnabled
-            renderItem={renderSaleProductCard}
-            showsHorizontalScrollIndicator={false}
-          />
+              <FlatList
+                data={products}
+                horizontal
+                pagingEnabled
+                renderItem={renderSaleProductCard}
+                showsHorizontalScrollIndicator={false}
+              />
+            </>
+          )}
 
           <View style={styles.bannerContainer}>
             <Image source={recomendedProductBanner} />
           </View>
 
-          <FlatList
-            data={products}
-            horizontal
-            pagingEnabled
-            renderItem={renderProductCard}
-            showsHorizontalScrollIndicator={false}
-          />
+          {fetchingProductsSuccess && (
+            <FlatList
+              data={products}
+              horizontal
+              pagingEnabled
+              renderItem={renderProductCard}
+              showsHorizontalScrollIndicator={false}
+            />
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
