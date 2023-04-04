@@ -13,7 +13,7 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Button, RatingStars} from '../../common';
+import {Button, RatingStars} from '../../components/common';
 import ProductCard from '../../components/Product/ProductCard/ProductCard';
 import ReviewCard from '../../components/Review/ReviewCard/ReviewCard';
 import {products} from '../../mockData/products.mock';

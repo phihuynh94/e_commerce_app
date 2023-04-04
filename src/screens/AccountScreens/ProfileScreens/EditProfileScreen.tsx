@@ -1,22 +1,34 @@
 // Imports
-import React, {useCallback, useState} from 'react';
+import React, {useCallback} from 'react';
+import {useForm} from 'react-hook-form';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
-import {Button, TextInput} from '../../../common';
+import {Button, TextInput} from '../../../components/common';
 import {globalStyles} from '../../../styles';
+// =====================================================================
+
+// Interface
+interface IEditProfileFormData {
+  birthday: string;
+  email: string;
+  gender: string;
+  name: string;
+  phoneNum: string;
+}
 // =====================================================================
 
 // Component
 const EditProfileScreen = () => {
-  // useStates
-  const [birthdate, setBirthDate] = useState('');
-  const [email, setEmail] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [gender, setGender] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  // hooks
+  const {control, handleSubmit} = useForm<IEditProfileFormData>();
   // =====================================================================
 
   // useCallbacks
-  const onEdit = useCallback(() => {}, []);
+  const onEdit = useCallback(
+    ({birthday, email, gender, name, phoneNum}: IEditProfileFormData) => {
+      console.log(birthday, email, gender, name, phoneNum);
+    },
+    [],
+  );
   // =====================================================================
 
   // Render
@@ -25,47 +37,47 @@ const EditProfileScreen = () => {
       <View style={globalStyles.container}>
         {/* Full name input */}
         <TextInput
+          control={control}
           icon="account-outline"
-          onChangeText={setFullName}
-          placeholder="Full Name"
-          value={fullName}
+          label="Full Name"
+          name="name"
         />
 
         {/* Email input */}
         <TextInput
+          control={control}
           icon="email-outline"
-          onChangeText={setEmail}
-          placeholder="Email"
-          value={email}
+          label="Email"
+          name="email"
         />
 
         {/* Birthday input */}
         <TextInput
+          control={control}
           icon="calendar-outline"
-          onChangeText={setBirthDate}
-          placeholder="Birthday"
-          value={birthdate}
+          label="Birthday"
+          name="birthday"
         />
 
         {/* Gender input */}
         <TextInput
+          control={control}
           icon="gender-male-female"
-          onChangeText={setGender}
-          placeholder="Gender"
-          value={gender}
+          label="Gender"
+          name="gender"
         />
 
         {/* Phone number input */}
         <TextInput
+          control={control}
           icon="phone-outline"
-          onChangeText={setPhoneNumber}
-          placeholder="Phone Number"
-          value={phoneNumber}
+          label="Phone Number"
+          name="phoneNum"
         />
 
         {/* Edit profile button */}
         <View style={styles.button}>
-          <Button onPress={onEdit}>Save Changes</Button>
+          <Button onPress={handleSubmit(onEdit)}>Save Changes</Button>
         </View>
       </View>
     </SafeAreaView>

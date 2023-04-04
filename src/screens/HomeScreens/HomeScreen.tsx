@@ -1,6 +1,7 @@
 // Import
 import {useNavigation} from '@react-navigation/native';
 import {useCallback, useEffect, useRef, useState} from 'react';
+import {useForm} from 'react-hook-form';
 import {
   Dimensions,
   FlatList,
@@ -17,7 +18,7 @@ import {
 import {Badge} from 'react-native-paper';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Divider, DotsIndicator, TextInput} from '../../common';
+import {Divider, DotsIndicator, TextInput} from '../../components/common';
 import ProductCard from '../../components/Product/ProductCard/ProductCard';
 import {categories} from '../../mockData/categories.mock';
 import {IBanner} from '../../models/banner.model';
@@ -45,8 +46,9 @@ const recomendedProductBanner = require('../../assets/images/recomended-product-
 
 // Component
 const HomeScreen = () => {
-  // Hooks
+  // hooks
   const dispatch = useAppDispatch();
+  const {control} = useForm<{search: string}>();
   const insets = useSafeAreaInsets();
   const navigation = useNavigation();
   // =====================================================================
@@ -65,7 +67,6 @@ const HomeScreen = () => {
 
   // useStates
   const [bannerIndex, setBannerIndex] = useState(0);
-  const [search, setSearch] = useState('');
   const [scrolling, setScrolling] = useState(false);
   const [finishScrolling, setFinishScrolling] = useState(false);
   // =====================================================================
@@ -193,10 +194,10 @@ const HomeScreen = () => {
           {/* Search text input */}
           <View style={styles.searchInput}>
             <TextInput
+              control={control}
               icon="text-search"
-              onChangeText={setSearch}
+              name="search"
               placeholder="Search Product"
-              value={search}
             />
           </View>
 
@@ -286,6 +287,7 @@ const HomeScreen = () => {
               <FlatList
                 data={products}
                 horizontal
+                initialNumToRender={5}
                 pagingEnabled
                 renderItem={renderSaleProductCard}
                 showsHorizontalScrollIndicator={false}
@@ -300,6 +302,7 @@ const HomeScreen = () => {
               <FlatList
                 data={products}
                 horizontal
+                initialNumToRender={5}
                 pagingEnabled
                 renderItem={renderSaleProductCard}
                 showsHorizontalScrollIndicator={false}
@@ -315,6 +318,7 @@ const HomeScreen = () => {
             <FlatList
               data={products}
               horizontal
+              initialNumToRender={5}
               pagingEnabled
               renderItem={renderProductCard}
               showsHorizontalScrollIndicator={false}

@@ -1,6 +1,7 @@
 // Imports
 import {useNavigation} from '@react-navigation/native';
 import React, {useCallback, useMemo, useState} from 'react';
+import {useForm} from 'react-hook-form';
 import {
   Pressable,
   SafeAreaView,
@@ -13,7 +14,7 @@ import AntIcon from 'react-native-vector-icons/AntDesign';
 import FeatherIcon from 'react-native-vector-icons/Feather';
 import FAIcon from 'react-native-vector-icons/FontAwesome';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Divider, TextInput} from '../../common';
+import {Divider, TextInput} from '../../components/common';
 import {categories} from '../../mockData/categories.mock';
 import {products} from '../../mockData/products.mock';
 import {IProduct} from '../../models/product.model';
@@ -24,7 +25,9 @@ import {theme} from '../../styles/theme';
 
 // Component
 const ExploreScreen = () => {
-  // Hooks
+  // hooks
+  const {control} = useForm<{s: string}>();
+
   const navigation = useNavigation();
   // =====================================================================
 
@@ -50,7 +53,7 @@ const ExploreScreen = () => {
   const onSearch = useCallback((val: string) => {
     setSearch(val);
 
-    const searchResult = products.reduce<IProduct[]>((acc, cur) => {
+    const result = products.reduce<IProduct[]>((acc, cur) => {
       if (cur.title.toLowerCase().includes(val.toLowerCase())) {
         return [...acc, cur];
       }
@@ -58,7 +61,7 @@ const ExploreScreen = () => {
       return acc;
     }, []);
 
-    setSearchResult(searchResult);
+    setSearchResult(result);
   }, []);
 
   const onSearchResult = useCallback(
@@ -111,12 +114,13 @@ const ExploreScreen = () => {
         <View style={styles.searchInput}>
           <TextInput
             blur={!isSearch}
+            control={control}
             icon="text-search"
+            label="Search Product"
+            name="s"
             onBlur={onSearchBlur}
             onChangeText={onSearch}
             onFocus={onSearchFocus}
-            placeholder="Search Product"
-            value=""
           />
         </View>
 

@@ -1,21 +1,37 @@
 // Import
-import React, {useCallback, useState} from 'react';
+import React, {useCallback} from 'react';
+import {useForm} from 'react-hook-form';
 import {SafeAreaView, StyleSheet, View} from 'react-native';
-import {Button, TextInput} from '../../../common';
+import {Button, TextInput} from '../../../components/common';
 import {globalStyles} from '../../../styles';
+// =====================================================================
+
+// Interface
+interface IAddCardFormData {
+  cardHolder: string;
+  cardNumber: string;
+  expireDate: string;
+  securityCode: string;
+}
 // =====================================================================
 
 // Component
 const AddCardScreen = () => {
-  // useStates
-  const [cardNumber, setCardNumber] = useState('');
-  const [expireDate, setExpireDate] = useState('');
-  const [securityCode, setSecurityCode] = useState('');
-  const [cardHolder, setCardHolder] = useState('');
+  // hooks
+  const {
+    control,
+    formState: {errors},
+    handleSubmit,
+  } = useForm<IAddCardFormData>();
   // =====================================================================
 
   // useCallbacks
-  const onAdd = useCallback(() => {}, []);
+  const onAdd = useCallback(
+    ({cardHolder, cardNumber, expireDate, securityCode}: IAddCardFormData) => {
+      console.log(cardHolder, cardNumber, expireDate, securityCode);
+    },
+    [],
+  );
   // =====================================================================
 
   // Render
@@ -25,36 +41,44 @@ const AddCardScreen = () => {
       <View style={globalStyles.container}>
         {/* Card number input */}
         <TextInput
-          onChangeText={setCardNumber}
-          placeholder="Enter Card Number"
-          value={cardNumber}
+          control={control}
+          errorMessage={errors.cardNumber?.message}
+          label="Enter Card Number"
+          name="cardNum"
+          rules={{required: 'Required'}}
         />
 
         {/* Expiration date input */}
         <TextInput
-          onChangeText={setExpireDate}
-          placeholder="Expiration Date"
-          value={expireDate}
+          control={control}
+          errorMessage={errors.expireDate?.message}
+          label="Expiration Date"
+          name="expireDate"
+          rules={{required: 'Required'}}
         />
 
         {/* Security code input */}
         <TextInput
-          onChangeText={setSecurityCode}
-          placeholder="Security Code"
-          value={securityCode}
+          control={control}
+          errorMessage={errors.securityCode?.message}
+          label="Security Code"
+          name="securityCode"
+          rules={{required: 'Required'}}
         />
 
         {/* Card holder input */}
         <TextInput
-          onChangeText={setCardHolder}
-          placeholder="Card Holder"
-          value={cardHolder}
+          control={control}
+          errorMessage={errors.cardHolder?.message}
+          label="Card Holder"
+          name="cardHolder"
+          rules={{required: 'Required'}}
         />
       </View>
 
       {/* Add address button */}
       <View style={styles.button}>
-        <Button onPress={onAdd}>Add Card</Button>
+        <Button onPress={handleSubmit(onAdd)}>Add Card</Button>
       </View>
     </SafeAreaView>
   );

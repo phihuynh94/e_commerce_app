@@ -2,7 +2,7 @@
 import React, {useCallback, useMemo} from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {theme} from '../../styles/theme';
+import {theme} from '../../../styles/theme';
 // =====================================================================
 
 // Interface
