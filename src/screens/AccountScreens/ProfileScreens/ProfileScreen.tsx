@@ -3,7 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useCallback} from 'react';
 import {Image, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Button} from '../../../common';
+import {Button} from '../../../components/common';
 import {ScreenNames} from '../../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../../styles';
 import {theme} from '../../../styles/theme';

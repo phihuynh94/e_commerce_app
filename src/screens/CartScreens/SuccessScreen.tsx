@@ -3,7 +3,7 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useCallback} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
-import {Button} from '../../common';
+import {Button} from '../../components/common';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {theme} from '../../styles/theme';
 // =====================================================================

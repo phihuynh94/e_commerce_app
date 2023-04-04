@@ -1,6 +1,7 @@
 // Import
 import {useNavigation} from '@react-navigation/core';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect} from 'react';
+import {useForm} from 'react-hook-form';
 import {
   Image,
   Keyboard,
@@ -10,7 +11,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import {Button, TextInput} from '../../common';
+import {Button, TextInput} from '../../components/common';
 import {login} from '../../redux/auth/auth.action';
 import {useLoginState, useTokenState} from '../../redux/auth/auth.selector';
 import {useAppDispatch} from '../../redux/hooks';
@@ -23,10 +24,24 @@ import {theme} from '../../styles/theme';
 const logo = require('../../assets/images/logo.png');
 // =====================================================================
 
+// Interface
+interface ILoginFormData {
+  email: string;
+  password: string;
+}
+// =====================================================================
+
 // Component
 const LoginScreen = () => {
-  // Hooks
+  // hooks
   const dispatch = useAppDispatch();
+
+  const {
+    control,
+    formState: {errors},
+    handleSubmit,
+  } = useForm<ILoginFormData>();
+
   const navigation = useNavigation();
   // =====================================================================
 
@@ -34,11 +49,6 @@ const LoginScreen = () => {
   const {loggingIn} = useLoginState();
 
   const token = useTokenState();
-  // =====================================================================
-
-  // useStates
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   // =====================================================================
 
   // useCallbacks
@@ -58,9 +68,12 @@ const LoginScreen = () => {
     navigation.navigate(ScreenNames.Register);
   }, [navigation]);
 
-  const onSignin = useCallback(() => {
-    dispatch(login({email, password}));
-  }, [dispatch, email, password]);
+  const onSignin = useCallback(
+    ({email, password}: ILoginFormData) => {
+      dispatch(login({email, password}));
+    },
+    [dispatch],
+  );
   // =====================================================================
 
   // useEffects
@@ -88,24 +101,28 @@ const LoginScreen = () => {
 
           {/* Email input */}
           <TextInput
+            control={control}
+            errorMessage={errors.email?.message}
             icon="email-outline"
-            onChangeText={setEmail}
-            placeholder="Your Email"
-            value={email}
+            label="Your Email"
+            name="email"
+            rules={{required: 'Required'}}
           />
 
           {/* Password input */}
           <TextInput
+            control={control}
+            errorMessage={errors.password?.message}
             icon="lock-outline"
-            onChangeText={setPassword}
-            placeholder="Password"
+            label="Password"
+            name="password"
+            rules={{required: 'Required'}}
             secureTextEntry={true}
-            value={password}
           />
         </View>
 
         {/* Sign in button */}
-        <Button loading={loggingIn} onPress={onSignin}>
+        <Button loading={loggingIn} onPress={handleSubmit(onSignin)}>
           sign in
         </Button>
 

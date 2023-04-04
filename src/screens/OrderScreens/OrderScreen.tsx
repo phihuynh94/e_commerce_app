@@ -2,7 +2,7 @@
 import {useNavigation} from '@react-navigation/native';
 import React, {useCallback, useEffect} from 'react';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
-import {Button, Divider} from '../../common';
+import {Button, Divider} from '../../components/common';
 import {useAppDispatch} from '../../redux/hooks';
 import {fetchOrders} from '../../redux/order/order.action';
 import {useFetchOrdersState, useOrders} from '../../redux/order/order.selector';

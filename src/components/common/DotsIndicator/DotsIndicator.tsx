@@ -1,7 +1,7 @@
 // Import
 import React, {useMemo} from 'react';
 import {StyleSheet, View} from 'react-native';
-import {theme} from '../../styles/theme';
+import {theme} from '../../../styles/theme';
 
 // Interfaces & Types
 interface IDotsIndicatorProps<T> {

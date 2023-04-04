@@ -1,17 +1,25 @@
 // Import
 import React, {useCallback, useState} from 'react';
+import {useForm} from 'react-hook-form';
 import {Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Button, RatingStars, TextInput} from '../../common';
+import {Button, RatingStars, TextInput} from '../../components/common';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
 // =====================================================================
 
 // Component
 const WriteReviewScreen = () => {
+  // hooks
+  const {
+    control,
+    formState: {errors},
+    handleSubmit,
+  } = useForm<{review: string}>();
+  // =====================================================================
+
   // useStates
   const [rating, setRating] = useState(0);
-  const [review, setReview] = useState('');
   // =====================================================================
 
   // useCallbacks
@@ -25,10 +33,6 @@ const WriteReviewScreen = () => {
 
   const onRating = useCallback((rate: number) => {
     setRating(rate);
-  }, []);
-
-  const onWriteReview = useCallback((input: string) => {
-    setReview(input);
   }, []);
   // =====================================================================
 
@@ -54,10 +58,11 @@ const WriteReviewScreen = () => {
         <Text style={styles.text}>Write Your Review</Text>
         <View style={styles.reviewInput}>
           <TextInput
+            control={control}
+            errorMessage={errors.review?.message}
             multiline={true}
-            onChangeText={onWriteReview}
+            name="review"
             placeholder="Write your review here."
-            value={review}
           />
         </View>
 
@@ -72,7 +77,7 @@ const WriteReviewScreen = () => {
         </Pressable>
 
         {/* Add review button */}
-        <Button onPress={onAddReview}>add review</Button>
+        <Button onPress={handleSubmit(onAddReview)}>add review</Button>
       </View>
     </SafeAreaView>
   );

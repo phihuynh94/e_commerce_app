@@ -10,11 +10,11 @@ import {
   ViewStyle,
 } from 'react-native';
 import {Card, Surface} from 'react-native-paper';
-import {RatingStars} from '../../../common';
 import {IProduct} from '../../../models/product.model';
 import {ScreenNames} from '../../../routes/routesHelpers';
 import {globalStyles} from '../../../styles';
 import {theme} from '../../../styles/theme';
+import {RatingStars} from '../../common';
 // =====================================================================
 
 // Interfaces & Types

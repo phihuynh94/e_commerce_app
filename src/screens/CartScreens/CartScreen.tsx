@@ -1,9 +1,10 @@
 // Imports
 import {useNavigation} from '@react-navigation/native';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback} from 'react';
+import {useForm} from 'react-hook-form';
 import {SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
-import {Button, Divider, TextInput} from '../../common';
 import CartCard from '../../components/Cart/CartCard/CartCard';
+import {Button, Divider, TextInput} from '../../components/common';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles} from '../../styles';
 import {theme} from '../../styles/theme';
@@ -11,12 +12,10 @@ import {theme} from '../../styles/theme';
 
 // Component
 const CartScreen = () => {
-  // Hooks
-  const navigation = useNavigation();
-  // =====================================================================
+  // hooks
+  const {control, handleSubmit} = useForm<{coupon: string}>();
 
-  // useStates
-  const [coupon, setCoupon] = useState('');
+  const navigation = useNavigation();
   // =====================================================================
 
   // useCallbacks
@@ -50,14 +49,14 @@ const CartScreen = () => {
           <View style={styles.coupon}>
             <View style={styles.couponInput}>
               <TextInput
-                onChangeText={setCoupon}
-                placeholder="Enter Coupon Code"
-                value={coupon}
+                control={control}
+                label="Enter Coupon Code"
+                name="coupon"
               />
             </View>
 
             <View style={styles.couponButton}>
-              <Button onPress={onCoupon}>Apply</Button>
+              <Button onPress={handleSubmit(onCoupon)}>Apply</Button>
             </View>
           </View>
 

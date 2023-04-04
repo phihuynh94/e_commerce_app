@@ -5,7 +5,7 @@ import {Pressable, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import IonIcon from 'react-native-vector-icons/Ionicons';
 import MCIcon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Divider} from '../../common';
+import {Divider} from '../../components/common';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {globalStyles, staticValues} from '../../styles';
 import {theme} from '../../styles/theme';

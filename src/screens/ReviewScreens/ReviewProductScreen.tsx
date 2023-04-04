@@ -11,7 +11,7 @@ import {
   View,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {Button} from '../../common';
+import {Button} from '../../components/common';
 import ReviewCard from '../../components/Review/ReviewCard/ReviewCard';
 import {reviews} from '../../mockData/reviews.mock';
 import {ScreenNames} from '../../routes/routesHelpers';

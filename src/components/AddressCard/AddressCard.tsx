@@ -3,10 +3,10 @@ import {useNavigation} from '@react-navigation/native';
 import React, {useCallback} from 'react';
 import {Pressable, StyleSheet, Text, View} from 'react-native';
 import FeatherIcon from 'react-native-vector-icons/Feather';
-import {Button} from '../../common';
 import {ScreenNames} from '../../routes/routesHelpers';
 import {staticValues} from '../../styles';
 import {theme} from '../../styles/theme';
+import {Button} from '../common';
 // =====================================================================
 
 // Component

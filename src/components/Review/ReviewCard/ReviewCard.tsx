@@ -1,9 +1,9 @@
 // Imports
 import React, {useMemo, useState} from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
-import {Divider, RatingStars} from '../../../common';
 import {IReview} from '../../../models/review.model';
 import {theme} from '../../../styles/theme';
+import {Divider, RatingStars} from '../../common';
 // =====================================================================
 
 const profileImage = require('../../../assets/images/profile.png');

@@ -1,6 +1,7 @@
 // Import
 import {useNavigation} from '@react-navigation/core';
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect} from 'react';
+import {useForm} from 'react-hook-form';
 import {
   Image,
   Keyboard,
@@ -10,7 +11,7 @@ import {
   Text,
   View,
 } from 'react-native';
-import {Button, TextInput} from '../../common';
+import {Button, TextInput} from '../../components/common';
 import {register} from '../../redux/auth/auth.action';
 import {useRegisterState, useTokenState} from '../../redux/auth/auth.selector';
 import {useAppDispatch} from '../../redux/hooks';
@@ -23,10 +24,26 @@ import {theme} from '../../styles/theme';
 const logo = require('../../assets/images/logo.png');
 // =====================================================================
 
+// Interface
+interface IRegistrationFormData {
+  confirmPassword: string;
+  email: string;
+  name: string;
+  password: string;
+}
+// =====================================================================
+
 // Component
 const RegisterScreen = () => {
-  // Hooks
+  // hooks
   const dispatch = useAppDispatch();
+
+  const {
+    control,
+    formState: {errors},
+    handleSubmit,
+  } = useForm<IRegistrationFormData>();
+
   const navigation = useNavigation();
   // =====================================================================
 
@@ -36,19 +53,13 @@ const RegisterScreen = () => {
   const token = useTokenState();
   // =====================================================================
 
-  // useStates
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [email, setEmail] = useState('');
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  // =====================================================================
-
   // useCallbacks
-  const onSignup = useCallback(() => {
-    console.log('press sign up');
-
-    dispatch(register({email, name, password}));
-  }, [dispatch, email, name, password]);
+  const onSignup = useCallback(
+    ({email, name, password}: IRegistrationFormData) => {
+      dispatch(register({email, name, password}));
+    },
+    [dispatch],
+  );
 
   const onSignin = useCallback(() => {
     navigation.navigate(ScreenNames.Login);
@@ -79,41 +90,49 @@ const RegisterScreen = () => {
 
           {/* Full name input */}
           <TextInput
+            control={control}
+            errorMessage={errors.name?.message}
             icon="account-outline"
-            onChangeText={setName}
-            placeholder="Full Name"
-            value={name}
+            label="Full Name"
+            name="name"
+            rules={{required: 'Required'}}
           />
 
           {/* Email input */}
           <TextInput
+            control={control}
+            errorMessage={errors.email?.message}
             icon="email-outline"
-            onChangeText={setEmail}
-            placeholder="Your Email"
-            value={email}
+            label="Email"
+            name="email"
+            rules={{required: 'Required'}}
           />
 
           {/* Password input */}
           <TextInput
+            control={control}
+            errorMessage={errors.password?.message}
             icon="lock-outline"
-            onChangeText={setPassword}
-            placeholder="Password"
+            label="Password"
+            name="password"
+            rules={{required: 'Required'}}
             secureTextEntry={true}
-            value={password}
           />
 
           {/* Confirm password input */}
           <TextInput
+            control={control}
+            errorMessage={errors.confirmPassword?.message}
             icon="lock-outline"
-            onChangeText={setConfirmPassword}
-            placeholder="Confirm Password"
+            label="Confirm Password"
+            name="confirmPassword"
+            rules={{required: 'Required'}}
             secureTextEntry={true}
-            value={confirmPassword}
           />
         </View>
 
         {/* Sign up button */}
-        <Button loading={registering} onPress={onSignup}>
+        <Button loading={registering} onPress={handleSubmit(onSignup)}>
           sign up
         </Button>
 

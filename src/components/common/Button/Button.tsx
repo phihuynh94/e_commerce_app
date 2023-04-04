@@ -3,7 +3,7 @@ import React, {ReactNode, useMemo} from 'react';
 import {StyleSheet, TextStyle} from 'react-native';
 import {Button as PaperButton} from 'react-native-paper';
 import {IconSource} from 'react-native-paper/lib/typescript/components/Icon';
-import {theme} from '../../styles/theme';
+import {theme} from '../../../styles/theme';
 // =====================================================================
 
 // Interface & Type

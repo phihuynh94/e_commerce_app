@@ -1,33 +1,42 @@
 // Imports
 import {RouteProp, useRoute} from '@react-navigation/native';
-import React, {useCallback, useState} from 'react';
+import React, {useCallback} from 'react';
+import {useForm} from 'react-hook-form';
 import {SafeAreaView, ScrollView, StyleSheet, View} from 'react-native';
-import {Button, TextInput} from '../../../common';
+import {Button, TextInput} from '../../../components/common';
 import {AppStackParamList} from '../../../routes/AppRoutes';
 import {globalStyles} from '../../../styles';
 // =====================================================================
 
 type RoutePropType = RouteProp<AppStackParamList, 'AddAddress'>;
 
+// Interface
+interface IAddAddressFormData {
+  address: string;
+  address2: string;
+  city: string;
+  country: string;
+  name: string;
+  phoneNum: string;
+  state: string;
+  zipcode: string;
+}
+// =====================================================================
+
 // Component
 const AddAddressScreen = () => {
   // Hooks
+  const {
+    control,
+    formState: {errors},
+    handleSubmit,
+  } = useForm<IAddAddressFormData>();
+
   const route = useRoute<RoutePropType>();
 
   const {type} = route.params;
 
   console.log(type);
-  // =====================================================================
-
-  // useStates
-  const [address, setAddress] = useState('');
-  const [address2, setAddress2] = useState('');
-  const [city, setCity] = useState('');
-  const [country, setCountry] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [state, setState] = useState('');
-  const [zipcode, setZipcode] = useState('');
   // =====================================================================
 
   // useCallbacks
@@ -40,72 +49,80 @@ const AddAddressScreen = () => {
       <ScrollView style={globalStyles.container}>
         {/* Country or region input */}
         <TextInput
+          control={control}
+          errorMessage={errors.country?.message}
           label="Country or region"
-          onChangeText={setCountry}
-          placeholder="Country or region"
-          value={country}
+          name="country"
+          rules={{required: 'Required'}}
         />
 
         {/* Full name input */}
         <TextInput
+          control={control}
+          errorMessage={errors.name?.message}
           label="Full Name"
-          onChangeText={setFullName}
-          placeholder="Full Name"
-          value={fullName}
+          name="name"
+          rules={{required: 'Required'}}
         />
 
         {/* Address input */}
         <TextInput
+          control={control}
+          errorMessage={errors.address?.message}
           label="Address"
-          onChangeText={setAddress}
-          placeholder="Address"
-          value={address}
+          name="address"
+          rules={{required: 'Required'}}
         />
 
         {/* Address 2 input */}
         <TextInput
+          control={control}
+          errorMessage={errors.address2?.message}
           label="Address 2"
-          onChangeText={setAddress2}
-          placeholder="Address 2"
-          value={address2}
+          name="address2"
+          rules={{required: 'Required'}}
         />
 
         {/* City input */}
         <TextInput
+          control={control}
+          errorMessage={errors.city?.message}
           label="City"
-          onChangeText={setCity}
-          placeholder="City"
-          value={city}
+          name="city"
+          rules={{required: 'Required'}}
         />
 
         {/* State input */}
         <TextInput
+          control={control}
+          errorMessage={errors.state?.message}
           label="State"
-          onChangeText={setState}
-          placeholder="State"
-          value={state}
+          name="state"
+          rules={{required: 'Required'}}
         />
 
         {/* Zipcode input */}
         <TextInput
+          control={control}
+          errorMessage={errors.zipcode?.message}
           label="Zipcode"
-          onChangeText={setZipcode}
-          placeholder="Zipcode"
-          value={zipcode}
+          name="zipcode"
+          rules={{required: 'Required'}}
         />
 
         {/* Phone number input */}
         <TextInput
+          control={control}
+          errorMessage={errors.phoneNum?.message}
           label="Phone Number"
-          onChangeText={setPhoneNumber}
-          placeholder="Phone Number"
-          value={phoneNumber}
+          name="phoneNum"
+          rules={{required: 'Required'}}
         />
       </ScrollView>
 
       {/* Add address button */}
       <View style={styles.button}>
-        <Button onPress={onAdd}>Add Address</Button>
+        <Button onPress={handleSubmit(onAdd)}>Add Address</Button>
       </View>
     </SafeAreaView>
   );
