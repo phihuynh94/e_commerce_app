@@ -6,110 +6,111 @@ An E-commerce mobile app shows the list of products, product details, customer r
 
 Login Screen
 
-![login](screenshots/login.png)
+<img alt='login' src='screenshots/login.png' width='200' height='400'/>
 
 Register Screen
 
-![register](screenshots/register.png)
-![register-error](screenshots/register-error.png)
+<img alt='register' src='screenshots/register.png' width='200' height='400'/>
+<img alt='register-error' src='screenshots/register-error.png' width='200' height='400'/>
 
 Home Screen
 
-![home](screenshots/home.png)
-![home-2](screenshots/home-2.png)
+<img alt='home' src='screenshots/home.png' width='200' height='400'/>
+<img alt='home-2' src='screenshots/home-2.png' width='200' height='400'/>
+<img alt='home-3' src='screenshots/home-3.png' width='200' height='400'/>
 
 Product Details Screen
 
-![product-details](screenshots/product-details.png)
-![product-details-2](screenshots/product-details-2.png)
+<img alt='product-details' src='screenshots/product-details.png' width='200' height='400'/>
+<img alt='product-details-2' src='screenshots/product-details-2.png' width='200' height='400'/>
+<img alt='product-details-3' src='screenshots/product-details-3.png' width='200' height='400'/>
 
 Review Screen
 
-![review](screenshots/review.png)
+<img alt='review' src='screenshots/review.png' width='200' height='400'/>
 
 Write Review Screen
 
-![write-review](screenshots/write-review.png)
-![write-review-2](screenshots/write-review-2.png)
+<img alt='write-review' src='screenshots/write-review.png' width='200' height='400'/>
 
 Favorite Screen
 
-![favorite](screenshots/favorite.png)
+<img alt='favorite' src='screenshots/favorite.png' width='200' height='400'/>
 
 Notification Screen
 
-![notification](screenshots/notification.png)
+<img alt='notification' src='screenshots/notification.png' width='200' height='400'/>
 
 Notification Offer Screen
 
-![notification-offer](screenshots/notification-offer.png)
+<img alt='notification-offer' src='screenshots/notification-offer.png' width='200' height='400'/>
 
 Notification Feed Screen
 
-![notification-feed](screenshots/notification-feed.png)
+<img alt='notification-feed' src='screenshots/notification-feed.png' width='200' height='400'/>
 
 Notification Activity Screen
 
-![notification-activity](screenshots/notification-activity.png)
+<img alt='notification-activity' src='screenshots/notification-activity.png' width='200' height='400'/>
 
 Explore Screen
 
-![explore](screenshots/explore.png)
+<img alt='explore' src='screenshots/explore.png' width='200' height='400'/>
 
 Search Products Screen
 
-![search-1](screenshots/search-1.png)
-![search-2](screenshots/search-2.png)
+<img alt='search-1' src='screenshots/search-1.png' width='200' height='400'/>
+<img alt='search-2' src='screenshots/search-2.png' width='200' height='400'/>
 
 Cart Screen
 
-![cart](screenshots/cart.png)
+<img alt='cart' src='screenshots/cart.png' width='200' height='400'/>
 
 Ship To Address Screen
 
-![ship-to-address](screenshots/ship-to-address.png)
+<img alt='ship-to-address' src='screenshots/ship-to-address.png' width='200' height='400'/>
 
 Add Address Screen
 
-![add-address](screenshots/add-address.png)
-![add-address-error](screenshots/add-address-error.png)
+<img alt='add-address' src='screenshots/add-address.png' width='200' height='400'/>
+<img alt='add-address-error' src='screenshots/add-address-error.png' width='200' height='400'/>
 
 Payment Screen
 
-![payment](screenshots/payment.png)
+<img alt='payment' src='screenshots/payment.png' width='200' height='400'/>
 
 Order Success Screen
 
-![order-success](screenshots/order-success.png)
+<img alt='order-success' src='screenshots/order-success.png' width='200' height='400'/>
 
 Order Screen
 
-![order](screenshots/order.png)
+<img alt='order' src='screenshots/order.png' width='200' height='400'/>
 
 Order Details Screen
 
-![order](screenshots/order-details.png)
+<img alt='order-details' src='screenshots/order-details.png' width='200' height='400'/>
 
 Account Screen
 
-![account](screenshots/account.png)
+<img alt='account' src='screenshots/account.png' width='200' height='400'/>
 
 Profile Screen
 
-![profile](screenshots/profile.png)
+<img alt='profile' src='screenshots/profile.png' width='200' height='400'/>
 
 Edit Profile Screen
 
-![edit-profile](screenshots/edit-profile.png)
+<img alt='edit-profile' src='screenshots/edit-profile.png' width='200' height='400'/>
 
 Change Password Screen
 
-![change-password](screenshots/change-password.png)
+<img alt='change-password' src='screenshots/change-password.png' width='200' height='400'/>
 
 Address Screen
 
-![address](screenshots/address.png)
+<img alt='address' src='screenshots/address.png' width='200' height='400'/>
 
 Add Card Screen
 
-![add-card](screenshots/add-card.png)
+<img alt='add-card' src='screenshots/add-card.png' width='200' height='400'/>
